@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>お問い合わせ｜霞ノ杜小学校</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
+  <script>
+    window.__TOKEN_DENIED__ = function (msg) {
+      var el = document.createElement("div"); el.className = "ns-denied-overlay";
+      el.innerHTML = '<div class="ns-denied-card"><h1>霞ノ杜小学校｜閲覧制限のお知らせ</h1><p>本ページは校務関係者向けの限定公開です。</p><p>許可されている経路からのアクセスをお願いします。</p><p class="small">' + String(msg||"").replace(/[<>]/g,"") + '</p></div>';
+      document.documentElement.appendChild(el);
+    };
+  </script>
+  <script src="../token-gate.js" defer></script>
+</head>
+<body>
+  <div id="site-root">
+    <header class="school-header"><div class="logo">霞</div><div><h1>霞ノ杜町立 霞ノ杜小学校</h1><div class="sub">公式ホームページ ・ 1953 年 開校</div></div></header>
+    <nav class="school-nav">
+      <a href="../">お知らせ</a>
+      <a href="../guide/">学校案内</a>
+      <a href="../events/">行事予定</a>
+      <a href="../activity/">地域活動</a>
+      <a href="../access/">アクセス</a>
+      <a href="./" class="is-active">お問い合わせ</a>
+    </nav>
+    <main>
+      <p class="crumbs"><a href="../">ホーム</a> ／ お問い合わせ</p>
+
+      <h2>お問い合わせ</h2>
+      <p>
+        校務に関するお問い合わせは、霞ノ杜町立霞ノ杜小学校 事務室までご連絡ください。
+      </p>
+      <table class="basic">
+        <tbody>
+          <tr><th>窓口</th><td>霞ノ杜町立霞ノ杜小学校 事務室</td></tr>
+          <tr><th>受付時間</th><td>平日 8:30 〜 17:00（学校休業日を除く）</td></tr>
+          <tr><th>電話番号</th><td>0×××-××-××××</td></tr>
+        </tbody>
+      </table>
+
+      <h3>個人情報の取り扱いについて</h3>
+      <div class="card">
+        <p>
+          本校では、児童・保護者の個人情報を、教育活動・連絡・各種証明・地域連携の範囲で取り扱います。
+          ホームページ等で氏名を表示する場合は、原則として保護者の同意を得た範囲とし、それ以外はマスクの上で掲載しています。
+        </p>
+        <p>
+          校内文書管理規程に基づく内部参照用の資料には、印刷時に校内識別のための情報が併記されることがあります。
+        </p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

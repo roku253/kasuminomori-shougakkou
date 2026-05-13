@@ -4,110 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>霞ノ杜小学校｜公式ホームページ</title>
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: "Yu Gothic","Hiragino Maru Gothic Pro","Meiryo",sans-serif; background: #f7f4ec; color: #222; line-height: 1.7; }
-    #site-root { visibility: hidden; }
-    html.token-gate-ok #site-root { visibility: visible; }
-
-    header.school-header {
-      background: #2d5a27; color: #fff; padding: 14px 20px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    header.school-header .logo {
-      width: 42px; height: 42px; border-radius: 999px; background: #fff;
-      color: #2d5a27; display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 18px;
-    }
-    header.school-header h1 { margin: 0; font-size: 1.05rem; }
-    header.school-header .sub { font-size: 0.75rem; opacity: 0.9; margin-top: 2px; }
-
-    nav.school-nav {
-      background: #1f4019; border-top: 1px solid #103109; color: #fff;
-      padding: 6px 12px; display: flex; gap: 12px; flex-wrap: wrap;
-      font-size: 13px;
-    }
-    nav.school-nav a { color: #fff; text-decoration: none; padding: 4px 8px; border-radius: 4px; }
-    nav.school-nav a:hover { background: #2d5a27; }
-
-    main { max-width: 880px; margin: 0 auto; padding: 18px 16px 48px; }
-    h2 { font-size: 1.05rem; color: #1f4019; border-bottom: 2px solid #2d5a27; padding-bottom: 6px; margin-top: 28px; }
-    h3 { font-size: 0.95rem; color: #2d5a27; margin: 18px 0 6px; }
-    p { margin: 8px 0; }
-
-    .news-box { background: #fff; border-left: 4px solid #2d5a27; padding: 12px 14px; }
-    .news-box ul { margin: 0; padding-left: 1.1em; }
-    .news-box li { font-size: 13px; padding: 3px 0; }
-
-    .placard { margin: 22px 0; padding: 14px; background: #fff; border: 2px dashed #8a6d3b; }
-    .placard .big { font-size: 1.4rem; font-weight: bold; letter-spacing: 0.2em; }
-    .furigana { font-size: 0.75rem; color: #555; letter-spacing: 0.35em; margin-top: 8px; }
-
-    .activity-block {
-      background: #fff; border: 1px solid #d8d2bc; padding: 16px;
-      margin-top: 12px;
-    }
-    .activity-meta { font-size: 12px; color: #666; }
-    .activity-meta strong { color: #1f4019; }
-
-    table.roster {
-      width: 100%; border-collapse: collapse; background: #fff; font-size: 0.9rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,.06); margin-top: 8px;
-    }
-    table.roster th, table.roster td { border: 1px solid #d6cfb6; padding: 8px 10px; text-align: left; vertical-align: top; }
-    table.roster th { background: #eef2ea; color: #1f4019; font-weight: 600; }
-    table.roster td.idx { width: 38px; text-align: center; color: #555; font-variant-numeric: tabular-nums; }
-    table.roster td.grade { width: 90px; }
-    table.roster td.name { font-feature-settings: "palt"; }
-    table.roster .masked { color: #888; letter-spacing: 0.2em; }
-
-    /* 印刷用追加列：通常は完全に非表示、印刷モードでだけ姿を出す */
-    table.roster col.print-col { width: 0; }
-    table.roster th.print-only, table.roster td.print-only {
-      display: none;
-    }
-
-    .print-footer { display: none; }
-
-    @media print {
-      body { background: #fff; }
-      nav.school-nav, header.school-header .logo { display: none; }
-      header.school-header { background: #fff; color: #2d5a27; border-bottom: 1px solid #2d5a27; }
-      header.school-header h1 { color: #2d5a27; }
-      table.roster th.print-only, table.roster td.print-only {
-        display: table-cell;
-      }
-      table.roster td.name .masked { display: none; }
-      .print-footer {
-        display: block;
-        margin-top: 28px;
-        padding-top: 10px;
-        border-top: 1px solid #999;
-        font-size: 10px;
-        color: #555;
-        text-align: right;
-        font-family: "Yu Gothic", serif;
-      }
-    }
-
-    .ns-denied-overlay {
-      position: fixed; inset: 0; z-index: 999999;
-      background: #f7f4ec;
-      display: flex; align-items: center; justify-content: center;
-      font-family: "Yu Gothic", Meiryo, sans-serif;
-      padding: 24px;
-    }
-    .ns-denied-card {
-      max-width: 520px; width: 100%;
-      background: #fff;
-      border-top: 6px solid #2d5a27;
-      box-shadow: 0 4px 18px rgba(0,0,0,.08);
-      padding: 26px 24px;
-    }
-    .ns-denied-card h1 { margin: 0 0 10px; font-size: 17px; color: #2d5a27; }
-    .ns-denied-card p { margin: 6px 0; font-size: 13px; color: #333; line-height: 1.8; }
-    .ns-denied-card .small { font-size: 11px; color: #777; margin-top: 14px; }
-  </style>
+  <link rel="stylesheet" href="./css/style.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
   <script>
     window.__TOKEN_DENIED__ = function (msg) {
@@ -135,21 +32,26 @@
       </div>
     </header>
     <nav class="school-nav">
-      <a href="#">学校案内</a>
-      <a href="#">行事予定</a>
-      <a href="#news">お知らせ</a>
-      <a href="#activity">地域活動</a>
-      <a href="#access">アクセス</a>
-      <a href="#contact">お問い合わせ</a>
+      <a href="./" class="is-active">お知らせ</a>
+      <a href="./guide/">学校案内</a>
+      <a href="./events/">行事予定</a>
+      <a href="./activity/">地域活動</a>
+      <a href="./access/">アクセス</a>
+      <a href="./contact/">お問い合わせ</a>
     </nav>
-
     <main>
-      <h2 id="news">お知らせ</h2>
+      <p class="crumbs"><a href="./">ホーム</a> ／ お知らせ</p>
+
+      <h2>新着のお知らせ</h2>
       <div class="news-box">
         <ul>
+          <li><strong>R6.12.10</strong>　冬期休業のご案内を更新しました。</li>
+          <li><strong>R6.12.01</strong>　冬の交通安全教室を実施しました。地域の防犯協会のみなさまにご協力いただきました。</li>
+          <li><strong>R6.11.20</strong>　学年だより 11 月号（4 年生）を発行しました。</li>
           <li><strong>R6.11.03</strong>　町民体育祭の手伝いに、児童ボランティアが参加しました。</li>
-          <li><strong>R6.10.12</strong>　河川敷の清掃活動を実施しました。記録を更新しています。</li>
+          <li><strong>R6.10.12</strong>　河川敷の清掃活動を実施しました。記録を <a href="./activity/">地域活動</a> に掲載しています。</li>
           <li><strong>R6.10.01</strong>　就学相談の受付期間についてお知らせします。</li>
+          <li><strong>R6.09.18</strong>　校内授業参観のご案内を保護者あてに配付しました。</li>
         </ul>
       </div>
 
@@ -160,103 +62,23 @@
         <p style="margin:10px 0 0;font-size:0.8rem;color:#444;">※看板は老朽化のため、一部判読しづらい箇所があります。</p>
       </div>
 
-      <h2 id="activity">地域貢献活動の記録</h2>
+      <h2>本校について</h2>
       <p>
-        本校では、地域の自然や歴史を学ぶ機会を大切にしています。
-        以下は、近年の地域連携活動の一部抜粋です。
+        霞ノ杜町立霞ノ杜小学校は、町の北西、霞ノ杜地区に位置する公立小学校です。
+        1953 年（昭和 28 年）に開校し、地域の自然と歴史に寄り添った学びを大切にしています。
+      </p>
+      <p>
+        全校児童数は約 110 名（令和 6 年度）。複式学級を含む 6 学年で、地域の自然体験や、町史編纂室・観光協会との連携活動を行っています。
+        詳細は <a href="./guide/">学校案内</a> をご覧ください。
       </p>
 
-      <h3>令和6年10月12日(土)　河川敷清掃活動（水辺の丘周辺）</h3>
-      <div class="activity-block">
-        <p class="activity-meta">
-          <strong>場所：</strong>町北西部・水辺の丘 周辺<br />
-          <strong>主催：</strong>霞ノ杜小学校 / 町民有志<br />
-          <strong>担当：</strong>4 年 担任<br />
-          <strong>備考：</strong>当日参加者の氏名一覧は、校内文書管理規程に基づき公開ページ上はマスク表示しています。
-        </p>
-
-        <table class="roster">
-          <colgroup>
-            <col style="width:48px;" />
-            <col style="width:90px;" />
-            <col />
-            <col class="print-col" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>学年・組</th>
-              <th>氏名（公開）</th>
-              <th class="print-only">校内記録（参考）</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="idx">1</td><td class="grade">4年1組</td>
-              <td class="name"><span class="masked">■■■ ■■</span></td>
-              <td class="print-only">青木 ハナ</td>
-            </tr>
-            <tr>
-              <td class="idx">2</td><td class="grade">4年1組</td>
-              <td class="name"><span class="masked">■■■ ■■</span></td>
-              <td class="print-only">石川 ユウト</td>
-            </tr>
-            <tr>
-              <td class="idx">3</td><td class="grade">4年1組</td>
-              <td class="name"><span class="masked">■■■ ■■■</span></td>
-              <td class="print-only">水瀬 ハルト</td>
-            </tr>
-            <tr>
-              <td class="idx">4</td><td class="grade">4年1組</td>
-              <td class="name"><span class="masked">■■■ ■■</span></td>
-              <td class="print-only">大野 サキ</td>
-            </tr>
-            <tr>
-              <td class="idx">5</td><td class="grade">4年2組</td>
-              <td class="name"><span class="masked">■■■ ■■</span></td>
-              <td class="print-only">川村 リョウ</td>
-            </tr>
-            <tr>
-              <td class="idx">6</td><td class="grade">4年2組</td>
-              <td class="name"><span class="masked">■■■ ■■</span></td>
-              <td class="print-only">高橋 アヤ</td>
-            </tr>
-            <tr>
-              <td class="idx">7</td><td class="grade">5年1組</td>
-              <td class="name"><span class="masked">■■■ ■■</span></td>
-              <td class="print-only">中島 ハル</td>
-            </tr>
-            <tr>
-              <td class="idx">8</td><td class="grade">5年1組</td>
-              <td class="name"><span class="masked">■■■ ■■</span></td>
-              <td class="print-only">藤田 ソウタ</td>
-            </tr>
-            <tr>
-              <td class="idx">9</td><td class="grade">5年2組</td>
-              <td class="name"><span class="masked">■■■ ■■</span></td>
-              <td class="print-only">山口 リン</td>
-            </tr>
-            <tr>
-              <td class="idx">10</td><td class="grade">6年1組</td>
-              <td class="name"><span class="masked">■■■ ■■</span></td>
-              <td class="print-only">渡辺 ケンタ</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style="margin-top:10px;font-size:11px;color:#666;">
-          ※ 個人情報保護のため、画面上の氏名はマスクしております。
-        </p>
-      </div>
-
-      <h2 id="contact">お問い合わせ</h2>
-      <p style="font-size:13px;">
-        校務に関するお問い合わせは、霞ノ杜町立霞ノ杜小学校 事務室までご連絡ください。
-      </p>
-
-      <div class="print-footer">
-        ※ この資料は校内文書管理規程に基づく内部参照用です。複写・転送はご遠慮ください。<br />
-        霞ノ杜町立霞ノ杜小学校 / 文書番号: KSE-R6-1012-A
-      </div>
+      <h2>関連リンク</h2>
+      <ul>
+        <li><a href="./activity/">地域活動の記録</a>（年間の活動一覧）</li>
+        <li><a href="./events/">行事予定</a></li>
+        <li><a href="./access/">アクセス・所在地</a></li>
+        <li><a href="./contact/">お問い合わせ</a></li>
+      </ul>
     </main>
   </div>
 </body>
