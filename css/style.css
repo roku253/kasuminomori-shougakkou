@@ -119,6 +119,8 @@ table.roster th.print-only, table.roster td.print-only { display: none; }
 .ns-denied-card h1 { margin: 0 0 10px; font-size: 17px; color: #2d5a27; }
 .ns-denied-card p { margin: 6px 0; font-size: 13px; color: #333; line-height: 1.8; }
 .ns-denied-card .small { font-size: 11px; color: #777; margin-top: 14px; }
+.ns-denied-card .ns-portal { margin-top: 14px; font-size: 12px; line-height: 1.5; word-break: break-all; }
+.ns-denied-card .ns-portal a { color: #2d5a27; text-decoration: underline; }
 
 .school-fiction-note {
   max-width: 880px;
