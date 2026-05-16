@@ -49,8 +49,8 @@
         </p>
       </div>
 
-      <h3>令和6年10月12日(土)　河川敷清掃活動（水辺の丘 周辺）</h3>
-      <div class="card">
+      <h3 data-kn-story-clue-wrap="1">令和6年10月12日(土)　河川敷清掃活動（水辺の丘 周辺）</h3>
+      <div class="card" data-kn-story-clue="1">
         <p style="font-size:13px;color:#555;">
           <strong>場所：</strong>町北西部・水辺の丘 周辺<br />
           <strong>主催：</strong>霞ノ杜小学校 / 町民有志<br />
@@ -117,5 +117,25 @@
     </main>
     <p class="school-fiction-note" role="note">※本サイトは謎解き作品のための<strong>架空サイト</strong>です。記載・表示されるサービス名・地名・人物名・団体名などはフィクションであり、<strong>実在のものとは一切関係ありません</strong>。</p>
   </div>
+  <script>
+    (function () {
+      var KN_FP_KEY = "signal_trace_kn_footprint_v2";
+      function knPurged() {
+        try {
+          var f = localStorage.getItem(KN_FP_KEY) || "";
+          return f === "purged_delete" || f === "purged_keep";
+        } catch (e) {
+          return false;
+        }
+      }
+      function knApplyFootprint() {
+        if (!knPurged()) return;
+        document.querySelectorAll('[data-kn-story-clue="1"],[data-kn-story-clue-wrap="1"]').forEach(function (el) {
+          el.style.display = "none";
+        });
+      }
+      knApplyFootprint();
+    })();
+  </script>
 </body>
 </html>

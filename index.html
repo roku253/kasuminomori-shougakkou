@@ -56,7 +56,7 @@
       </div>
 
       <h2>校門のご案内</h2>
-      <div class="placard" aria-label="校門付近の案内板">
+      <div class="placard" data-kn-story-clue="1" aria-label="校門付近の案内板">
         <div class="big">霞ノ杜小学校</div>
         <div class="furigana">す　・　え　・　る　・　か</div>
         <p style="margin:10px 0 0;font-size:0.8rem;color:#444;">※看板は老朽化のため、一部判読しづらい箇所があります。</p>
@@ -82,5 +82,67 @@
     </main>
     <p class="school-fiction-note" role="note">※本サイトは謎解き作品のための<strong>架空サイト</strong>です。記載・表示されるサービス名・地名・人物名・団体名などはフィクションであり、<strong>実在のものとは一切関係ありません</strong>。</p>
   </div>
+  <script>
+    (function () {
+      var KN_FP_KEY = "signal_trace_kn_footprint_v2";
+      function knPurged() {
+        try {
+          var f = localStorage.getItem(KN_FP_KEY) || "";
+          return f === "purged_delete" || f === "purged_keep";
+        } catch (e) {
+          return false;
+        }
+      }
+      function knApplyFootprint() {
+        if (!knPurged()) return;
+        document.querySelectorAll('[data-kn-story-clue="1"],[data-kn-story-clue-wrap="1"]').forEach(function (el) {
+          el.style.display = "none";
+        });
+      }
+      function knPurgeModal() {
+        var q = new URLSearchParams(location.search);
+        if (q.get("kn_purge") !== "1") return;
+        var step = parseInt(q.get("kn_step") || "0", 10);
+        var ov = document.createElement("div");
+        ov.style.cssText =
+          "position:fixed;inset:0;z-index:999998;background:rgba(240,248,255,.92);display:flex;align-items:center;justify-content:center;padding:16px;";
+        var card = document.createElement("div");
+        card.style.cssText =
+          "max-width:420px;width:100%;background:#fff;border:2px solid #234;padding:20px;border-radius:8px;font-family:inherit;";
+        card.innerHTML =
+          "<p style=\"margin:0 0 10px;font-weight:bold;\">校内公開ページのキャッシュ整合</p>" +
+          "<p style=\"margin:0 0 14px;font-size:13px;line-height:1.6;color:#333;\">地域活動記録に紐づく公開キャッシュを削除キューに載せますか？</p>";
+        var row = document.createElement("div");
+        row.style.cssText = "display:flex;gap:10px;justify-content:flex-end;";
+        function reply(c) {
+          try {
+            if (window.opener && !window.opener.closed) {
+              window.opener.postMessage({ type: "KN_PURGE_SITE_RESPONSE", step: step, choice: c }, "*");
+            }
+          } catch (e) {}
+          window.close();
+        }
+        var n = document.createElement("button");
+        n.textContent = "いいえ";
+        n.type = "button";
+        var y = document.createElement("button");
+        y.textContent = "はい";
+        y.type = "button";
+        n.onclick = function () {
+          reply(false);
+        };
+        y.onclick = function () {
+          reply(true);
+        };
+        row.appendChild(n);
+        row.appendChild(y);
+        card.appendChild(row);
+        ov.appendChild(card);
+        document.body.appendChild(ov);
+      }
+      knApplyFootprint();
+      knPurgeModal();
+    })();
+  </script>
 </body>
 </html>
