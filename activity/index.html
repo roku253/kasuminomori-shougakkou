@@ -134,6 +134,12 @@
           el.style.display = "none";
         });
       }
+      window.addEventListener("storage", function (e) {
+        if (e.key !== KN_FP_KEY) return;
+        var v = e.newValue;
+        if (v !== "purged_delete" && v !== "purged_keep") return;
+        knApplyFootprint();
+      });
       knApplyFootprint();
     })();
   </script>
