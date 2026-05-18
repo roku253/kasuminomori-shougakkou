@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>タイムカプセル｜4年1組（2016）</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
+  <script src="../token-gate.js" defer></script>
+  <style>
+    .lock { background: #f5f5f0; border: 1px dashed #999; padding: 14px; margin: 12px 0; }
+    .doc { display: none; background: #fff; border: 1px solid #ccc; padding: 16px; margin-top: 12px; }
+    .doc.open { display: block; }
+    input { padding: 6px 8px; margin-right: 8px; }
+    button { padding: 6px 12px; cursor: pointer; }
+    .seat-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; max-width: 320px; margin: 12px 0; }
+    .seat { border: 1px solid #bbb; padding: 6px; text-align: center; font-size: 11px; }
+    .seat.empty { background: #eee; color: #999; }
+  </style>
+</head>
+<body>
+  <div id="site-root">
+    <header class="school-header"><div class="logo">霞</div><div><h1>タイムカプセル（2016・4年1組）</h1></div></header>
+    <nav class="school-nav">
+      <a href="../">お知らせ</a>
+      <a href="../activity/">地域活動</a>
+      <a href="./" class="is-active">タイムカプセル</a>
+    </nav>
+    <main data-kn-story-clue="1">
+      <p class="crumbs"><a href="../">ホーム</a> ／ タイムカプセル</p>
+      <h2>二重ロック文書</h2>
+      <div class="lock" id="lock1">
+        <p><strong>第1ロック:</strong> 当時のクラス合唱曲名を入力</p>
+        <input id="song" placeholder="曲名" />
+        <button type="button" id="btn1">解除</button>
+      </div>
+      <div class="lock" id="lock2" style="display:none">
+        <p><strong>第2ロック:</strong> 佐藤ユウの<strong>本来の</strong>出席番号（アキトがいた前提）</p>
+        <p class="hint">座席表では公式記録は8番。4人目がいたときは9番。</p>
+        <div class="seat-grid" id="seats"></div>
+        <input id="seat" placeholder="番号" maxlength="2" />
+        <button type="button" id="btn2">解除</button>
+      </div>
+      <article class="doc" id="doc">
+        <h3>ユウの作文（抜粋）</h3>
+        <p>旧・烏啼の開発現場で、大人たちが <code>67B_MUNAGI</code> と呼んでいた。風穴の奥で、アキトを…</p>
+        <h3>成人式の手紙（二分割の片方）</h3>
+        <p>「ここにいる」——消された記録のなかで、ぼくたちだけが知っている。</p>
+      </article>
+    </main>
+  </div>
+  <script>
+    (function () {
+      var seats = document.getElementById("seats");
+      for (var i = 1; i <= 28; i++) {
+        var d = document.createElement("div");
+        d.className = "seat" + (i === 9 ? "" : i === 8 ? " empty" : "");
+        d.textContent = i === 8 ? "ユウ(公)" : i === 9 ? "ユウ" : i <= 4 ? String(i) : "";
+        seats.appendChild(d);
+      }
+      document.getElementById("btn1").onclick = function () {
+        var v = (document.getElementById("song").value || "").trim();
+        if (v === "ふるさと" || v === "フルサト") {
+          document.getElementById("lock2").style.display = "block";
+        } else alert("合唱曲名が一致しません。");
+      };
+      document.getElementById("btn2").onclick = function () {
+        var v = (document.getElementById("seat").value || "").trim();
+        if (v === "9") document.getElementById("doc").classList.add("open");
+        else alert("出席番号が一致しません。");
+      };
+      var KN_FP_KEY = "signal_trace_kn_footprint_v2";
+      function knApply() {
+        try {
+          var f = localStorage.getItem(KN_FP_KEY) || "";
+          if (f === "purged_delete" || f === "purged_keep") {
+            document.querySelectorAll('[data-kn-story-clue="1"]').forEach(function (el) {
+              el.style.display = "none";
+            });
+          }
+        } catch (e) {}
+      }
+      knApply();
+      window.addEventListener("storage", function (e) {
+        if (e.key === KN_FP_KEY) knApply();
+      });
+    })();
+  </script>
+</body>
+</html>
