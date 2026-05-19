@@ -132,3 +132,45 @@ table.roster th.print-only, table.roster td.print-only { display: none; }
   border-top: 1px dashed #c8c2a8;
 }
 .school-fiction-note strong { color: #3d3d3d; font-weight: 600; }
+
+/* 写生大会サムネ・ライトボックス */
+.sketch-figure { margin: 12px 0 0; }
+.sketch-thumb {
+  display: block; width: 100%; max-width: 320px; padding: 0; border: 1px solid #c8c2a8;
+  background: #fff; cursor: zoom-in; text-align: left;
+}
+.sketch-frame {
+  display: block; height: 140px;
+  background: linear-gradient(145deg, #dfe8d4 0%, #b8c9a8 45%, #8fa878 100%);
+  position: relative;
+}
+.sketch-frame::after {
+  content: "受賞作品";
+  position: absolute; left: 10px; bottom: 10px;
+  font-size: 11px; color: #fff; background: rgba(45,90,39,.75); padding: 2px 8px;
+}
+.sketch-caption { display: block; padding: 8px 10px; font-size: 12px; color: #444; }
+.sketch-lightbox {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,.55); display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.sketch-lightbox[hidden] { display: none !important; }
+.sketch-lightbox-inner {
+  background: #fff; max-width: 520px; width: 100%; padding: 16px;
+  border-radius: 4px; box-shadow: 0 8px 32px rgba(0,0,0,.2);
+}
+.sketch-close {
+  float: right; border: 1px solid #ccc; background: #f5f5f0; padding: 4px 10px; cursor: pointer;
+}
+.sketch-zoom-art {
+  clear: both; height: 220px; margin-top: 8px;
+  background: linear-gradient(160deg, #e8efe0, #9cb088);
+  position: relative;
+}
+.sketch-sign {
+  position: absolute; right: 14px; bottom: 12px;
+  font-size: 13px; color: #1a1a1a; font-family: "Yu Mincho", serif;
+  transform: rotate(-4deg); letter-spacing: 0.05em;
+}
+.sketch-zoom-note { font-size: 11px; color: #666; margin: 10px 0 0; }

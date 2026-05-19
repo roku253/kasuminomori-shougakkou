@@ -52,8 +52,23 @@
       
       <h3 data-kn-story-clue-wrap="1">平成28年5月22日(日)　写生大会（旧・水辺の丘）</h3>
       <div class="card" data-kn-story-clue="1">
-        <p>4年1組の作品のうち、<strong>秋山 アキト</strong> の「風穴」が金賞。サインは写真拡大で確認できる。</p>
+        <p>4年1組の受賞作品。公式の一覧には作者名を掲載していません。集合写真のサムネイルを拡大すると、キャンバス端のサインが判読できます。</p>
+        <figure class="sketch-figure">
+          <button type="button" class="sketch-thumb" id="sketch-open" aria-label="作品写真を拡大">
+            <span class="sketch-frame" aria-hidden="true"></span>
+            <span class="sketch-caption">受賞作品（4年1組）— クリックで拡大</span>
+          </button>
+        </figure>
         <p><a href="../time-capsule/">タイムカプセル（2016・4年1組）閲覧</a></p>
+      </div>
+      <div id="sketch-lightbox" class="sketch-lightbox" hidden>
+        <div class="sketch-lightbox-inner" role="dialog" aria-modal="true" aria-label="写生作品の拡大">
+          <button type="button" class="sketch-close" id="sketch-close">閉じる</button>
+          <div class="sketch-zoom-art">
+            <p class="sketch-sign">金賞・アキト</p>
+          </div>
+          <p class="sketch-zoom-note">キャンバス右下の筆跡（復元）</p>
+        </div>
       </div>
 
       <h3 data-kn-story-clue-wrap="1">令和6年10月12日(土)　河川敷清掃活動（水辺の丘 周辺）</h3>
@@ -83,7 +98,7 @@
           <tbody>
             <tr><td class="idx">1</td><td class="grade">4年1組</td><td class="name"><span class="masked">■■■ ■■</span></td><td class="print-only">青木 ハナ</td></tr>
             <tr><td class="idx">2</td><td class="grade">4年1組</td><td class="name"><span class="masked">■■■ ■■■</span></td><td class="print-only">佐藤 ユウ</td></tr>
-            <tr><td class="idx">3</td><td class="grade">4年1組</td><td class="name"><span class="masked">■■■ ■■■</span></td><td class="print-only">秋山 アキト</td></tr>
+            <tr><td class="idx">3</td><td class="grade">4年1組</td><td class="name"><span class="masked">■■■ ■■■</span></td><td class="print-only">（欠番・参照不可）</td></tr>
             <tr><td class="idx">4</td><td class="grade">4年1組</td><td class="name"><span class="masked">■■■ ■■</span></td><td class="print-only">大野 サキ</td></tr>
             <tr><td class="idx">5</td><td class="grade">4年2組</td><td class="name"><span class="masked">■■■ ■■■</span></td><td class="print-only">川村 リョウ</td></tr>
             <tr><td class="idx">6</td><td class="grade">4年2組</td><td class="name"><span class="masked">■■■ ■■</span></td><td class="print-only">高橋 アヤ</td></tr>
@@ -148,6 +163,23 @@
         knApplyFootprint();
       });
       knApplyFootprint();
+
+      var lb = document.getElementById("sketch-lightbox");
+      var openBtn = document.getElementById("sketch-open");
+      var closeBtn = document.getElementById("sketch-close");
+      if (openBtn && lb) {
+        openBtn.addEventListener("click", function () {
+          lb.hidden = false;
+        });
+      }
+      if (closeBtn && lb) {
+        closeBtn.addEventListener("click", function () {
+          lb.hidden = true;
+        });
+        lb.addEventListener("click", function (e) {
+          if (e.target === lb) lb.hidden = true;
+        });
+      }
     })();
   </script>
 </body>
