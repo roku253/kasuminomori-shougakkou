@@ -1,7 +1,7 @@
 /**
- * 全ページ共通ヘッダー・タブ・フッター（谷津南小／鷺沼型）
+ * 全ページ共通ヘッダー・タブ・左メニュー・フッター
  * body[data-sgn-base] 相対パス（例: ../../）
- * body[data-sgn-active] 現在タブ: home|guide|contact|access|events|life|newsletter
+ * body[data-sgn-active] 現在タブ: home|guide|contact
  */
 (function () {
   var ACTIVE = document.body.getAttribute("data-sgn-active") || "home";
@@ -12,6 +12,26 @@
   var FICTION_HTML =
     "※本サイトは謎解き作品のための<strong>架空サイト</strong>です。記載・表示されるサービス名・地名・人物名・団体名などはフィクションであり、<strong>実在のものとは一切関係ありません</strong>。";
 
+  var TABS = [
+    { id: "home", label: "ホーム", href: "" },
+    { id: "guide", label: "学校案内", href: "guide/" },
+    { id: "contact", label: "お問い合わせ", href: "contact/" },
+  ];
+
+  var MENU_ITEMS = [
+    { id: "events", label: "年間行事予定", href: "portal/events/" },
+    { id: "life", label: "学校生活の様子", href: "portal/life/" },
+    { id: "evaluation", label: "学校評価アンケート", href: "portal/evaluation/" },
+    { id: "newsletter", label: "学校だより", href: "portal/newsletters/" },
+    { id: "grade-news", label: "学年だより", href: "portal/grade-news/" },
+    { id: "health", label: "保健だより", href: "portal/health/" },
+    { id: "nurse", label: "保健室からのお知らせ", href: "portal/nurse/" },
+    { id: "lunch", label: "給食だより・こんだて表", href: "portal/lunch/" },
+    { id: "pta", label: "PTAからのお手紙", href: "portal/pta/" },
+    { id: "shin1", label: "令和8年度入学新1年生", href: "portal/shin1/" },
+    { id: "time-capsule", label: "タイムカプセル", href: "archives/time-capsule/" },
+  ];
+
   function join(path) {
     var base = BASE || "./";
     if (base === ".") base = "./";
@@ -21,15 +41,22 @@
     return base + path;
   }
 
-  var TABS = [
-    { id: "home", label: "ホーム", href: "", login: false },
-    { id: "guide", label: "学校案内", href: "guide/", login: false },
-    { id: "contact", label: "お問い合わせ", href: "contact/", login: false },
-    { id: "access", label: "アクセス", href: "access/", login: false },
-    { id: "events", label: "年間行事", href: "portal/events/", login: true },
-    { id: "life", label: "学校生活", href: "portal/life/", login: true },
-    { id: "newsletter", label: "学校だより", href: "portal/newsletters/", login: true },
-  ];
+  function currentMenuId() {
+    var p = (location.pathname || "").toLowerCase();
+    if (/\/portal\/events/.test(p)) return "events";
+    if (/\/portal\/life/.test(p)) return "life";
+    if (/\/portal\/evaluation/.test(p)) return "evaluation";
+    if (/\/portal\/newsletters/.test(p)) return "newsletter";
+    if (/\/portal\/grade-news/.test(p)) return "grade-news";
+    if (/\/portal\/health/.test(p)) return "health";
+    if (/\/portal\/nurse/.test(p)) return "nurse";
+    if (/\/portal\/lunch/.test(p)) return "lunch";
+    if (/\/portal\/pta/.test(p)) return "pta";
+    if (/\/portal\/shin1/.test(p)) return "shin1";
+    if (/\/archives\/time-capsule/.test(p)) return "time-capsule";
+    if (/\/archives\/2016/.test(p)) return "time-capsule";
+    return null;
+  }
 
   function buildChrome() {
     var wrap = document.createElement("div");
@@ -56,14 +83,42 @@
       a.href = join(tab.href);
       a.textContent = tab.label;
       if (tab.id === ACTIVE) a.className = "is-active";
-      if (tab.login) a.setAttribute("data-require-login", "");
       nav.appendChild(a);
     });
 
     return wrap;
   }
 
-  /** 旧 muni-wrap / main 構造を sgn-site に寄せる */
+  function injectSidebar(site) {
+    var body = site.querySelector(".sgn-body");
+    if (!body) return;
+
+    var current = currentMenuId();
+    var aside = body.querySelector(".sgn-col-side.sgn-menu-links");
+    if (!aside) {
+      aside = document.createElement("aside");
+      aside.className = "sgn-col-side sgn-menu-links";
+      var main = body.querySelector(".sgn-col-main");
+      if (main) body.insertBefore(aside, main);
+      else body.appendChild(aside);
+    } else {
+      aside.innerHTML = "";
+    }
+
+    var heading = document.createElement("h3");
+    heading.textContent = "メニュー";
+    aside.appendChild(heading);
+
+    MENU_ITEMS.forEach(function (item) {
+      if (item.id === current) return;
+      var a = document.createElement("a");
+      a.href = join(item.href);
+      a.textContent = item.label;
+      a.setAttribute("data-require-login", "");
+      aside.appendChild(a);
+    });
+  }
+
   function ensureSiteContainer() {
     var site = document.querySelector(".sgn-site");
     if (site) return site;
@@ -89,9 +144,6 @@
       body.appendChild(col);
       main.replaceWith(body);
     }
-
-    var mfooter = muni.querySelector(".muni-footer");
-    if (mfooter) mfooter.className = "sgn-footer";
 
     return muni;
   }
@@ -125,23 +177,24 @@
   function normalizeBodyLayout(site) {
     var body = site.querySelector(".sgn-body");
     if (!body) return;
-    var sides = body.querySelectorAll(".sgn-col-side");
-    if (sides.length === 0) body.classList.add("sgn-body--full");
+    var menu = body.querySelector(".sgn-menu-links");
+    var notice = body.querySelector(".sgn-notice-panel");
+    if (!menu && !notice) body.classList.add("sgn-body--full");
   }
 
   function mount() {
     var site = ensureSiteContainer();
     if (!site) return;
 
-    var oldBanner = site.querySelector(".sgn-banner");
-    var oldNav = site.querySelector(".sgn-gnav");
-    if (oldBanner) oldBanner.remove();
-    if (oldNav) oldNav.remove();
+    site.querySelectorAll(".sgn-banner, .sgn-gnav, .sgn-emergency, .staff-banner").forEach(function (n) {
+      n.remove();
+    });
 
     var existing = site.querySelector(".sgn-chrome");
     if (existing) existing.remove();
 
     site.insertBefore(buildChrome(), site.firstChild);
+    injectSidebar(site);
     normalizeBodyLayout(site);
     normalizeFooter(site);
   }

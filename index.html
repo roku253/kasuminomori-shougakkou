@@ -26,28 +26,7 @@
 <body data-sgn-base="./" data-sgn-active="home">
   <div id="site-root">
     <div class="sgn-site">
-      <div class="sgn-emergency">
-        <div class="sgn-emergency-label">緊急情報</div>
-        <div class="sgn-emergency-body">2026年05月01日　西門付近の歩行者通行について（フィクション）</div>
-      </div>
-
-      <p class="staff-banner">保護者ポータルにログイン中です。<a href="#" id="staff-logout">ログアウト</a></p>
-
       <div class="sgn-body">
-        <aside class="sgn-col-side sgn-menu-links">
-          <h3>霞ノ杜小学校ホームページ</h3>
-          <a href="./portal/events/" data-require-login>年間行事予定</a>
-          <a href="./portal/life/" data-require-login>学校生活の様子</a>
-          <a href="./portal/evaluation/" data-require-login>学校評価アンケート</a>
-          <a href="./portal/newsletters/" data-require-login>学校だより</a>
-          <a href="./portal/grade-news/" data-require-login>学年だより</a>
-          <a href="./portal/health/" data-require-login>保健だより</a>
-          <a href="./portal/nurse/" data-require-login>保健室からのお知らせ</a>
-          <a href="./portal/lunch/" data-require-login>給食だより・こんだて表</a>
-          <a href="./portal/pta/" data-require-login>PTAからのお手紙</a>
-          <a href="./portal/shin1/" data-require-login>令和8年度入学新1年生</a>
-        </aside>
-
         <div class="sgn-col-main">
           <p class="sgn-slogan">～ よく見て、よく考える 霞ノ杜小 ～</p>
           <p style="font-size:13px;line-height:1.7;">
@@ -57,38 +36,28 @@
           <div class="sgn-news-head">NEW 新着情報</div>
           <ul class="sgn-news-list">
             <li>2026年04月08日　<a href="./portal/shin1/" data-require-login>令和8年度 入学式を挙行しました。</a></li>
-            <li>2025年12月15日　<a href="./portal/newsletters/" data-require-login>冬期休業のご案内を更新しました。</a></li>
-            <li>2024年11月20日　<a href="./portal/grade-news/" data-require-login>学年だより 11月号を発行しました。</a></li>
-            <li>2024年11月03日　町民体育祭ボランティアに参加しました。</li>
-            <li>2024年10月12日　河川敷清掃活動を実施しました。</li>
+            <li>2026年03月25日　<a href="./portal/newsletters/" data-require-login>学校だより 3月号を発行しました。</a></li>
+            <li>2026年03月10日　<a href="./portal/grade-news/" data-require-login>学年だより（6学年）を更新しました。</a></li>
+            <li>2026年02月14日　<a href="./portal/events/" data-require-login>令和8年度 年間行事予定を掲載しました。</a></li>
+            <li>2026年01月15日　<a href="./portal/nurse/" data-require-login>インフルエンザに関するお知らせを掲載しました。</a></li>
+            <li>2025年12月20日　<a href="./portal/lunch/" data-require-login>給食だより・1月こんだてを更新しました。</a></li>
           </ul>
-
-          <h2 style="font-size:1rem;margin-top:24px;">校門のご案内</h2>
-          <div class="placard" data-kn-story-clue="1">
-            <div class="big">霞ノ杜小学校</div>
-            <div class="furigana">す　・　え　・　る　・　か</div>
-          </div>
         </div>
 
-        <aside class="sgn-col-side">
+        <aside class="sgn-col-side sgn-notice-panel">
           <h3>各種お知らせ</h3>
           <ul class="sgn-notice-list">
-            <li><a href="./guide/">学校案内・保護者ポータルFAQ</a></li>
-            <li><a href="./portal/newsletters/" data-require-login>学校だより（PDF）</a></li>
-            <li><a href="./contact/">お問い合わせ・タイムカプセル</a></li>
-            <li><a href="./access/">アクセス</a></li>
+            <li><a href="./assets/pdf/notice-bullying.pdf" target="_blank" rel="noopener">霞ノ杜小学校いじめ防止対策基本方針</a> <span class="pdf-size">(PDFファイル:248KB)</span></li>
+            <li><a href="./assets/pdf/notice-healing.pdf" target="_blank" rel="noopener">治癒報告書（令和6年度以降）</a></li>
+            <li><a href="./assets/pdf/notice-guide.pdf" target="_blank" rel="noopener">よくわかる！霞ノ杜小ガイド</a></li>
+            <li><a href="./assets/pdf/notice-info-mgmt.pdf" target="_blank" rel="noopener">霞ノ杜小学校情報管理規定</a></li>
+            <li><a href="./assets/pdf/notice-belongings.pdf" target="_blank" rel="noopener">学校に置いておくことのできるもの</a></li>
+            <li><a href="./assets/pdf/notice-reading.pdf" target="_blank" rel="noopener">子供の読書キャンペーン</a></li>
+            <li><a href="./assets/pdf/notice-weather.pdf" target="_blank" rel="noopener">天候悪化等への対応について</a></li>
           </ul>
         </aside>
       </div>
-
     </div>
   </div>
-  <script>
-    document.getElementById("staff-logout")?.addEventListener("click", function (e) {
-      e.preventDefault();
-      try { sessionStorage.removeItem("kn_school_staff_v1"); } catch (err) {}
-      location.reload();
-    });
-  </script>
 </body>
 </html>

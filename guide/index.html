@@ -11,43 +11,72 @@
   <script src="../token-gate.js" defer></script>
   <script src="../js/school-login.js" defer></script>
   <script src="../js/school-shell.js" defer></script>
-  <script src="../js/kn-footprint.js" defer></script>
 </head>
 <body data-sgn-base="../" data-sgn-active="guide">
   <div id="site-root">
     <div class="sgn-site">
       <div class="sgn-body">
-        <aside class="sgn-col-side sgn-menu-links">
-          <h3>メニュー</h3>
-          <a href="../portal/events/" data-require-login>年間行事予定</a>
-          <a href="../portal/life/" data-require-login>学校生活の様子</a>
-          <a href="../portal/newsletters/" data-require-login>学校だより</a>
-          <a href="../portal/grade-news/" data-require-login>学年だより</a>
-          <a href="../portal/lunch/" data-require-login>給食だより</a>
-        </aside>
         <div class="sgn-col-main">
           <h1 class="sgn-page-title">学校案内</h1>
           <p class="sgn-crumbs"><a href="../">ホーム</a> ／ 学校案内</p>
-          <p>霞ノ杜小学校は、地域に根ざした学びを続けてきた学校です。</p>
 
-          <h3>校長あいさつ</h3>
+          <h2 class="sgn-section-title">校長あいさつ</h2>
           <div class="card">
-            <p>本校は1953年から子どもたちの学びを見守ってきました。</p>
+            <p>本校は1953年の開校以来、霞ノ杜町の子どもたちの成長を見守ってきました。よく見て、よく考え、言葉にする学びを大切にし、地域とともに歩んでまいります。</p>
             <p style="text-align:right;">— 校長　佐藤　誠</p>
           </div>
 
-          <h3>保護者ポータルについて（FAQ）</h3>
-          <div class="card">
-            <p>
-              学校だより・年間行事・給食メニューは保護者ポータルからご覧ください。
-              ログインIDは<strong>町立校名のローマ字表記</strong>（小文字・つなげて）、
-              初期パスワードは<strong>「小学校」のローマ字（shougakkou）</strong>です。
-            </p>
-            <p style="font-size:12px;color:#666;">
-              ※ 保護者ポータル（年間行事・学校生活・学校だよりなど）はログインが必要です。卒業生向けタイムカプセルは
-              <a href="../contact/">お問い合わせ</a>から（別認証）。
-            </p>
+          <h2 class="sgn-section-title" id="access">学校の概要</h2>
+          <table class="basic">
+            <tbody>
+              <tr><th>学校名</th><td>霞ノ杜町立 霞ノ杜小学校</td></tr>
+              <tr><th>所在地</th><td>〒000-0000 霞ノ杜町大字杜ケ丘 1234（フィクション）</td></tr>
+              <tr><th>電話</th><td>0×××-××-××××</td></tr>
+              <tr><th>児童数</th><td>約110名（令和8年4月現在）</td></tr>
+              <tr><th>学級数</th><td>6学級</td></tr>
+              <tr><th>教育目標</th><td>心豊かでたくましく、地域に愛される子どもを育てる</td></tr>
+            </tbody>
+          </table>
+          <h3>交通・アクセス</h3>
+          <ul>
+            <li>霞ノ杜町営バス「霞ノ杜小前」下車 徒歩1分</li>
+            <li>正門前・西門付近の送迎は可能（私有地への駐車は不可）</li>
+          </ul>
+
+          <h2 class="sgn-section-title">校章の意味</h2>
+          <div class="sgn-emblem-wrap">
+            <img src="../assets/images/school-emblem.svg" width="140" height="140" alt="霞ノ杜小学校校章（差し替え用）" />
+            <div>
+              <p>校章は、杜ケ丘の空と霞ノ杜の水辺を背景に、子どもたちが知識の翼を広げて未来へ進む姿を表しています。</p>
+              <ul>
+                <li><strong>太陽</strong> … 真理と情熱</li>
+                <li><strong>波</strong> … 町を流れる川と学びの連続</li>
+                <li><strong>翼</strong> … 伸びゆく可能性</li>
+                <li><strong>「霞小」</strong> … 地域とともにある学校</li>
+              </ul>
+              <p style="font-size:12px;color:#666;">※ 校章画像は <code>assets/images/school-emblem.svg</code> を差し替えると変更できます。</p>
+            </div>
           </div>
+
+          <h2 class="sgn-section-title">沿革</h2>
+          <table class="history-table">
+            <thead>
+              <tr><th>年度</th><th>月</th><th>出来事</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>昭和28年度</td><td>4月</td><td>霞ノ杜町立霞ノ杜小学校開校（仮設校舎）</td></tr>
+              <tr><td>昭和30年度</td><td>3月</td><td>現校舎第1期工事完成</td></tr>
+              <tr><td>昭和45年度</td><td>11月</td><td>校章・校歌制定</td></tr>
+              <tr><td>平成8年度</td><td>4月</td><td>コンピュータ室整備</td></tr>
+              <tr><td>平成18年度</td><td>6月</td><td>自然観察園（ビオトープ）完成</td></tr>
+              <tr><td>平成20年度</td><td>10月</td><td>地域連携プログラム開始</td></tr>
+              <tr><td>平成28年度</td><td>4月</td><td>児童数 256名・10学級</td></tr>
+              <tr><td>令和2年度</td><td>3月</td><td>体育館耐震補強工事完了</td></tr>
+              <tr><td>令和4年度</td><td>4月</td><td>情報教育推進校に指定</td></tr>
+              <tr><td>令和6年度</td><td>4月</td><td>児童数 221名・10学級</td></tr>
+              <tr><td>令和8年度</td><td>4月</td><td>児童数 約110名・6学級（現在）</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

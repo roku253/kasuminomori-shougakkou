@@ -2,69 +2,60 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>歴代タイムカプセル｜霞ノ杜小学校</title>
   <link rel="stylesheet" href="../../css/style.css" />
   <link rel="stylesheet" href="../../css/layout-municipal.css" />
+  <link rel="stylesheet" href="../../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
   <script src="../../token-gate.js" defer></script>
-  <script src="../../js/kn-footprint.js" defer></script>
+  <script src="../../js/school-login.js" defer></script>
+  <script src="../../js/school-shell.js" defer></script>
 </head>
-<body>
+<body data-sgn-base="../../" data-sgn-active="home">
   <div id="site-root">
     <div class="sgn-site">
       <div class="sgn-body">
         <div class="sgn-col-main">
           <h1 class="sgn-page-title">卒業クラス別 保管一覧</h1>
-          <p class="sgn-crumbs"><a href="../../">トップ</a> &gt; <a href="../../contact/">お問い合わせ</a> &gt; タイムカプセル</p>
-          <div class="pdf-catalog">
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">2026年度</h3>
-              <div class="pdf-issue-row"><span style="color:#666;">準備中（当年組は未保管）</span></div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">2025年度</h3>
-              <div class="pdf-issue-row"><a href="./2025/">閲覧（卒業生認証）</a></div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">2024年度</h3>
-              <div class="pdf-issue-row"><a href="./2024/">閲覧（卒業生認証）</a></div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">2023年度</h3>
-              <div class="pdf-issue-row"><a href="./2023/">閲覧（卒業生認証）</a></div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">2022年度</h3>
-              <div class="pdf-issue-row"><a href="./2022/">閲覧（卒業生認証）</a></div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">2021年度</h3>
-              <div class="pdf-issue-row"><a href="./2021/">閲覧（卒業生認証）</a></div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">2020年度</h3>
-              <div class="pdf-issue-row"><a href="./2020/">閲覧（卒業生認証）</a></div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">2019年度</h3>
-              <div class="pdf-issue-row"><a href="./2019/">閲覧（卒業生認証）</a></div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">2018年度</h3>
-              <div class="pdf-issue-row"><a href="./2018/">閲覧（卒業生認証）</a></div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">2017年度</h3>
-              <div class="pdf-issue-row"><a href="./2017/">閲覧（卒業生認証）</a></div>
-            </section>
-            <section class="pdf-year-block is-archive">
-              <h3 class="pdf-year-title">2016年度（平成28・4年1組）</h3>
-              <div class="pdf-issue-row"><a href="./2016/">第1号（二重ロックあり）</a></div>
-            </section>
-          </div>
+          <p class="sgn-crumbs"><a href="../../">ホーム</a> ／ <a href="../../contact/">お問い合わせ</a> ／ タイムカプセル</p>
+          <p class="pdf-gate-msg" style="display:block;font-size:12px;color:#888;">閲覧には認証が必要です（お問い合わせのFAQをご参照ください）。</p>
+          <div class="pdf-catalog" id="tc-catalog"></div>
         </div>
       </div>
     </div>
   </div>
+  <script>
+    (function () {
+      var years = [];
+      for (var y = 2026; y >= 2013; y--) years.push(y);
+      var root = document.getElementById("tc-catalog");
+      years.forEach(function (year) {
+        var block = document.createElement("section");
+        block.className = "pdf-year-block";
+        block.setAttribute("data-year", String(year));
+        var h = document.createElement("h3");
+        h.className = "pdf-year-title";
+        h.textContent = year + "年度";
+        block.appendChild(h);
+        var row = document.createElement("div");
+        row.className = "pdf-issue-row";
+        if (year === 2026) {
+          row.innerHTML = '<span style="color:#666;">準備中（当年組は未保管）</span>';
+        } else {
+          var a = document.createElement("a");
+          a.href = "./" + year + "/";
+          a.textContent = "閲覧";
+          if (year >= 2013 && year <= 2019) a.setAttribute("data-require-login", "");
+          row.appendChild(a);
+        }
+        block.appendChild(row);
+        root.appendChild(block);
+      });
+      if (window.KnSchoolLogin && window.KnSchoolLogin.applyYearFilter) {
+        window.KnSchoolLogin.applyYearFilter();
+      }
+    })();
+  </script>
 </body>
 </html>

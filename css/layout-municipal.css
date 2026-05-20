@@ -289,12 +289,110 @@ body {
   list-style: none;
   font-size: 12px;
 }
+.sgn-notice-panel h3 {
+  font-size: 13px;
+  color: #333;
+  margin: 0 0 10px;
+  font-weight: 700;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #ddd;
+}
+
+.sgn-notice-list {
+  border-top: none;
+}
+.sgn-notice-list li {
+  padding: 8px 0;
+  border-bottom: 1px dotted #ccc;
+  list-style: none;
+}
 .sgn-notice-list a {
   color: #0033cc;
   text-decoration: underline;
   line-height: 1.55;
+  display: inline;
+  margin: 0;
+}
+.sgn-notice-list .pdf-size {
+  font-size: 11px;
+  color: #666;
+}
+
+.sgn-section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #333;
+  margin: 28px 0 12px;
+  padding: 0 0 8px 12px;
+  border-left: 4px solid #8b2942;
+  border-bottom: 1px solid #ddd;
+}
+
+.sgn-emblem-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+  margin: 12px 0 20px;
+}
+.sgn-emblem-wrap img {
+  width: 140px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.faq-list dt {
+  font-weight: 700;
+  margin: 14px 0 4px;
+  font-size: 13px;
+}
+.faq-list dd {
+  margin: 0 0 8px 16px;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 12px 0 24px;
+}
+.history-table th,
+.history-table td {
+  border: 1px solid #d6cfb6;
+  padding: 6px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.history-table th {
+  background: #f5f2ea;
+  width: 88px;
+}
+
+.pdf-year-block.is-gated a,
+.pdf-issue-row a.is-gated {
+  color: #999;
+  pointer-events: none;
+  text-decoration: none;
+}
+.pdf-year-block.is-hidden-year,
+.life-year-block.is-hidden-year {
+  display: none;
+}
+.pdf-year-block.is-gated .pdf-gate-msg,
+[data-requires-graduate].is-gated .pdf-gate-msg {
   display: block;
-  margin: 5px 0;
+  font-size: 12px;
+  color: #888;
+  margin: 4px 0;
+}
+.pdf-gate-msg {
+  display: none;
+}
+
+.graduate-logged-in .staff-banner {
+  display: none !important;
 }
 
 .sgn-slogan {

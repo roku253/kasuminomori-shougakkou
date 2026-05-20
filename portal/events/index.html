@@ -10,7 +10,7 @@
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
   <script>
     try {
-      if (sessionStorage.getItem("kn_school_staff_v1") !== "1") {
+      if (sessionStorage.getItem("kn_graduate_auth_v1") !== "1") {
         document.documentElement.classList.add("staff-prelock");
       }
     } catch (e) {}
@@ -18,59 +18,20 @@
   <script src="../../token-gate.js" defer></script>
   <script src="../../js/school-login.js" defer></script>
   <script src="../../js/school-shell.js" defer></script>
+  <script src="../../js/school-catalog.js" defer></script>
 </head>
-<body data-staff-page data-school-home="../../" data-sgn-base="../../" data-sgn-active="events">
+<body data-staff-page data-school-home="../../" data-sgn-base="../../" data-catalog="events">
   <div id="site-root">
     <div class="sgn-site">
-<div class="sgn-body">
-        <aside class="sgn-col-side sgn-menu-links">
-          <a href="./" data-require-login>年間行事予定</a>
-          <a href="../newsletters/" data-require-login>学校だより</a>
-        </aside>
+      <div class="sgn-body">
         <div class="sgn-col-main">
           <h1 class="sgn-page-title">年間行事予定</h1>
-          <p class="sgn-crumbs"><a href="../../">トップ</a> &gt; 年間行事予定</p>
-
-          <div class="pdf-catalog">
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">令和８年度</h3>
-              <div class="pdf-issue-row">
-                <a href="../../assets/pdf/events-r8.pdf" target="_blank" rel="noopener">年間行事予定表</a>
-                <span class="pdf-meta">(PDF)</span>
-              </div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">令和７年度</h3>
-              <div class="pdf-issue-row">
-                <a href="../../assets/pdf/events-r7.pdf" target="_blank" rel="noopener">年間行事予定表</a>
-                <span class="pdf-meta">(PDF)</span>
-              </div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">令和６年度</h3>
-              <div class="pdf-issue-row">
-                <a href="../../assets/pdf/events-r6.pdf" target="_blank" rel="noopener">年間行事予定表</a>
-                <span class="pdf-meta">(PDF)</span>
-              </div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">令和５年度</h3>
-              <div class="pdf-issue-row">
-                <a href="../../assets/pdf/events-r5.pdf" target="_blank" rel="noopener">年間行事予定表</a>
-                <span class="pdf-meta">(PDF)</span>
-              </div>
-            </section>
-            <section class="pdf-year-block">
-              <h3 class="pdf-year-title">令和４年度</h3>
-              <div class="pdf-issue-row">
-                <a href="../../assets/pdf/events-r4.pdf" target="_blank" rel="noopener">年間行事予定表</a>
-                <span class="pdf-meta">(PDF)</span>
-              </div>
-            </section>
-          </div>
+          <p class="sgn-crumbs"><a href="../../">ホーム</a> ／ 年間行事予定</p>
+          <p style="font-size:12px;color:#666;">令和2〜8年度は常時掲載。2013〜2019年度は認証後に閲覧できます。</p>
+          <div id="catalog-root" class="pdf-catalog"></div>
         </div>
       </div>
-</div>
+    </div>
   </div>
 </body>
 </html>
