@@ -8,5 +8,5 @@
   <rect width="800" height="320" fill="url(#sky)"/>
   <rect y="200" width="800" height="120" fill="#C4A574"/>
   <ellipse cx="400" cy="230" rx="280" ry="40" fill="#8FAD5C" opacity="0.7"/>
-  <text x="400" y="170" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#555">Î\f!î;Ï	</text>
+  <text x="400" y="170" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#555">ï¿½\f!ï¿½;ï¿½	</text>
 </svg>

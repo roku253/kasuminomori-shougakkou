@@ -100,25 +100,33 @@
     var root = document.getElementById("site-root");
     if (!root) return;
 
-    var footer = site.querySelector("footer.sgn-footer, footer.muni-footer");
-    if (!footer) {
-      footer = document.createElement("footer");
-      footer.className = "sgn-footer";
-      site.appendChild(footer);
-    } else {
-      footer.className = "sgn-footer";
-    }
-    footer.textContent = FOOTER_TEXT;
-
+    site.querySelectorAll(
+      "footer.sgn-footer, footer.muni-footer, footer.sgn-site-footer, .school-fiction-note"
+    ).forEach(function (n) {
+      n.remove();
+    });
     root.querySelectorAll(".school-fiction-note").forEach(function (n) {
       n.remove();
     });
 
-    var note = document.createElement("p");
-    note.className = "school-fiction-note";
-    note.setAttribute("role", "note");
-    note.innerHTML = FICTION_HTML;
-    site.appendChild(note);
+    var footer = document.createElement("footer");
+    footer.className = "sgn-site-footer";
+    footer.setAttribute("role", "contentinfo");
+    footer.innerHTML =
+      '<p class="sgn-footer-line">' +
+      FOOTER_TEXT +
+      "</p>" +
+      '<p class="sgn-footer-fiction" role="note">' +
+      FICTION_HTML +
+      "</p>";
+    site.appendChild(footer);
+  }
+
+  function normalizeBodyLayout(site) {
+    var body = site.querySelector(".sgn-body");
+    if (!body) return;
+    var sides = body.querySelectorAll(".sgn-col-side");
+    if (sides.length === 0) body.classList.add("sgn-body--full");
   }
 
   function mount() {
@@ -134,6 +142,7 @@
     if (existing) existing.remove();
 
     site.insertBefore(buildChrome(), site.firstChild);
+    normalizeBodyLayout(site);
     normalizeFooter(site);
   }
 

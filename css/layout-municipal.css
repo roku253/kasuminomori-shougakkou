@@ -1,11 +1,19 @@
 /* 習志野市立小学校サイト風レイアウト（霞ノ杜小学校） */
+html {
+  height: 100%;
+}
+
 body {
-  background: #eceae4;
+  background: #fff;
   margin: 0;
+  min-height: 100%;
 }
 
 #site-root {
   width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: #fff;
 }
 
@@ -15,6 +23,10 @@ body {
   margin: 0;
   background: #fff;
   box-shadow: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* ===== ヘッダー（左：校名 / 右：仮写真） ===== */
@@ -178,6 +190,14 @@ body {
   margin: 0 auto;
   box-sizing: border-box;
   width: 100%;
+  flex: 1;
+}
+
+/* サイドなし（お問い合わせ・アクセス等）は全幅の中央列へ */
+.sgn-body--full > .sgn-col-main,
+.sgn-body:not(:has(.sgn-col-side)) > .sgn-col-main,
+.sgn-body > .sgn-col-main:only-child {
+  grid-column: 1 / -1;
 }
 @media (max-width: 900px) {
   .sgn-header {
@@ -338,6 +358,7 @@ body.staff-logged-in .staff-banner { display: block; }
   background: #f0f7ee;
   padding: 16px 18px;
   margin: 20px 0;
+  max-width: 640px;
 }
 .highlight-box h3 { margin: 0 0 8px; color: #2d5a27; }
 .highlight-box .cta {
@@ -365,13 +386,38 @@ body.staff-logged-in .staff-banner { display: block; }
 .year-card:hover { background: #eef4fb; }
 .year-card.is-prep { color: #666; font-weight: 400; pointer-events: none; }
 
-.sgn-footer {
-  border-top: 1px solid #ddd;
-  padding: 16px;
-  font-size: 11px;
-  color: #666;
+/* 共通フッター（住所＋架空注意・2行・白背景・画面下部） */
+.sgn-site-footer {
+  margin-top: auto;
+  padding: 14px 20px 18px;
   text-align: center;
-  background: #fafafa;
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+  font-size: 11px;
+  line-height: 1.65;
+  color: #666;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sgn-site-footer .sgn-footer-line {
+  margin: 0 0 6px;
+  color: #666;
+}
+
+.sgn-site-footer .sgn-footer-fiction {
+  margin: 0;
+  color: #5a5a5a;
+}
+
+.sgn-site-footer .sgn-footer-fiction strong {
+  color: #3d3d3d;
+  font-weight: 600;
+}
+
+/* 旧フッター（互換） */
+.sgn-footer {
+  display: none;
 }
 
 /* legacy compat */
