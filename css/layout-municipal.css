@@ -119,29 +119,35 @@ body {
     linear-gradient(180deg, #9ed8f0 0%, #d4e8c8 55%, #c9a86a 100%);
 }
 
-/* ===== タブ（水色・区切り線・鍵なし） ===== */
+/* ===== タブ（水色・中央寄せ・左右余白） ===== */
 .sgn-tabs {
   display: flex;
+  justify-content: center;
+  align-items: stretch;
   width: 100%;
+  box-sizing: border-box;
+  padding: 0 clamp(32px, 14vw, 200px);
   background: #c8ecef;
   border-bottom: 1px solid #9ab8bc;
 }
 
 .sgn-tabs a {
-  flex: 1;
+  flex: 0 0 auto;
+  min-width: 120px;
   text-align: center;
-  padding: 12px 8px;
+  padding: 12px 32px;
   color: #111;
   text-decoration: none;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.35;
-  border-right: 1px solid #9ab8bc;
   background: transparent;
+  border-left: 1px solid #9ab8bc;
+  white-space: nowrap;
 }
 
 .sgn-tabs a:last-child {
-  border-right: none;
+  border-right: 1px solid #9ab8bc;
 }
 
 .sgn-tabs a:hover {
@@ -212,11 +218,14 @@ body {
     min-height: 120px;
   }
   .sgn-tabs {
-    flex-wrap: wrap;
+    padding: 0 clamp(12px, 5vw, 48px);
+    flex-wrap: nowrap;
   }
   .sgn-tabs a {
-    flex: 1 1 33%;
-    border-bottom: 1px solid #9ab8bc;
+    min-width: 0;
+    flex: 1 1 0;
+    padding: 10px 12px;
+    font-size: 12px;
   }
   .sgn-body { grid-template-columns: 1fr; }
   .sgn-col-side { order: 2; }
