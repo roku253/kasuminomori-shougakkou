@@ -1,13 +1,20 @@
 /* 習志野市立小学校サイト風レイアウト（霞ノ杜小学校） */
 body {
-  background: #f7f5f0;
+  background: #eceae4;
+  margin: 0;
+}
+
+#site-root {
+  width: 100%;
+  background: #fff;
 }
 
 .sgn-site {
-  max-width: 1100px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   background: #fff;
-  box-shadow: 0 0 0 1px #e0ddd6;
+  box-shadow: none;
 }
 
 /* ===== ヘッダー（左：校名 / 右：仮写真） ===== */
@@ -165,8 +172,12 @@ body {
   display: grid;
   grid-template-columns: 200px 1fr 200px;
   gap: 0;
-  padding: 14px 14px 24px;
+  padding: 14px 20px 24px;
   align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
 }
 @media (max-width: 900px) {
   .sgn-header {

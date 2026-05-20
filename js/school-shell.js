@@ -1,11 +1,16 @@
 /**
- * 全ページ共通ヘッダー・タブ（谷津南小／鷺沼型）
+ * 全ページ共通ヘッダー・タブ・フッター（谷津南小／鷺沼型）
  * body[data-sgn-base] 相対パス（例: ../../）
  * body[data-sgn-active] 現在タブ: home|guide|contact|access|events|life|newsletter
  */
 (function () {
   var ACTIVE = document.body.getAttribute("data-sgn-active") || "home";
   var BASE = document.body.getAttribute("data-sgn-base") || "./";
+
+  var FOOTER_TEXT =
+    "霞ノ杜町立霞ノ杜小学校 ／ 〒000-0000 霞ノ杜町（フィクション）";
+  var FICTION_HTML =
+    "※本サイトは謎解き作品のための<strong>架空サイト</strong>です。記載・表示されるサービス名・地名・人物名・団体名などはフィクションであり、<strong>実在のものとは一切関係ありません</strong>。";
 
   function join(path) {
     var base = BASE || "./";
@@ -46,7 +51,7 @@
       '<nav class="sgn-tabs" aria-label="メインメニュー"></nav>';
 
     var nav = wrap.querySelector(".sgn-tabs");
-    TABS.forEach(function (tab, i) {
+    TABS.forEach(function (tab) {
       var a = document.createElement("a");
       a.href = join(tab.href);
       a.textContent = tab.label;
@@ -58,8 +63,66 @@
     return wrap;
   }
 
-  function mount() {
+  /** 旧 muni-wrap / main 構造を sgn-site に寄せる */
+  function ensureSiteContainer() {
     var site = document.querySelector(".sgn-site");
+    if (site) return site;
+
+    var muni = document.querySelector(".muni-wrap");
+    if (!muni) return null;
+
+    muni.classList.add("sgn-site");
+    muni.classList.remove("muni-wrap");
+
+    var header = muni.querySelector(".muni-header");
+    var nav = muni.querySelector(".muni-nav");
+    if (header) header.remove();
+    if (nav) nav.remove();
+
+    var main = muni.querySelector("main");
+    if (main) {
+      var body = document.createElement("div");
+      body.className = "sgn-body";
+      var col = document.createElement("div");
+      col.className = "sgn-col-main";
+      while (main.firstChild) col.appendChild(main.firstChild);
+      body.appendChild(col);
+      main.replaceWith(body);
+    }
+
+    var mfooter = muni.querySelector(".muni-footer");
+    if (mfooter) mfooter.className = "sgn-footer";
+
+    return muni;
+  }
+
+  function normalizeFooter(site) {
+    var root = document.getElementById("site-root");
+    if (!root) return;
+
+    var footer = site.querySelector("footer.sgn-footer, footer.muni-footer");
+    if (!footer) {
+      footer = document.createElement("footer");
+      footer.className = "sgn-footer";
+      site.appendChild(footer);
+    } else {
+      footer.className = "sgn-footer";
+    }
+    footer.textContent = FOOTER_TEXT;
+
+    root.querySelectorAll(".school-fiction-note").forEach(function (n) {
+      n.remove();
+    });
+
+    var note = document.createElement("p");
+    note.className = "school-fiction-note";
+    note.setAttribute("role", "note");
+    note.innerHTML = FICTION_HTML;
+    site.appendChild(note);
+  }
+
+  function mount() {
+    var site = ensureSiteContainer();
     if (!site) return;
 
     var oldBanner = site.querySelector(".sgn-banner");
@@ -70,8 +133,8 @@
     var existing = site.querySelector(".sgn-chrome");
     if (existing) existing.remove();
 
-    var chrome = buildChrome();
-    site.insertBefore(chrome, site.firstChild);
+    site.insertBefore(buildChrome(), site.firstChild);
+    normalizeFooter(site);
   }
 
   if (document.readyState === "loading") {
