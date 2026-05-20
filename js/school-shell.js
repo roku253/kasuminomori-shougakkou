@@ -8,7 +8,7 @@
   var BASE = document.body.getAttribute("data-sgn-base") || "./";
 
   var FOOTER_TEXT =
-    "霞ノ杜町立霞ノ杜小学校 ／ 〒000-0000 霞ノ杜町（フィクション）";
+    "霞ノ杜町立霞ノ杜小学校 ／ 〒393-0000 霞ノ杜町大字杜ケ丘 1234";
   var FICTION_HTML =
     "※本サイトは謎解き作品のための<strong>架空サイト</strong>です。記載・表示されるサービス名・地名・人物名・団体名などはフィクションであり、<strong>実在のものとは一切関係ありません</strong>。";
 
