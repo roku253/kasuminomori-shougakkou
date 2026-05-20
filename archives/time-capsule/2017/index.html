@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>タイムカプセル（）｜霞ノ杜小学校</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/layout-municipal.css" />
+  <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
+  <script src="../../token-gate.js" defer></script>
+</head>
+<body>
+  <div id="site-root">
+    <div class="muni-wrap">
+      <main style="max-width:520px;margin:40px auto;">
+        <h2 id="year-title">タイムカプセル</h2>
+        <p>当該年度の卒業生認証が必要です。事務室で発行された年度コードを入力してください。</p>
+        <div class="lock" style="background:#f5f5f0;border:1px dashed #999;padding:14px;">
+          <input id="grad-code" placeholder="卒業生コード" />
+          <button type="button" id="grad-btn">認証</button>
+        </div>
+        <p id="grad-msg" style="color:#c00;font-size:13px;margin-top:10px;"></p>
+        <p><a href="../">← 年一覧へ</a></p>
+      </main>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var y = (location.pathname.match(/\/(\d{4})\//) || [])[1] || "????";
+      document.getElementById("year-title").textContent = y + "年度 タイムカプセル";
+      document.getElementById("grad-btn").onclick = function () {
+        document.getElementById("grad-msg").textContent =
+          "認証に失敗しました。当該年度の公開は終了しているか、コードが無効です。";
+      };
+    })();
+  </script>
+</body>
+</html>
+

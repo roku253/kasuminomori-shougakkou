@@ -1,0 +1,153 @@
+/* 町立小学校サイト — 鷺沼型レイアウト */
+.muni-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+}
+.muni-top-bar {
+  background: #1a4d8c;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 16px;
+  text-align: right;
+}
+.muni-top-bar a { color: #cce4ff; }
+.muni-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0 12px;
+  border-bottom: 3px solid #1a4d8c;
+}
+.muni-header .logo {
+  width: 52px; height: 52px; border-radius: 8px;
+  background: #2d5a27; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 22px; flex-shrink: 0;
+}
+.muni-header h1 { margin: 0; font-size: 1.15rem; color: #1a4d8c; }
+.muni-header .sub { font-size: 0.75rem; color: #555; margin-top: 4px; }
+
+.muni-nav {
+  display: flex; flex-wrap: wrap; gap: 2px;
+  background: #eef4fb; border: 1px solid #c5d9ef;
+  padding: 6px 8px; margin: 12px 0;
+  font-size: 13px;
+}
+.muni-nav a {
+  color: #1a4d8c; text-decoration: none; padding: 6px 12px;
+  border-radius: 3px;
+}
+.muni-nav a:hover { background: #d6e8f8; }
+.muni-nav a.is-active { background: #1a4d8c; color: #fff; }
+.muni-nav a.is-locked::after { content: " 🔒"; font-size: 10px; }
+
+.muni-layout {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .muni-layout { grid-template-columns: 1fr; }
+}
+
+.muni-sidebar {
+  background: #f5f9fc;
+  border: 1px solid #c5d9ef;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.muni-sidebar h3 {
+  margin: 0 0 8px; font-size: 13px; color: #1a4d8c;
+  border-bottom: 1px solid #c5d9ef; padding-bottom: 6px;
+}
+.muni-sidebar ul { margin: 0; padding-left: 1.1em; }
+.muni-sidebar li { margin: 6px 0; }
+.muni-sidebar a { color: #1a4d8c; }
+
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px 16px;
+  margin: 16px 0 24px;
+}
+.link-grid a {
+  color: #0033cc;
+  text-decoration: underline;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.link-grid a:hover { color: #001a99; }
+.link-grid a.is-locked { color: #555; }
+
+.highlight-box {
+  border: 2px solid #2d5a27;
+  background: #f0f7ee;
+  padding: 16px 18px;
+  margin: 20px 0;
+}
+.highlight-box h3 {
+  margin: 0 0 8px; color: #2d5a27; font-size: 1rem;
+}
+.highlight-box .cta {
+  display: inline-block; margin-top: 10px;
+  background: #2d5a27; color: #fff;
+  padding: 8px 16px; text-decoration: none; border-radius: 4px;
+  font-size: 13px;
+}
+.highlight-box .cta:hover { opacity: 0.9; }
+
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+.year-card {
+  border: 1px solid #c5d9ef;
+  background: #fff;
+  padding: 14px;
+  text-align: center;
+  text-decoration: none;
+  color: #1a4d8c;
+  font-weight: 600;
+}
+.year-card:hover { background: #eef4fb; }
+.year-card.is-disabled {
+  color: #999; background: #f5f5f5; cursor: not-allowed;
+  pointer-events: none;
+}
+.year-card.is-prep { color: #666; font-weight: 400; font-size: 12px; }
+
+.staff-banner {
+  background: #fff8e6;
+  border: 1px solid #e6c200;
+  padding: 8px 12px;
+  font-size: 12px;
+  margin-bottom: 12px;
+  display: none;
+}
+body.staff-logged-in .staff-banner { display: block; }
+
+.archive-timeline {
+  border-left: 3px solid #2d5a27;
+  padding-left: 16px;
+  margin: 16px 0;
+}
+.archive-timeline li { margin: 8px 0; }
+
+.pdf-dl {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #eef4fb; border: 1px solid #1a4d8c;
+  padding: 10px 14px; color: #1a4d8c; text-decoration: none;
+  margin: 8px 0; font-size: 14px;
+}
+.pdf-dl:hover { background: #d6e8f8; }
+
+.muni-footer {
+  margin-top: 32px; padding-top: 16px;
+  border-top: 1px solid #ccc;
+  font-size: 11px; color: #666;
+  text-align: center;
+}

@@ -5,54 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>お問い合わせ｜霞ノ杜小学校</title>
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/layout-municipal.css" />
+  <link rel="stylesheet" href="../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
-  <script>
-    window.__TOKEN_DENIED__ = function (msg) {
-      var el = document.createElement("div"); el.className = "ns-denied-overlay";
-      el.innerHTML = '<div class="ns-denied-card"><h1>霞ノ杜小学校｜閲覧制限のお知らせ</h1><p>本ページは校務関係者向けの限定公開です。</p><p>閲覧できる環境から再度お試しください。</p><p class="ns-portal"><a href="https://nazo-portal.vercel.app/portal" target="_blank" rel="noopener noreferrer">https://nazo-portal.vercel.app/portal</a></p></div>';
-      document.documentElement.appendChild(el);
-    };
-  </script>
   <script src="../token-gate.js" defer></script>
+  <script src="../js/school-login.js" defer></script>
 </head>
 <body>
   <div id="site-root">
-    <header class="school-header"><div class="logo">霞</div><div><h1>霞ノ杜町立 霞ノ杜小学校</h1><div class="sub">公式ホームページ ・ 1953 年 開校</div></div></header>
-    <nav class="school-nav">
-      <a href="../">お知らせ</a>
-      <a href="../guide/">学校案内</a>
-      <a href="../events/">行事予定</a>
-      <a href="../activity/">地域活動</a>
-      <a href="../access/">アクセス</a>
-      <a href="./" class="is-active">お問い合わせ</a>
-    </nav>
-    <main>
-      <p class="crumbs"><a href="../">ホーム</a> ／ お問い合わせ</p>
+    <div class="muni-wrap">
+      <header class="muni-header">
+        <div class="logo">霞</div>
+        <div><h1>霞ノ杜町立 霞ノ杜小学校</h1><div class="sub">お問い合わせ</div></div>
+      </header>
+      <nav class="muni-nav">
+        <a href="../">ホーム</a>
+        <a href="../guide/">学校案内</a>
+        <a href="./" class="is-active">お問い合わせ</a>
+        <a href="../access/">アクセス</a>
+      </nav>
+      <main>
+        <p class="crumbs"><a href="../">ホーム</a> ／ お問い合わせ</p>
+        <h2>お問い合わせ</h2>
+        <p>校務に関するお問い合わせは、事務室までご連絡ください。</p>
+        <table class="basic">
+          <tbody>
+            <tr><th>窓口</th><td>霞ノ杜町立霞ノ杜小学校 事務室</td></tr>
+            <tr><th>受付時間</th><td>平日 8:30 〜 17:00</td></tr>
+          </tbody>
+        </table>
 
-      <h2>お問い合わせ</h2>
-      <p>
-        校務に関するお問い合わせは、霞ノ杜町立霞ノ杜小学校 事務室までご連絡ください。
-      </p>
-      <table class="basic">
-        <tbody>
-          <tr><th>窓口</th><td>霞ノ杜町立霞ノ杜小学校 事務室</td></tr>
-          <tr><th>受付時間</th><td>平日 8:30 〜 17:00（学校休業日を除く）</td></tr>
-          <tr><th>電話番号</th><td>0×××-××-××××</td></tr>
-        </tbody>
-      </table>
+        <div class="highlight-box">
+          <h3>卒業生の皆さま（タイムカプセルについて）</h3>
+          <p>
+            本校では <strong>2016年度（平成28年）4年1組</strong> を起点に、2分の1成人式向けのタイムカプセル保管を開始しました。
+            以降、卒業クラスごとに年度別で保管しています。
+          </p>
+          <a class="cta" href="../archives/time-capsule/">歴代タイムカプセル一覧（2016年〜）</a>
+        </div>
 
-      <h3>個人情報の取り扱いについて</h3>
-      <div class="card">
-        <p>
-          本校では、児童・保護者の個人情報を、教育活動・連絡・各種証明・地域連携の範囲で取り扱います。
-          ホームページ等で氏名を表示する場合は、原則として保護者の同意を得た範囲とし、それ以外はマスクの上で掲載しています。
-        </p>
-        <p>
-          校内文書管理規程に基づく内部参照用の資料には、印刷時に校内識別のための情報が併記されることがあります。
-        </p>
-      </div>
-    </main>
-    <p class="school-fiction-note" role="note">※本サイトは謎解き作品のための<strong>架空サイト</strong>です。記載・表示されるサービス名・地名・人物名・団体名などはフィクションであり、<strong>実在のものとは一切関係ありません</strong>。</p>
+        <h3>個人情報の取り扱い</h3>
+        <div class="card">
+          <p>ホームページ上の氏名は原則マスク表示です。校内文書は印刷レイアウトにより参考列が併記される場合があります。</p>
+        </div>
+      </main>
+      <footer class="muni-footer">霞ノ杜町立霞ノ杜小学校</footer>
+    </div>
+    <p class="school-fiction-note" role="note">※架空サイトです。</p>
   </div>
 </body>
 </html>

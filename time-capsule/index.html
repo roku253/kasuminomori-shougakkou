@@ -2,98 +2,11 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>タイムカプセル｜4年1組（2016）</title>
-  <link rel="stylesheet" href="../css/style.css" />
-  <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
-  <script src="../token-gate.js" defer></script>
-  <style>
-    .lock { background: #f5f5f0; border: 1px dashed #999; padding: 14px; margin: 12px 0; }
-    .pdf-panel { display: none; background: #fff; border: 1px solid #ccc; padding: 16px; margin-top: 12px; }
-    .pdf-panel.open { display: block; }
-    .pdf-hint { display: none; margin-top: 10px; font-size: 13px; color: #444; }
-    .pdf-hint.open { display: block; }
-    input { padding: 6px 8px; margin-right: 8px; }
-    button { padding: 6px 12px; cursor: pointer; }
-    .seat-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; max-width: 320px; margin: 12px 0; }
-    .seat { border: 1px solid #bbb; padding: 6px; text-align: center; font-size: 11px; min-height: 28px; }
-    .seat.empty { background: #eee; color: #aaa; }
-    .pdf-link { display: inline-block; margin-top: 8px; color: #2d5a27; font-weight: 600; }
-  </style>
+  <meta http-equiv="refresh" content="0; url=../archives/time-capsule/2016/" />
+  <title>リダイレクト…</title>
+  <script>location.replace("../archives/time-capsule/2016/");</script>
 </head>
 <body>
-  <div id="site-root">
-    <header class="school-header"><div class="logo">霞</div><div><h1>タイムカプセル（2016・4年1組）</h1></div></header>
-    <nav class="school-nav">
-      <a href="../">お知らせ</a>
-      <a href="../activity/">地域活動</a>
-      <a href="./" class="is-active">タイムカプセル</a>
-    </nav>
-    <main data-kn-story-clue="1">
-      <p class="crumbs"><a href="../">ホーム</a> ／ タイムカプセル</p>
-      <h2>二重ロック文書</h2>
-      <p>2016年・2分の1成人式に向けてクラスで残した記録です。閲覧には順にロックを解除してください。</p>
-
-      <div class="lock" id="lock1">
-        <p><strong>第1ロック:</strong> 当時のクラス合唱曲名を入力</p>
-        <input id="song" placeholder="曲名" autocomplete="off" />
-        <button type="button" id="btn1">解除</button>
-      </div>
-
-      <div class="pdf-panel" id="pdf-panel">
-        <h3>帳票「10年後の私へ」</h3>
-        <p>PDFを開くと閲覧パスワードの入力が求められます。第2ロックで得た番号と、合唱曲名をつなげてください。</p>
-        <a class="pdf-link" id="pdf-link" href="../assets/time-capsule-2016.pdf" target="_blank" rel="noopener noreferrer">time-capsule-2016.pdf を開く</a>
-      </div>
-
-      <div class="lock" id="lock2" style="display:none">
-        <p><strong>第2ロック:</strong> 佐藤ユウの<strong>本来の</strong>出席番号（4人目がいた前提）</p>
-        <p class="hint" style="font-size:12px;color:#555;">座席表（28枠）と公式記録（8番）の差分を考えてください。地域活動の名簿・写生記録も参照できます。</p>
-        <div class="seat-grid" id="seats" aria-label="教室座席（番号のみ）"></div>
-        <input id="seat" placeholder="番号" maxlength="2" autocomplete="off" />
-        <button type="button" id="btn2">解除</button>
-        <p class="pdf-hint" id="pdf-hint">PDFパスワードの組み立て: <strong>本来の出席番号</strong> + <strong>合唱曲名（ひらがな・区切りなし）</strong></p>
-      </div>
-    </main>
-  </div>
-  <script>
-    (function () {
-      var seats = document.getElementById("seats");
-      for (var i = 1; i <= 28; i++) {
-        var d = document.createElement("div");
-        d.className = "seat" + (i === 8 ? " empty" : "");
-        d.textContent = String(i);
-        seats.appendChild(d);
-      }
-      document.getElementById("btn1").onclick = function () {
-        var v = (document.getElementById("song").value || "").trim();
-        if (v === "ふるさと" || v === "フルサト") {
-          document.getElementById("pdf-panel").classList.add("open");
-          document.getElementById("lock2").style.display = "block";
-        } else alert("合唱曲名が一致しません。");
-      };
-      document.getElementById("btn2").onclick = function () {
-        var v = (document.getElementById("seat").value || "").trim();
-        if (v === "9") {
-          document.getElementById("pdf-hint").classList.add("open");
-        } else alert("出席番号が一致しません。");
-      };
-      var KN_FP_KEY = "signal_trace_kn_footprint_v2";
-      function knApply() {
-        try {
-          var f = localStorage.getItem(KN_FP_KEY) || "";
-          if (f === "purged_delete" || f === "purged_keep") {
-            document.querySelectorAll('[data-kn-story-clue="1"]').forEach(function (el) {
-              el.style.display = "none";
-            });
-          }
-        } catch (e) {}
-      }
-      knApply();
-      window.addEventListener("storage", function (e) {
-        if (e.key === KN_FP_KEY) knApply();
-      });
-    })();
-  </script>
+  <p><a href="../archives/time-capsule/2016/">タイムカプセル（2016）へ</a></p>
 </body>
 </html>
