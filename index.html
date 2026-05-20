@@ -13,10 +13,8 @@
       var el = document.createElement("div");
       el.className = "ns-denied-overlay";
       el.innerHTML =
-        '<div class="ns-denied-card"><h1>霞ノ杜小学校｜閲覧制限のお知らせ</h1>' +
-        '<p>本ページは校務関係者向けの限定公開です。</p>' +
-        '<p>閲覧できる環境から再度お試しください。</p>' +
-        '<p class="ns-portal"><a href="https://nazo-portal.vercel.app/portal" target="_blank" rel="noopener noreferrer">https://nazo-portal.vercel.app/portal</a></p></div>';
+        '<div class="ns-denied-card"><h1>霞ノ杜小学校｜閲覧制限</h1><p>校務関係者向けの限定公開です。</p>' +
+        '<p class="ns-portal"><a href="https://nazo-portal.vercel.app/portal" target="_blank" rel="noopener noreferrer">ポータル</a></p></div>';
       document.documentElement.appendChild(el);
     };
   </script>
@@ -26,104 +24,87 @@
 </head>
 <body>
   <div id="site-root">
-    <p class="muni-top-bar"><a href="./guide/">学校案内</a> ｜ 令和8年度</p>
-    <div class="muni-wrap">
-      <header class="muni-header school-header">
-        <div class="logo">霞</div>
-        <div>
-          <h1>霞ノ杜町立 霞ノ杜小学校</h1>
-          <div class="sub">公式ホームページ ・ 1953年開校 ・ 令和8年度</div>
-        </div>
-      </header>
+    <div class="sgn-site">
+      <div class="sgn-banner">
+        <div class="sgn-banner-title">霞ノ杜町立 霞ノ杜小学校</div>
+        <div class="sgn-banner-mark">Kasuminomori<br />since 1953</div>
+      </div>
 
-      <nav class="muni-nav school-nav" aria-label="メインメニュー">
+      <nav class="sgn-gnav" aria-label="グローバルナビ">
         <a href="./" class="is-active">ホーム</a>
-        <a href="./guide/">学校案内</a>
+        <a href="./guide/">学校紹介</a>
+        <a href="./portal/life/" data-require-login>学校生活</a>
         <a href="./contact/">お問い合わせ</a>
-        <a href="./access/">アクセス</a>
-        <a href="./portal/events/" data-require-login class="is-locked">年間行事</a>
-        <a href="./portal/life/" data-require-login class="is-locked">学校生活</a>
-        <a href="./portal/newsletters/" data-require-login class="is-locked">学校だより</a>
+        <a href="./portal/shin1/" data-require-login>R8 学校生活</a>
       </nav>
+
+      <div class="sgn-emergency">
+        <div class="sgn-emergency-label">緊急情報</div>
+        <div class="sgn-emergency-body">2026年05月01日　西門付近の歩行者通行について（フィクション）</div>
+      </div>
 
       <p class="staff-banner">保護者ポータルにログイン中です。<a href="#" id="staff-logout">ログアウト</a></p>
 
-      <div class="muni-layout">
-        <div class="muni-main">
-          <h2 style="font-size:1rem;color:#1a4d8c;border-bottom:2px solid #1a4d8c;padding-bottom:6px;">新着情報</h2>
-          <div class="news-box">
-            <ul>
-              <li><strong>R8.04.08</strong>　令和8年度 入学式を挙行しました。</li>
-              <li><strong>R7.12.15</strong>　冬期休業のご案内を更新しました。</li>
-              <li><strong>R7.11.20</strong>　学年だより 11月号を発行しました（保護者ポータル）。</li>
-              <li><strong>R6.12.10</strong>　冬期休業のご案内を更新しました。</li>
-              <li><strong>R6.11.03</strong>　町民体育祭の手伝いに児童ボランティアが参加しました。</li>
-              <li><strong>R6.10.12</strong>　河川敷清掃活動を実施しました。</li>
-            </ul>
-          </div>
+      <div class="sgn-body">
+        <aside class="sgn-col-side sgn-menu-links">
+          <h3>霞ノ杜小学校ホームページ</h3>
+          <a href="./portal/events/" data-require-login class="is-locked">年間行事予定</a>
+          <a href="./portal/life/" data-require-login class="is-locked">学校生活の様子</a>
+          <a href="./portal/evaluation/" data-require-login class="is-locked">学校評価アンケート</a>
+          <a href="./portal/newsletters/" data-require-login class="is-locked">学校だより</a>
+          <a href="./portal/grade-news/" data-require-login class="is-locked">学年だより</a>
+          <a href="./portal/health/" data-require-login class="is-locked">保健だより</a>
+          <a href="./portal/nurse/" data-require-login class="is-locked">保健室からのお知らせ</a>
+          <a href="./portal/lunch/" data-require-login class="is-locked">給食だより・こんだて表</a>
+          <a href="./portal/pta/" data-require-login class="is-locked">PTAからのお手紙</a>
+          <a href="./portal/shin1/" data-require-login class="is-locked">令和8年度入学新1年生</a>
+        </aside>
 
-          <h2 style="font-size:1rem;color:#1a4d8c;margin-top:28px;">メニュー</h2>
-          <div class="link-grid">
-            <a href="./portal/events/" data-require-login class="is-locked">年間行事予定</a>
-            <a href="./portal/life/" data-require-login class="is-locked">学校生活の様子</a>
-            <a href="./portal/evaluation/" data-require-login class="is-locked">学校評価アンケート</a>
-            <a href="./portal/newsletters/" data-require-login class="is-locked">学校だより</a>
-            <a href="./portal/grade-news/" data-require-login class="is-locked">学年だより</a>
-            <a href="./portal/health/" data-require-login class="is-locked">保健だより</a>
-            <a href="./portal/nurse/" data-require-login class="is-locked">保健室からのお知らせ</a>
-            <a href="./portal/lunch/" data-require-login class="is-locked">給食だより・こんだて表</a>
-            <a href="./portal/pta/" data-require-login class="is-locked">PTAからのお手紙</a>
-            <a href="./portal/shin1/" data-require-login class="is-locked">令和8年度入学新1年生のページ</a>
-            <a href="./archives/2016/" data-require-login class="is-locked">平成28年度 保管資料（職員）</a>
-          </div>
+        <div class="sgn-col-main">
+          <p class="sgn-slogan">～ よく見て、よく考える 霞ノ杜小 ～</p>
+          <p style="font-size:13px;line-height:1.7;">
+            霞ノ杜町立霞ノ杜小学校は、町の北西に位置する公立小学校です。1953年開校。地域の自然と歴史に寄り添った学びを大切にしています。
+          </p>
 
-          <h2>校門のご案内</h2>
-          <div class="placard" data-kn-story-clue="1" aria-label="校門付近の案内板">
+          <div class="sgn-news-head">NEW 新着情報</div>
+          <ul class="sgn-news-list">
+            <li>2026年04月08日　<a href="./portal/shin1/" data-require-login>令和8年度 入学式を挙行しました。</a></li>
+            <li>2025年12月15日　<a href="./portal/newsletters/" data-require-login>冬期休業のご案内を更新しました。</a></li>
+            <li>2024年11月20日　<a href="./portal/grade-news/" data-require-login>学年だより 11月号を発行しました。</a></li>
+            <li>2024年11月03日　町民体育祭ボランティアに参加しました。</li>
+            <li>2024年10月12日　河川敷清掃活動を実施しました。</li>
+          </ul>
+
+          <h2 style="font-size:1rem;margin-top:24px;">校門のご案内</h2>
+          <div class="placard" data-kn-story-clue="1">
             <div class="big">霞ノ杜小学校</div>
             <div class="furigana">す　・　え　・　る　・　か</div>
-            <p style="margin:10px 0 0;font-size:0.8rem;color:#444;">※看板は老朽化のため、一部判読しづらい箇所があります。</p>
           </div>
-
-          <h2>本校について</h2>
-          <p>
-            霞ノ杜町立霞ノ杜小学校は、町の北西、霞ノ杜地区に位置する公立小学校です。
-            詳細は <a href="./guide/">学校案内</a> をご覧ください。
-          </p>
         </div>
 
-        <aside class="muni-sidebar">
-          <h3>メニュー</h3>
-          <ul>
-            <li><a href="./guide/">学校紹介</a></li>
-            <li><a href="./portal/life/" data-require-login>学校生活</a></li>
-            <li><a href="./contact/">お問い合わせ</a></li>
-          </ul>
-          <h3 style="margin-top:16px;">各種相談窓口</h3>
-          <ul>
-            <li>学校問題相談窓口</li>
-            <li>いじめ防止対策</li>
+        <aside class="sgn-col-side">
+          <h3>各種お知らせ</h3>
+          <ul class="sgn-notice-list">
+            <li><a href="./guide/">学校案内・保護者ポータルFAQ</a></li>
+            <li><a href="./portal/newsletters/" data-require-login>学校だより（PDF）</a></li>
+            <li><a href="./contact/">お問い合わせ・タイムカプセル</a></li>
+            <li><a href="./access/">アクセス</a></li>
           </ul>
         </aside>
       </div>
 
-      <footer class="muni-footer">
-        霞ノ杜町立霞ノ杜小学校 ／ 〒000-0000 霞ノ杜町（フィクション）<br />
-        Copyright (c) Kasuminomori Elementary School. Fiction site.
+      <footer class="sgn-footer">
+        霞ノ杜町立霞ノ杜小学校 ／ 〒000-0000 霞ノ杜町（フィクション）
       </footer>
     </div>
-    <p class="school-fiction-note" role="note">※本サイトは謎解き作品のための<strong>架空サイト</strong>です。記載・表示されるサービス名・地名・人物名・団体名などはフィクションであり、<strong>実在のものとは一切関係ありません</strong>。</p>
+    <p class="school-fiction-note" role="note">※架空サイトです。</p>
   </div>
   <script>
-    (function () {
-      var btn = document.getElementById("staff-logout");
-      if (btn) {
-        btn.addEventListener("click", function (e) {
-          e.preventDefault();
-          try { sessionStorage.removeItem("kn_school_staff_v1"); } catch (err) {}
-          location.reload();
-        });
-      }
-    })();
+    document.getElementById("staff-logout")?.addEventListener("click", function (e) {
+      e.preventDefault();
+      try { sessionStorage.removeItem("kn_school_staff_v1"); } catch (err) {}
+      location.reload();
+    });
   </script>
 </body>
 </html>

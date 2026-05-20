@@ -8,19 +8,126 @@
   <link rel="stylesheet" href="../../css/layout-municipal.css" />
   <link rel="stylesheet" href="../../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
+  <script>
+    try {
+      if (sessionStorage.getItem("kn_school_staff_v1") !== "1") {
+        document.documentElement.classList.add("staff-prelock");
+      }
+    } catch (e) {}
+  </script>
   <script src="../../token-gate.js" defer></script>
   <script src="../../js/school-login.js" defer></script>
 </head>
-<body data-staff-page>
+<body data-staff-page data-school-home="../../">
   <div id="site-root">
-    <div class="muni-wrap">
-      <header class="muni-header"><div class="logo">霞</div><div><h1>学校だより</h1></div></header>
-      <nav class="muni-nav"><a href="../../">ホーム</a></nav>
-      <main>
-        <p>最新号（令和6年11月号）:</p>
-        <a class="pdf-dl" href="../../assets/pdf/newsletter-r6-11.pdf" target="_blank" rel="noopener">newsletter-r6-11.pdf</a>
-        <p style="margin-top:20px;font-size:12px;">過去の保管資料（2016）: <a href="../../archives/2016/">平成28年度アーカイブ</a></p>
-      </main>
+    <div class="sgn-site">
+      <div class="sgn-banner">
+        <div class="sgn-banner-title">霞ノ杜町立 霞ノ杜小学校</div>
+        <div class="sgn-banner-mark">学校だより</div>
+      </div>
+      <nav class="sgn-gnav">
+        <a href="../../">ホーム</a>
+        <a href="../../guide/">学校紹介</a>
+        <a href="../life/" data-require-login>学校生活</a>
+        <a href="../../contact/">お問い合わせ</a>
+      </nav>
+      <div class="sgn-body">
+        <aside class="sgn-col-side sgn-menu-links">
+          <h3>メニュー</h3>
+          <a href="../events/" data-require-login>年間行事予定</a>
+          <a href="./" data-require-login>学校だより</a>
+          <a href="../grade-news/" data-require-login>学年だより</a>
+        </aside>
+        <div class="sgn-col-main">
+          <h1 class="sgn-page-title">学校だより</h1>
+          <p class="sgn-crumbs"><a href="../../">トップ</a> &gt; <a href="../../">お知らせ</a> &gt; 学校だより</p>
+
+          <div class="pdf-catalog">
+            <section class="pdf-year-block">
+              <h3 class="pdf-year-title">令和８年度</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/newsletter-r8-01.pdf" target="_blank" rel="noopener">第1号</a>
+              </div>
+            </section>
+            <section class="pdf-year-block">
+              <h3 class="pdf-year-title">令和７年度</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/newsletter-r7-12.pdf" target="_blank" rel="noopener">第12号</a>
+                <a href="../../assets/pdf/newsletter-r7-11.pdf" target="_blank" rel="noopener">第11号</a>
+                <a href="../../assets/pdf/newsletter-r7-10.pdf" target="_blank" rel="noopener">第10号</a>
+                <a href="../../assets/pdf/newsletter-r7-09.pdf" target="_blank" rel="noopener">第9号</a>
+                <a href="../../assets/pdf/newsletter-r7-08.pdf" target="_blank" rel="noopener">第8号</a>
+                <a href="../../assets/pdf/newsletter-r7-07.pdf" target="_blank" rel="noopener">第7号</a>
+                <a href="../../assets/pdf/newsletter-r7-06.pdf" target="_blank" rel="noopener">第6号</a>
+                <a href="../../assets/pdf/newsletter-r7-05.pdf" target="_blank" rel="noopener">第5号</a>
+                <a href="../../assets/pdf/newsletter-r7-04.pdf" target="_blank" rel="noopener">第4号</a>
+                <a href="../../assets/pdf/newsletter-r7-03.pdf" target="_blank" rel="noopener">第3号</a>
+                <a href="../../assets/pdf/newsletter-r7-02.pdf" target="_blank" rel="noopener">第2号</a>
+                <a href="../../assets/pdf/newsletter-r7-01.pdf" target="_blank" rel="noopener">第1号</a>
+              </div>
+            </section>
+            <section class="pdf-year-block">
+              <h3 class="pdf-year-title">令和６年度</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/newsletter-r6-12.pdf" target="_blank" rel="noopener">第12号</a>
+                <a href="../../assets/pdf/newsletter-r6-11.pdf" target="_blank" rel="noopener">第11号</a>
+                <a href="../../assets/pdf/newsletter-r6-10.pdf" target="_blank" rel="noopener">第10号</a>
+                <a href="../../assets/pdf/newsletter-r6-09.pdf" target="_blank" rel="noopener">第9号</a>
+                <a href="../../assets/pdf/newsletter-r6-08.pdf" target="_blank" rel="noopener">第8号</a>
+                <a href="../../assets/pdf/newsletter-r6-07.pdf" target="_blank" rel="noopener">第7号</a>
+                <a href="../../assets/pdf/newsletter-r6-06.pdf" target="_blank" rel="noopener">第6号</a>
+                <a href="../../assets/pdf/newsletter-r6-05.pdf" target="_blank" rel="noopener">第5号</a>
+                <a href="../../assets/pdf/newsletter-r6-04.pdf" target="_blank" rel="noopener">第4号</a>
+                <a href="../../assets/pdf/newsletter-r6-03.pdf" target="_blank" rel="noopener">第3号</a>
+                <a href="../../assets/pdf/newsletter-r6-02.pdf" target="_blank" rel="noopener">第2号</a>
+                <a href="../../assets/pdf/newsletter-r6-01.pdf" target="_blank" rel="noopener">第1号</a>
+              </div>
+            </section>
+            <section class="pdf-year-block">
+              <h3 class="pdf-year-title">令和５年度</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/newsletter-r5-12.pdf" target="_blank" rel="noopener">第12号</a>
+                <a href="../../assets/pdf/newsletter-r5-11.pdf" target="_blank" rel="noopener">第11号</a>
+                <a href="../../assets/pdf/newsletter-r5-10.pdf" target="_blank" rel="noopener">第10号</a>
+                <a href="../../assets/pdf/newsletter-r5-09.pdf" target="_blank" rel="noopener">第9号</a>
+                <a href="../../assets/pdf/newsletter-r5-08.pdf" target="_blank" rel="noopener">第8号</a>
+                <a href="../../assets/pdf/newsletter-r5-07.pdf" target="_blank" rel="noopener">第7号</a>
+                <a href="../../assets/pdf/newsletter-r5-06.pdf" target="_blank" rel="noopener">第6号</a>
+                <a href="../../assets/pdf/newsletter-r5-05.pdf" target="_blank" rel="noopener">第5号</a>
+                <a href="../../assets/pdf/newsletter-r5-04.pdf" target="_blank" rel="noopener">第4号</a>
+                <a href="../../assets/pdf/newsletter-r5-03.pdf" target="_blank" rel="noopener">第3号</a>
+                <a href="../../assets/pdf/newsletter-r5-02.pdf" target="_blank" rel="noopener">第2号</a>
+                <a href="../../assets/pdf/newsletter-r5-01.pdf" target="_blank" rel="noopener">第1号</a>
+              </div>
+            </section>
+            <section class="pdf-year-block">
+              <h3 class="pdf-year-title">令和４年度</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/newsletter-r4-12.pdf" target="_blank" rel="noopener">第12号</a>
+                <a href="../../assets/pdf/newsletter-r4-11.pdf" target="_blank" rel="noopener">第11号</a>
+                <a href="../../assets/pdf/newsletter-r4-10.pdf" target="_blank" rel="noopener">第10号</a>
+                <a href="../../assets/pdf/newsletter-r4-09.pdf" target="_blank" rel="noopener">第9号</a>
+                <a href="../../assets/pdf/newsletter-r4-08.pdf" target="_blank" rel="noopener">第8号</a>
+                <a href="../../assets/pdf/newsletter-r4-07.pdf" target="_blank" rel="noopener">第7号</a>
+                <a href="../../assets/pdf/newsletter-r4-06.pdf" target="_blank" rel="noopener">第6号</a>
+                <a href="../../assets/pdf/newsletter-r4-05.pdf" target="_blank" rel="noopener">第5号</a>
+                <a href="../../assets/pdf/newsletter-r4-04.pdf" target="_blank" rel="noopener">第4号</a>
+                <a href="../../assets/pdf/newsletter-r4-03.pdf" target="_blank" rel="noopener">第3号</a>
+                <a href="../../assets/pdf/newsletter-r4-02.pdf" target="_blank" rel="noopener">第2号</a>
+                <a href="../../assets/pdf/newsletter-r4-01.pdf" target="_blank" rel="noopener">第1号</a>
+              </div>
+            </section>
+            <section class="pdf-year-block is-archive">
+              <h3 class="pdf-year-title">平成２８年度（保管庫）</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/newsletter-h28-2016.pdf" target="_blank" rel="noopener">第9号</a>
+                <span style="font-size:12px;color:#666;"> ※2016年関連記事を含む</span>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <footer class="sgn-footer">霞ノ杜町立霞ノ杜小学校</footer>
     </div>
   </div>
 </body>

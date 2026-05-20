@@ -2,23 +2,23 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>保健室からのお知らせ｜霞ノ杜小学校</title>
+  <title>保健室｜霞ノ杜小学校</title>
   <link rel="stylesheet" href="../../css/style.css" />
   <link rel="stylesheet" href="../../css/layout-municipal.css" />
   <link rel="stylesheet" href="../../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
+  <script>try{if(sessionStorage.getItem("kn_school_staff_v1")!=="1")document.documentElement.classList.add("staff-prelock");}catch(e){}</script>
   <script src="../../token-gate.js" defer></script>
   <script src="../../js/school-login.js" defer></script>
 </head>
-<body data-staff-page>
+<body data-staff-page data-school-home="../../">
   <div id="site-root">
-    <div class="muni-wrap">
-      <main>
-        <h1>保健室からのお知らせ</h1>
-        <div class="card"><p>視力検査の予定は保健だよりをご確認ください。</p></div>
-        <a class="pdf-dl" href="../../assets/pdf/health-r6.pdf" target="_blank" rel="noopener">保健だより PDF</a>
+    <div class="sgn-site">
+      <div class="sgn-col-main" style="padding:20px;">
+        <h1 class="sgn-page-title">保健室からのお知らせ</h1>
+        <p>視力検査の予定は <a href="../health/" data-require-login>保健だより</a> をご確認ください。</p>
         <p><a href="../../">ホーム</a></p>
-      </main>
+      </div>
     </div>
   </div>
 </body>

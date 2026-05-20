@@ -8,77 +8,58 @@
   <link rel="stylesheet" href="../css/layout-municipal.css" />
   <link rel="stylesheet" href="../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
-  <script>
-    window.__TOKEN_DENIED__ = function () {
-      var el = document.createElement("div");
-      el.className = "ns-denied-overlay";
-      el.innerHTML =
-        '<div class="ns-denied-card"><h1>霞ノ杜小学校｜閲覧制限</h1><p>校務関係者向けの限定公開です。</p>' +
-        '<p class="ns-portal"><a href="https://nazo-portal.vercel.app/portal" target="_blank" rel="noopener noreferrer">ポータル</a></p></div>';
-      document.documentElement.appendChild(el);
-    };
-  </script>
   <script src="../token-gate.js" defer></script>
   <script src="../js/school-login.js" defer></script>
   <script src="../js/kn-footprint.js" defer></script>
 </head>
 <body>
   <div id="site-root">
-    <p class="muni-top-bar">令和8年度</p>
-    <div class="muni-wrap">
-      <header class="muni-header">
-        <div class="logo">霞</div>
-        <div><h1>霞ノ杜町立 霞ノ杜小学校</h1><div class="sub">学校案内</div></div>
-      </header>
-      <nav class="muni-nav" aria-label="メインメニュー">
+    <div class="sgn-site">
+      <div class="sgn-banner">
+        <div class="sgn-banner-title">霞ノ杜町立 霞ノ杜小学校</div>
+        <div class="sgn-banner-mark">学校紹介</div>
+      </div>
+      <nav class="sgn-gnav">
         <a href="../">ホーム</a>
-        <a href="./" class="is-active">学校案内</a>
+        <a href="./" class="is-active">学校紹介</a>
+        <a href="../portal/life/" data-require-login>学校生活</a>
         <a href="../contact/">お問い合わせ</a>
-        <a href="../access/">アクセス</a>
-        <a href="../portal/newsletters/" data-require-login class="is-locked">学校だより</a>
       </nav>
-      <main>
-        <p class="crumbs"><a href="../">ホーム</a> ／ 学校案内</p>
-        <h2>学校案内</h2>
-        <p>霞ノ杜小学校は、霞と杜に囲まれた小さな町で、地域に根ざした学びを続けてきた学校です。</p>
+      <div class="sgn-body">
+        <aside class="sgn-col-side sgn-menu-links">
+          <h3>メニュー</h3>
+          <a href="../portal/events/" data-require-login class="is-locked">年間行事予定</a>
+          <a href="../portal/life/" data-require-login class="is-locked">学校生活の様子</a>
+          <a href="../portal/newsletters/" data-require-login class="is-locked">学校だより</a>
+          <a href="../portal/grade-news/" data-require-login class="is-locked">学年だより</a>
+          <a href="../portal/lunch/" data-require-login class="is-locked">給食だより</a>
+        </aside>
+        <div class="sgn-col-main">
+          <h1 class="sgn-page-title">学校案内</h1>
+          <p class="sgn-crumbs"><a href="../">ホーム</a> ／ 学校案内</p>
+          <p>霞ノ杜小学校は、地域に根ざした学びを続けてきた学校です。</p>
 
-        <h3>校長あいさつ</h3>
-        <div class="card">
-          <p>本校は、町の宝である「霞ノ杜」と「杜川」のほとりで、1953年から子どもたちの学びを見守ってきました。</p>
-          <p style="text-align:right;">— 校長　佐藤　誠</p>
+          <h3>校長あいさつ</h3>
+          <div class="card">
+            <p>本校は1953年から子どもたちの学びを見守ってきました。</p>
+            <p style="text-align:right;">— 校長　佐藤　誠</p>
+          </div>
+
+          <h3>保護者ポータルについて（FAQ）</h3>
+          <div class="card">
+            <p>
+              学校だより・年間行事・給食メニューは保護者ポータルからご覧ください。
+              ログインIDは<strong>町立校名のローマ字表記</strong>（小文字・つなげて）、
+              初期パスワードは<strong>「小学校」のローマ字（shougakkou）</strong>です。
+            </p>
+            <p style="font-size:12px;color:#666;">
+              ※ 左メニューの🔒付きリンクはログインが必要です。卒業生向けタイムカプセルは
+              <a href="../contact/">お問い合わせ</a>から（別認証）。
+            </p>
+          </div>
         </div>
-
-        <h3>沿革（抜粋）</h3>
-        <table class="basic">
-          <tbody>
-            <tr><th>昭和28年</th><td>開校</td></tr>
-            <tr><th>平成 8年</th><td>校舎改築</td></tr>
-            <tr><th>令和 4年</th><td>水辺の丘 自然観察を一時休止</td></tr>
-          </tbody>
-        </table>
-
-        <h3>学校概要</h3>
-        <table class="basic">
-          <tbody>
-            <tr><th>所在地</th><td>霞ノ杜町大字杜ケ丘 1234（フィクション）</td></tr>
-            <tr><th>児童数</th><td>約 110 名（令和6年度）</td></tr>
-            <tr><th>教育目標</th><td>「よく見て、よく考えて、ことばにする子」</td></tr>
-          </tbody>
-        </table>
-
-        <h3>保護者ポータルについて（FAQ）</h3>
-        <div class="card">
-          <p>
-            学校だより・学年だより・給食メニューなどは、保護者ポータルからご覧いただけます。
-            ログインIDは<strong>町立校名のローマ字表記</strong>（小文字・つなげて）、
-            初期パスワードは<strong>「小学校」をローマ字で</strong>入力してください。初回ログイン後の変更を推奨します。
-          </p>
-          <p style="font-size:12px;color:#666;">
-            ※ 卒業生向けのタイムカプセル資料は、<a href="../contact/">お問い合わせ</a>ページの案内からご確認ください（別認証）。
-          </p>
-        </div>
-      </main>
-      <footer class="muni-footer">霞ノ杜町立霞ノ杜小学校</footer>
+      </div>
+      <footer class="sgn-footer">霞ノ杜町立霞ノ杜小学校</footer>
     </div>
     <p class="school-fiction-note" role="note">※架空サイトです。</p>
   </div>

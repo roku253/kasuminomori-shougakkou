@@ -7,17 +7,26 @@
   <link rel="stylesheet" href="../../css/layout-municipal.css" />
   <link rel="stylesheet" href="../../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
+  <script>try{if(sessionStorage.getItem("kn_school_staff_v1")!=="1")document.documentElement.classList.add("staff-prelock");}catch(e){}</script>
   <script src="../../token-gate.js" defer></script>
   <script src="../../js/school-login.js" defer></script>
 </head>
-<body data-staff-page>
+<body data-staff-page data-school-home="../../">
   <div id="site-root">
-    <div class="muni-wrap">
-      <main>
-        <h1>保健だより</h1>
-        <a class="pdf-dl" href="../../assets/pdf/health-r6.pdf" target="_blank" rel="noopener">health-r6.pdf</a>
-        <p><a href="../../">ホーム</a></p>
-      </main>
+    <div class="sgn-site">
+      <div class="sgn-body">
+        <div class="sgn-col-main">
+          <h1 class="sgn-page-title">保健だより</h1>
+          <div class="pdf-catalog">
+            <section class="pdf-year-block"><h3 class="pdf-year-title">令和６年度</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/health-r6.pdf" target="_blank" rel="noopener">第10号</a>
+                <a href="../../assets/pdf/health-r6.pdf" target="_blank" rel="noopener">第9号</a>
+              </div></section>
+          </div>
+          <p><a href="../../">ホーム</a></p>
+        </div>
+      </div>
     </div>
   </div>
 </body>

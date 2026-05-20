@@ -7,18 +7,15 @@
   <link rel="stylesheet" href="../../css/layout-municipal.css" />
   <link rel="stylesheet" href="../../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
+  <script>try{if(sessionStorage.getItem("kn_school_staff_v1")!=="1")document.documentElement.classList.add("staff-prelock");}catch(e){}</script>
   <script src="../../token-gate.js" defer></script>
   <script src="../../js/school-login.js" defer></script>
 </head>
-<body data-staff-page>
-  <div id="site-root">
-    <div class="muni-wrap">
-      <main>
-        <h1>令和8年度 入学新1年生のページ</h1>
-        <p>4月8日 入学式を予定しています。必要な持ち物リストは学校だよりで配布します。</p>
-        <p><a href="../../">ホーム</a></p>
-      </main>
-    </div>
-  </div>
+<body data-staff-page data-school-home="../../">
+  <div id="site-root"><div class="sgn-site"><div class="sgn-col-main" style="padding:20px;">
+    <h1 class="sgn-page-title">令和8年度 入学新1年生のページ</h1>
+    <p>4月8日 入学式を予定しています。</p>
+    <p><a href="../../">ホーム</a></p>
+  </div></div></div>
 </body>
 </html>

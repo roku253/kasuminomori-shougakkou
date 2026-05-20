@@ -16,11 +16,27 @@
     }
   }
 
+  function homeUrl() {
+    var base = document.body.getAttribute("data-school-home");
+    if (base) return base;
+    var path = location.pathname || "";
+    if (/\/portal\//.test(path) || /\/archives\/2016\//.test(path)) return "../../";
+    if (/\/archives\//.test(path)) return "../../";
+    if (/\/guide\//.test(path) || /\/contact\//.test(path) || /\/access\//.test(path)) return "../";
+    return "./";
+  }
+
   function setLoggedIn() {
     try {
       sessionStorage.setItem(SESSION_KEY, "1");
     } catch (e) {}
+    document.documentElement.classList.remove("staff-prelock");
     document.body.classList.add("staff-logged-in");
+  }
+
+  function lockStaffUI() {
+    document.documentElement.classList.add("staff-prelock");
+    document.body.classList.remove("staff-logged-in");
   }
 
   function ensureModal() {
@@ -31,7 +47,6 @@
     el.id = "school-login-overlay";
     el.className = "login-overlay";
     el.hidden = true;
-    el.setAttribute("role", "presentation");
     el.innerHTML =
       '<div class="login-dialog" role="dialog" aria-labelledby="login-title" aria-modal="true">' +
       '<div class="login-dialog-header" id="login-title">ログイン</div>' +
@@ -52,12 +67,18 @@
     el.querySelector("#login-cancel").addEventListener("click", function () {
       el.hidden = true;
       pendingHref = null;
+      if (document.body.hasAttribute("data-staff-page") && !isLoggedIn()) {
+        window.location.href = homeUrl();
+      }
     });
     el.querySelector("#login-submit").addEventListener("click", tryLogin);
     el.addEventListener("click", function (e) {
       if (e.target === el) {
         el.hidden = true;
         pendingHref = null;
+        if (document.body.hasAttribute("data-staff-page") && !isLoggedIn()) {
+          window.location.href = homeUrl();
+        }
       }
     });
     document.getElementById("login-pass").addEventListener("keydown", function (e) {
@@ -73,7 +94,9 @@
     pendingHref = targetHref || null;
     var urlEl = document.getElementById("login-url");
     if (urlEl) {
-      urlEl.textContent = targetHref ? SITE_HOST + targetHref.replace(/^\//, "") : SITE_HOST;
+      urlEl.textContent = targetHref
+        ? SITE_HOST + targetHref.replace(/^\.\//, "").replace(/^\//, "")
+        : SITE_HOST;
     }
     document.getElementById("login-error").textContent = "";
     document.getElementById("login-user").value = "";
@@ -105,15 +128,23 @@
     if (!link) return;
     if (isLoggedIn()) return;
     e.preventDefault();
-    showModal(link.getAttribute("href"));
+    e.stopPropagation();
+    var href = link.getAttribute("href");
+    if (!href || href === "#") {
+      showModal(null);
+      return;
+    }
+    showModal(href);
   });
 
   function guardStaffPage() {
     if (!document.body.hasAttribute("data-staff-page")) return;
     if (isLoggedIn()) {
+      document.documentElement.classList.remove("staff-prelock");
       document.body.classList.add("staff-logged-in");
       return;
     }
+    lockStaffUI();
     showModal(null);
   }
 
@@ -123,7 +154,13 @@
     setLoggedIn: setLoggedIn,
   };
 
-  if (isLoggedIn()) document.body.classList.add("staff-logged-in");
+  if (isLoggedIn()) {
+    document.documentElement.classList.remove("staff-prelock");
+    document.body.classList.add("staff-logged-in");
+  } else if (document.body.hasAttribute("data-staff-page")) {
+    lockStaffUI();
+  }
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", guardStaffPage);
   } else {

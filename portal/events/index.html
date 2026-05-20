@@ -8,19 +8,78 @@
   <link rel="stylesheet" href="../../css/layout-municipal.css" />
   <link rel="stylesheet" href="../../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
+  <script>
+    try {
+      if (sessionStorage.getItem("kn_school_staff_v1") !== "1") {
+        document.documentElement.classList.add("staff-prelock");
+      }
+    } catch (e) {}
+  </script>
   <script src="../../token-gate.js" defer></script>
   <script src="../../js/school-login.js" defer></script>
 </head>
-<body data-staff-page>
+<body data-staff-page data-school-home="../../">
   <div id="site-root">
-    <div class="muni-wrap">
-      <header class="muni-header"><div class="logo">霞</div><div><h1>年間行事予定</h1><div class="sub">令和6年度</div></div></header>
-      <nav class="muni-nav"><a href="../../">ホーム</a></nav>
-      <main>
-        <p class="crumbs"><a href="../../">ホーム</a> ／ 年間行事予定</p>
-        <p>令和6年度の年間行事予定です。PDFで配布しています。</p>
-        <a class="pdf-dl" href="../../assets/pdf/events-r6.pdf" target="_blank" rel="noopener">events-r6.pdf を開く</a>
-      </main>
+    <div class="sgn-site">
+      <div class="sgn-banner">
+        <div class="sgn-banner-title">霞ノ杜町立 霞ノ杜小学校</div>
+        <div class="sgn-banner-mark">年間行事予定</div>
+      </div>
+      <nav class="sgn-gnav">
+        <a href="../../">ホーム</a>
+        <a href="../../guide/">学校紹介</a>
+        <a href="../life/" data-require-login>学校生活</a>
+        <a href="../../contact/">お問い合わせ</a>
+      </nav>
+      <div class="sgn-body">
+        <aside class="sgn-col-side sgn-menu-links">
+          <a href="./" data-require-login>年間行事予定</a>
+          <a href="../newsletters/" data-require-login>学校だより</a>
+        </aside>
+        <div class="sgn-col-main">
+          <h1 class="sgn-page-title">年間行事予定</h1>
+          <p class="sgn-crumbs"><a href="../../">トップ</a> &gt; 年間行事予定</p>
+
+          <div class="pdf-catalog">
+            <section class="pdf-year-block">
+              <h3 class="pdf-year-title">令和８年度</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/events-r8.pdf" target="_blank" rel="noopener">年間行事予定表</a>
+                <span class="pdf-meta">(PDF)</span>
+              </div>
+            </section>
+            <section class="pdf-year-block">
+              <h3 class="pdf-year-title">令和７年度</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/events-r7.pdf" target="_blank" rel="noopener">年間行事予定表</a>
+                <span class="pdf-meta">(PDF)</span>
+              </div>
+            </section>
+            <section class="pdf-year-block">
+              <h3 class="pdf-year-title">令和６年度</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/events-r6.pdf" target="_blank" rel="noopener">年間行事予定表</a>
+                <span class="pdf-meta">(PDF)</span>
+              </div>
+            </section>
+            <section class="pdf-year-block">
+              <h3 class="pdf-year-title">令和５年度</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/events-r5.pdf" target="_blank" rel="noopener">年間行事予定表</a>
+                <span class="pdf-meta">(PDF)</span>
+              </div>
+            </section>
+            <section class="pdf-year-block">
+              <h3 class="pdf-year-title">令和４年度</h3>
+              <div class="pdf-issue-row">
+                <a href="../../assets/pdf/events-r4.pdf" target="_blank" rel="noopener">年間行事予定表</a>
+                <span class="pdf-meta">(PDF)</span>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <footer class="sgn-footer">霞ノ杜町立霞ノ杜小学校</footer>
     </div>
   </div>
 </body>

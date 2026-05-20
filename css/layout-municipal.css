@@ -1,85 +1,235 @@
-/* 町立小学校サイト — 鷺沼型レイアウト */
-.muni-wrap {
-  max-width: 1000px;
+/* 習志野市立小学校サイト風レイアウト（霞ノ杜小学校） */
+body {
+  background: #f7f5f0;
+}
+
+.sgn-site {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 0 16px 48px;
+  background: #fff;
+  box-shadow: 0 0 0 1px #e0ddd6;
 }
-.muni-top-bar {
-  background: #1a4d8c;
-  color: #fff;
-  font-size: 12px;
-  padding: 6px 16px;
-  text-align: right;
+
+.sgn-banner {
+  display: flex;
+  align-items: stretch;
+  min-height: 88px;
+  background: linear-gradient(90deg, #e8f4e8 0%, #f5f9f5 55%, #dceaf5 100%);
+  border-bottom: 1px solid #c5d9ef;
 }
-.muni-top-bar a { color: #cce4ff; }
-.muni-header {
+.sgn-banner-title {
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 16px 0 12px;
-  border-bottom: 3px solid #1a4d8c;
+  padding: 12px 20px;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #2d6b2d;
+  letter-spacing: 0.06em;
 }
-.muni-header .logo {
-  width: 52px; height: 52px; border-radius: 8px;
-  background: #2d5a27; color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 22px; flex-shrink: 0;
+.sgn-banner-mark {
+  width: 100px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-left: 1px solid #c5d9ef;
+  font-size: 11px;
+  color: #666;
+  text-align: center;
+  padding: 8px;
 }
-.muni-header h1 { margin: 0; font-size: 1.15rem; color: #1a4d8c; }
-.muni-header .sub { font-size: 0.75rem; color: #555; margin-top: 4px; }
 
-.muni-nav {
-  display: flex; flex-wrap: wrap; gap: 2px;
-  background: #eef4fb; border: 1px solid #c5d9ef;
-  padding: 6px 8px; margin: 12px 0;
+.sgn-gnav {
+  display: flex;
+  background: #b8e4e8;
+  border-bottom: 2px solid #7ab8be;
+}
+.sgn-gnav a {
+  flex: 1;
+  text-align: center;
+  padding: 10px 8px;
+  color: #1a3d42;
+  text-decoration: none;
   font-size: 13px;
+  font-weight: 600;
+  border-right: 1px solid #9ccfd4;
 }
-.muni-nav a {
-  color: #1a4d8c; text-decoration: none; padding: 6px 12px;
-  border-radius: 3px;
+.sgn-gnav a:last-child { border-right: none; }
+.sgn-gnav a:hover { background: #a5d8dc; }
+.sgn-gnav a.is-active {
+  background: #fff;
+  color: #1a4d8c;
+  margin-bottom: -2px;
+  border-bottom: 2px solid #fff;
 }
-.muni-nav a:hover { background: #d6e8f8; }
-.muni-nav a.is-active { background: #1a4d8c; color: #fff; }
-.muni-nav a.is-locked::after { content: " 🔒"; font-size: 10px; }
 
-.muni-layout {
+.sgn-emergency {
+  display: flex;
+  margin: 12px 14px 0;
+  border: 1px solid #ccc;
+}
+.sgn-emergency-label {
+  background: #c62828;
+  color: #fff;
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 13px;
+  min-width: 100px;
+  text-align: center;
+}
+.sgn-emergency-body {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 13px;
+  background: #fff;
+}
+
+.sgn-body {
   display: grid;
-  grid-template-columns: 1fr 220px;
-  gap: 24px;
+  grid-template-columns: 200px 1fr 200px;
+  gap: 0;
+  padding: 14px 14px 24px;
   align-items: start;
 }
-@media (max-width: 720px) {
-  .muni-layout { grid-template-columns: 1fr; }
+@media (max-width: 900px) {
+  .sgn-body { grid-template-columns: 1fr; }
+  .sgn-col-side { order: 2; }
 }
 
-.muni-sidebar {
-  background: #f5f9fc;
-  border: 1px solid #c5d9ef;
-  padding: 12px 14px;
+.sgn-col-side {
+  padding: 8px 12px 8px 4px;
   font-size: 13px;
 }
-.muni-sidebar h3 {
-  margin: 0 0 8px; font-size: 13px; color: #1a4d8c;
-  border-bottom: 1px solid #c5d9ef; padding-bottom: 6px;
+.sgn-col-side h3 {
+  font-size: 13px;
+  color: #333;
+  margin: 0 0 10px;
+  font-weight: 700;
 }
-.muni-sidebar ul { margin: 0; padding-left: 1.1em; }
-.muni-sidebar li { margin: 6px 0; }
-.muni-sidebar a { color: #1a4d8c; }
+.sgn-menu-links a {
+  display: block;
+  color: #0033cc;
+  text-decoration: underline;
+  margin: 6px 0;
+  line-height: 1.45;
+}
+.sgn-menu-links a.is-locked::after {
+  content: " 🔒";
+  font-size: 10px;
+  text-decoration: none;
+}
 
-.link-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 8px 16px;
-  margin: 16px 0 24px;
+.sgn-col-main {
+  padding: 8px 16px;
+  min-width: 0;
 }
-.link-grid a {
+
+.sgn-page-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #4a3d5c;
+  margin: 0 0 4px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #8e7aa8;
+}
+.sgn-crumbs {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 20px;
+}
+.sgn-crumbs a { color: #0033cc; text-decoration: none; }
+
+.sgn-news-head {
+  background: #d4c4a8;
+  color: #333;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.sgn-news-list {
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+.sgn-news-list li {
+  padding: 5px 0;
+  border-bottom: 1px dotted #ddd;
+}
+
+.sgn-notice-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+}
+.sgn-notice-list a {
+  color: #0033cc;
+  text-decoration: underline;
+  line-height: 1.55;
+  display: block;
+  margin: 5px 0;
+}
+
+.sgn-slogan {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 16px 0 10px;
+  color: #333;
+}
+
+.staff-banner {
+  background: #fff8e6;
+  border: 1px solid #e6c200;
+  padding: 8px 12px;
+  font-size: 12px;
+  margin: 0 14px 10px;
+  display: none;
+}
+body.staff-logged-in .staff-banner { display: block; }
+
+/* PDF 年度別一覧（学校だより形式） */
+.pdf-catalog { margin: 8px 0 28px; }
+.pdf-year-block { margin-bottom: 22px; }
+.pdf-year-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #4a3d5c;
+  margin: 0 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #8e7aa8;
+}
+.pdf-issue-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  padding: 8px 0 4px;
+}
+.pdf-issue-row a {
   color: #0033cc;
   text-decoration: underline;
   font-size: 14px;
-  line-height: 1.5;
+  white-space: nowrap;
 }
-.link-grid a:hover { color: #001a99; }
-.link-grid a.is-locked { color: #555; }
+.pdf-issue-row a:hover { color: #001a99; }
+.pdf-issue-row .pdf-meta {
+  font-size: 11px;
+  color: #666;
+  margin-left: 2px;
+}
+
+.pdf-year-block.is-archive {
+  opacity: 0.92;
+}
+.pdf-year-block.is-archive .pdf-year-title {
+  font-size: 0.95rem;
+  color: #666;
+}
 
 .highlight-box {
   border: 2px solid #2d5a27;
@@ -87,20 +237,17 @@
   padding: 16px 18px;
   margin: 20px 0;
 }
-.highlight-box h3 {
-  margin: 0 0 8px; color: #2d5a27; font-size: 1rem;
-}
+.highlight-box h3 { margin: 0 0 8px; color: #2d5a27; }
 .highlight-box .cta {
   display: inline-block; margin-top: 10px;
   background: #2d5a27; color: #fff;
   padding: 8px 16px; text-decoration: none; border-radius: 4px;
   font-size: 13px;
 }
-.highlight-box .cta:hover { opacity: 0.9; }
 
 .year-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: 10px;
   margin: 16px 0;
 }
@@ -114,40 +261,17 @@
   font-weight: 600;
 }
 .year-card:hover { background: #eef4fb; }
-.year-card.is-disabled {
-  color: #999; background: #f5f5f5; cursor: not-allowed;
-  pointer-events: none;
-}
-.year-card.is-prep { color: #666; font-weight: 400; font-size: 12px; }
+.year-card.is-prep { color: #666; font-weight: 400; pointer-events: none; }
 
-.staff-banner {
-  background: #fff8e6;
-  border: 1px solid #e6c200;
-  padding: 8px 12px;
-  font-size: 12px;
-  margin-bottom: 12px;
-  display: none;
-}
-body.staff-logged-in .staff-banner { display: block; }
-
-.archive-timeline {
-  border-left: 3px solid #2d5a27;
-  padding-left: 16px;
-  margin: 16px 0;
-}
-.archive-timeline li { margin: 8px 0; }
-
-.pdf-dl {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: #eef4fb; border: 1px solid #1a4d8c;
-  padding: 10px 14px; color: #1a4d8c; text-decoration: none;
-  margin: 8px 0; font-size: 14px;
-}
-.pdf-dl:hover { background: #d6e8f8; }
-
-.muni-footer {
-  margin-top: 32px; padding-top: 16px;
-  border-top: 1px solid #ccc;
-  font-size: 11px; color: #666;
+.sgn-footer {
+  border-top: 1px solid #ddd;
+  padding: 16px;
+  font-size: 11px;
+  color: #666;
   text-align: center;
+  background: #fafafa;
 }
+
+/* legacy compat */
+.muni-wrap { max-width: 1100px; margin: 0 auto; }
+.link-grid a { color: #0033cc; text-decoration: underline; }
