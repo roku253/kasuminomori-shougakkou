@@ -10,59 +10,134 @@ body {
   box-shadow: 0 0 0 1px #e0ddd6;
 }
 
-.sgn-banner {
+/* ===== ヘッダー（左：校名 / 右：仮写真） ===== */
+.sgn-chrome {
+  width: 100%;
+}
+
+.sgn-header {
   display: flex;
   align-items: stretch;
-  min-height: 88px;
-  background: linear-gradient(90deg, #e8f4e8 0%, #f5f9f5 55%, #dceaf5 100%);
-  border-bottom: 1px solid #c5d9ef;
+  min-height: 150px;
+  border-bottom: 1px solid #d8d8d8;
 }
-.sgn-banner-title {
-  flex: 1;
+
+.sgn-header-brand {
+  flex: 0 0 42%;
+  min-width: 280px;
+  background-color: #fff;
+  background-image:
+    linear-gradient(#eee 1px, transparent 1px),
+    linear-gradient(90deg, #eee 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.sgn-header-brand-inner {
   display: flex;
-  align-items: center;
-  padding: 12px 20px;
-  font-size: 1.55rem;
-  font-weight: 700;
-  color: #2d6b2d;
-  letter-spacing: 0.06em;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px 16px;
+  height: 100%;
 }
-.sgn-banner-mark {
-  width: 100px;
-  flex-shrink: 0;
+
+.sgn-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid #2d5a27;
+  background: #fff;
+  color: #2d5a27;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
-  border-left: 1px solid #c5d9ef;
-  font-size: 11px;
-  color: #666;
-  text-align: center;
-  padding: 8px;
+  font-weight: 800;
+  font-size: 22px;
+  flex-shrink: 0;
 }
 
-.sgn-gnav {
-  display: flex;
-  background: #b8e4e8;
-  border-bottom: 2px solid #7ab8be;
+.sgn-header-titles {
+  min-width: 0;
 }
-.sgn-gnav a {
+
+.sgn-header-ruby {
+  margin: 0 0 4px;
+  font-size: 11px;
+  color: #c45c5c;
+  letter-spacing: 0.08em;
+}
+
+.sgn-header-name {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #111;
+  letter-spacing: 0.04em;
+}
+
+.sgn-header-name a {
+  color: #111;
+  text-decoration: none;
+}
+
+.sgn-header-name a:hover {
+  text-decoration: underline;
+}
+
+.sgn-header-slogan {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: #222;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.sgn-header-photo {
+  flex: 1;
+  min-height: 150px;
+  background:
+    url("../assets/images/header-placeholder.svg") center center / cover no-repeat,
+    linear-gradient(180deg, #9ed8f0 0%, #d4e8c8 55%, #c9a86a 100%);
+}
+
+/* ===== タブ（水色・区切り線・鍵なし） ===== */
+.sgn-tabs {
+  display: flex;
+  width: 100%;
+  background: #c8ecef;
+  border-bottom: 1px solid #9ab8bc;
+}
+
+.sgn-tabs a {
   flex: 1;
   text-align: center;
-  padding: 10px 8px;
-  color: #1a3d42;
+  padding: 12px 8px;
+  color: #111;
   text-decoration: none;
   font-size: 13px;
   font-weight: 600;
-  border-right: 1px solid #9ccfd4;
+  line-height: 1.35;
+  border-right: 1px solid #9ab8bc;
+  background: transparent;
 }
-.sgn-gnav a:last-child { border-right: none; }
-.sgn-gnav a:hover { background: #a5d8dc; }
-.sgn-gnav a.is-active {
+
+.sgn-tabs a:last-child {
+  border-right: none;
+}
+
+.sgn-tabs a:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.sgn-tabs a.is-active {
   background: #fff;
-  color: #1a4d8c;
-  margin-bottom: -2px;
-  border-bottom: 2px solid #fff;
+  color: #111;
+}
+
+/* 旧クラス互換（school-shell が差し替え前のページ用） */
+.sgn-banner,
+.sgn-gnav {
+  display: none;
 }
 
 .sgn-emergency {
@@ -94,6 +169,24 @@ body {
   align-items: start;
 }
 @media (max-width: 900px) {
+  .sgn-header {
+    flex-direction: column;
+    min-height: 0;
+  }
+  .sgn-header-brand {
+    flex: none;
+    min-width: 0;
+  }
+  .sgn-header-photo {
+    min-height: 120px;
+  }
+  .sgn-tabs {
+    flex-wrap: wrap;
+  }
+  .sgn-tabs a {
+    flex: 1 1 33%;
+    border-bottom: 1px solid #9ab8bc;
+  }
   .sgn-body { grid-template-columns: 1fr; }
   .sgn-col-side { order: 2; }
 }
@@ -116,9 +209,7 @@ body {
   line-height: 1.45;
 }
 .sgn-menu-links a.is-locked::after {
-  content: " 🔒";
-  font-size: 10px;
-  text-decoration: none;
+  content: none;
 }
 
 .sgn-col-main {
