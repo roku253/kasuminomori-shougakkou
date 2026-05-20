@@ -8,14 +8,7 @@
   <link rel="stylesheet" href="../../../css/layout-municipal.css" />
   <link rel="stylesheet" href="../../../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
-  <script>
-    try {
-      if (sessionStorage.getItem("kn_graduate_auth_v1") !== "1") {
-        document.documentElement.classList.add("staff-prelock");
-      }
-    } catch (e) {}
-  </script>
-  <script src="../../../token-gate.js" defer></script>
+<script src="../../../token-gate.js" defer></script>
   <script src="../../../js/school-login.js" defer></script>
   <script src="../../../js/school-shell.js" defer></script>
   <script src="../../../js/kn-footprint.js" defer></script>
@@ -33,7 +26,7 @@
     .pdf-link { display: inline-block; margin-top: 8px; color: #2d5a27; font-weight: 600; }
   </style>
 </head>
-<body data-staff-page data-school-home="../../../" data-sgn-base="../../../" data-sgn-active="contact">
+<body data-graduate-page data-school-home="../../../" data-sgn-base="../../../" data-sgn-active="contact">
   <div id="site-root">
     <div class="sgn-site">
       <div class="sgn-body">

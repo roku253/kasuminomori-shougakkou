@@ -6,7 +6,8 @@
   line-height: 1.5;
 }
 
-html.staff-prelock #site-root {
+html.staff-prelock #site-root,
+html.graduate-prelock #site-root {
   display: none !important;
 }
 

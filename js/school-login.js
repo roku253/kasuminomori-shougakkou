@@ -1,5 +1,5 @@
 /**
- * 限定公開ページ用ログイン（卒業生：在学時氏名 + 生年月日）
+ * 卒業生認証（在学時氏名 + 生年月日）— PDF閲覧時のみ必須
  */
 (function () {
   var SESSION_KEY = "kn_graduate_auth_v1";
@@ -35,27 +35,18 @@
     }
   }
 
-  function homeUrl() {
-    var base = document.body.getAttribute("data-school-home");
-    if (base) return base;
-    var path = location.pathname || "";
-    if (/\/portal\//.test(path) || /\/archives\//.test(path)) return "../../";
-    if (/\/guide\//.test(path) || /\/contact\//.test(path)) return "../";
-    return "./";
+  function notifyAuthChange() {
+    document.dispatchEvent(new CustomEvent("kn-graduate-auth-changed"));
   }
 
   function setLoggedIn() {
     try {
       sessionStorage.setItem(SESSION_KEY, "1");
     } catch (e) {}
-    document.documentElement.classList.remove("staff-prelock");
+    document.documentElement.classList.remove("staff-prelock", "graduate-prelock");
     document.body.classList.add("graduate-logged-in");
+    notifyAuthChange();
     applyYearFilter();
-  }
-
-  function lockStaffUI() {
-    document.documentElement.classList.add("staff-prelock");
-    document.body.classList.remove("graduate-logged-in");
   }
 
   function nameOk(user) {
@@ -76,24 +67,34 @@
     var logged = isLoggedIn();
     document.querySelectorAll("[data-year]").forEach(function (el) {
       var y = parseInt(el.getAttribute("data-year"), 10);
-      if (!logged) {
+      if (isNaN(y)) return;
+      if (logged) {
         if (y >= YEAR_MIN && y <= YEAR_MAX) {
-          if (el.querySelector("[data-requires-graduate]")) {
-            el.classList.remove("is-hidden-year");
-          } else {
-            el.classList.add("is-hidden-year");
-          }
-        } else {
           el.classList.remove("is-hidden-year", "is-gated");
+        } else {
+          el.classList.add("is-hidden-year");
         }
-        return;
+      } else {
+        if (y >= YEAR_MIN && y <= YEAR_MAX) {
+          el.classList.add("is-hidden-year");
+        } else {
+          el.classList.remove("is-hidden-year");
+        }
       }
-      el.classList.remove("is-hidden-year", "is-gated");
     });
-    document.querySelectorAll("[data-requires-graduate]").forEach(function (el) {
+    document.querySelectorAll("[data-requires-graduate], [data-require-pdf]").forEach(function (el) {
       if (logged) el.classList.remove("is-gated");
       else el.classList.add("is-gated");
     });
+  }
+
+  function isPdfGateTarget(el) {
+    if (!el || el.tagName !== "A") return false;
+    if (el.hasAttribute("data-requires-graduate") || el.hasAttribute("data-require-pdf")) return true;
+    if (el.closest(".pdf-issue-row")) return true;
+    var href = el.getAttribute("href") || "";
+    if (el.closest(".sgn-notice-list") && /\.pdf($|\?|#)/i.test(href)) return true;
+    return false;
   }
 
   function ensureModal() {
@@ -107,7 +108,7 @@
     el.innerHTML =
       '<div class="login-dialog" role="dialog" aria-labelledby="login-title" aria-modal="true">' +
       '<div class="login-dialog-header" id="login-title">閲覧には認証が必要です</div>' +
-      '<p class="login-dialog-note">個人情報を含むページです。認証情報を入力してください。</p>' +
+      '<p class="login-dialog-note">個人情報を含む資料です。認証情報を入力してください。</p>' +
       '<div class="login-dialog-body">' +
       '<div class="login-field"><label for="login-user">ユーザー名</label>' +
       '<input id="login-user" type="text" autocomplete="username" /></div>' +
@@ -123,19 +124,13 @@
 
     el.querySelector("#login-cancel").addEventListener("click", function () {
       el.hidden = true;
-      pendingHref = null;
-      if (document.body.hasAttribute("data-staff-page") && !isLoggedIn()) {
-        window.location.href = homeUrl();
-      }
+      pendingPdfHref = null;
     });
     el.querySelector("#login-submit").addEventListener("click", tryLogin);
     el.addEventListener("click", function (e) {
       if (e.target === el) {
         el.hidden = true;
-        pendingHref = null;
-        if (document.body.hasAttribute("data-staff-page") && !isLoggedIn()) {
-          window.location.href = homeUrl();
-        }
+        pendingPdfHref = null;
       }
     });
     document.getElementById("login-pass").addEventListener("keydown", function (e) {
@@ -144,11 +139,11 @@
     return el;
   }
 
-  var pendingHref = null;
+  var pendingPdfHref = null;
 
-  function showModal(targetHref) {
+  function showModal(pdfHref) {
     var overlay = ensureModal();
-    pendingHref = targetHref || null;
+    pendingPdfHref = pdfHref || null;
     document.getElementById("login-error").textContent = "";
     document.getElementById("login-user").value = "";
     document.getElementById("login-pass").value = "";
@@ -163,40 +158,32 @@
     if (nameOk(user) && birthOk(pass)) {
       setLoggedIn();
       document.getElementById("school-login-overlay").hidden = true;
-      if (pendingHref) {
-        window.location.href = pendingHref;
-      } else {
-        window.location.reload();
+      if (pendingPdfHref) {
+        window.open(pendingPdfHref, "_blank", "noopener,noreferrer");
       }
-      pendingHref = null;
+      pendingPdfHref = null;
       return;
     }
     err.textContent = "認証に失敗しました。入力内容をご確認ください。";
   }
 
   document.addEventListener("click", function (e) {
-    var link = e.target.closest("[data-require-login]");
-    if (!link) return;
+    var link = e.target.closest("a");
+    if (!link || !isPdfGateTarget(link)) return;
     if (isLoggedIn()) return;
     e.preventDefault();
     e.stopPropagation();
-    var href = link.getAttribute("href");
-    if (!href || href === "#") {
-      showModal(null);
-      return;
-    }
-    showModal(href);
+    var href = link.href;
+    showModal(href || null);
   });
 
-  function guardStaffPage() {
-    if (!document.body.hasAttribute("data-staff-page")) return;
+  function guardGraduateOnlyPage() {
+    if (!document.body.hasAttribute("data-graduate-page")) return;
     if (isLoggedIn()) {
-      document.documentElement.classList.remove("staff-prelock");
-      document.body.classList.add("graduate-logged-in");
-      applyYearFilter();
+      document.documentElement.classList.remove("graduate-prelock");
       return;
     }
-    lockStaffUI();
+    document.documentElement.classList.add("graduate-prelock");
     showModal(null);
   }
 
@@ -210,15 +197,14 @@
   };
 
   if (isLoggedIn()) {
-    document.documentElement.classList.remove("staff-prelock");
+    document.documentElement.classList.remove("graduate-prelock");
     document.body.classList.add("graduate-logged-in");
-  } else if (document.body.hasAttribute("data-staff-page")) {
-    lockStaffUI();
   }
 
   function onReady() {
-    guardStaffPage();
+    guardGraduateOnlyPage();
     applyYearFilter();
+    notifyAuthChange();
   }
 
   if (document.readyState === "loading") {

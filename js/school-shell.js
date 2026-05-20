@@ -1,7 +1,5 @@
 /**
  * 全ページ共通ヘッダー・タブ・左メニュー・フッター
- * body[data-sgn-base] 相対パス（例: ../../）
- * body[data-sgn-active] 現在タブ: home|guide|contact
  */
 (function () {
   var ACTIVE = document.body.getAttribute("data-sgn-active") || "home";
@@ -18,8 +16,7 @@
     { id: "contact", label: "お問い合わせ", href: "contact/" },
   ];
 
-  var MENU_ITEMS = [
-    { id: "events", label: "年間行事予定", href: "portal/events/" },
+  var MENU_PUBLIC = [
     { id: "life", label: "学校生活の様子", href: "portal/life/" },
     { id: "evaluation", label: "学校評価アンケート", href: "portal/evaluation/" },
     { id: "newsletter", label: "学校だより", href: "portal/newsletters/" },
@@ -29,8 +26,23 @@
     { id: "lunch", label: "給食だより・こんだて表", href: "portal/lunch/" },
     { id: "pta", label: "PTAからのお手紙", href: "portal/pta/" },
     { id: "shin1", label: "令和8年度入学新1年生", href: "portal/shin1/" },
+  ];
+
+  var MENU_GRADUATE = [
+    { id: "events", label: "年間行事予定", href: "portal/events/" },
+    { id: "life", label: "学校生活の様子", href: "portal/life/" },
+    { id: "newsletter", label: "学校だより", href: "portal/newsletters/" },
+    { id: "grade-news", label: "学年だより", href: "portal/grade-news/" },
     { id: "time-capsule", label: "タイムカプセル", href: "archives/time-capsule/" },
   ];
+
+  function isGraduateLoggedIn() {
+    try {
+      return sessionStorage.getItem("kn_graduate_auth_v1") === "1";
+    } catch (e) {
+      return false;
+    }
+  }
 
   function join(path) {
     var base = BASE || "./";
@@ -94,6 +106,7 @@
     if (!body) return;
 
     var current = currentMenuId();
+    var items = isGraduateLoggedIn() ? MENU_GRADUATE : MENU_PUBLIC;
     var aside = body.querySelector(".sgn-col-side.sgn-menu-links");
     if (!aside) {
       aside = document.createElement("aside");
@@ -109,12 +122,11 @@
     heading.textContent = "メニュー";
     aside.appendChild(heading);
 
-    MENU_ITEMS.forEach(function (item) {
+    items.forEach(function (item) {
       if (item.id === current) return;
       var a = document.createElement("a");
       a.href = join(item.href);
       a.textContent = item.label;
-      a.setAttribute("data-require-login", "");
       aside.appendChild(a);
     });
   }
@@ -198,6 +210,16 @@
     normalizeBodyLayout(site);
     normalizeFooter(site);
   }
+
+  window.KnSchoolShell = { refreshSidebar: function () {
+    var site = document.querySelector(".sgn-site");
+    if (site) injectSidebar(site);
+  }};
+
+  document.addEventListener("kn-graduate-auth-changed", function () {
+    document.body.classList.toggle("graduate-logged-in", isGraduateLoggedIn());
+    window.KnSchoolShell.refreshSidebar();
+  });
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", mount);
