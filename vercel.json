@@ -1,0 +1,13 @@
+{
+  "headers": [
+    {
+      "source": "/assets/pdf/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        }
+      ]
+    }
+  ]
+}
