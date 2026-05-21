@@ -98,7 +98,7 @@
       return true;
     if (el.closest(".pdf-issue-row")) return true;
     var href = el.getAttribute("href") || "";
-    if (el.closest(".sgn-notice-list") && /\.pdf($|\?|#)/i.test(href)) return true;
+    if (el.closest(".sgn-notice-list") && /\.(pdf|html)($|\?|#)/i.test(href)) return true;
     return false;
   }
 

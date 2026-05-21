@@ -94,9 +94,9 @@
         var nn = String(n).padStart(2, "0");
         var href;
         if (year === 2016) {
-          href = join("assets/pdf/newsletter-h28-" + nn + ".pdf");
+          href = join("assets/pdf/newsletter-h28-" + nn + ".html");
         } else {
-          href = join("assets/pdf/newsletter-" + eraSlug(year) + "-" + nn + ".pdf");
+          href = join("assets/pdf/newsletter-" + eraSlug(year) + "-" + nn + ".html");
         }
         addPdfLink(row, href, "第" + n + "号", !logged);
       }
@@ -126,7 +126,7 @@
       row.className = "pdf-issue-row";
       addPdfLink(
         row,
-        join("assets/pdf/events-" + eraSlug(year) + ".pdf"),
+        join("assets/pdf/events-" + eraSlug(year) + ".html"),
         "年間行事予定表",
         logged || year > YEAR_MAX
       );
