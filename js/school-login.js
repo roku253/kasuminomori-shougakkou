@@ -82,7 +82,7 @@
         }
       }
     });
-    document.querySelectorAll("[data-requires-graduate], [data-require-pdf]").forEach(function (el) {
+    document.querySelectorAll("[data-requires-graduate], [data-require-pdf], [data-login-gate]").forEach(function (el) {
       if (logged) el.classList.remove("is-gated");
       else el.classList.add("is-gated");
     });
@@ -90,7 +90,12 @@
 
   function isPdfGateTarget(el) {
     if (!el || el.tagName !== "A") return false;
-    if (el.hasAttribute("data-requires-graduate") || el.hasAttribute("data-require-pdf")) return true;
+    if (
+      el.hasAttribute("data-requires-graduate") ||
+      el.hasAttribute("data-require-pdf") ||
+      el.hasAttribute("data-login-gate")
+    )
+      return true;
     if (el.closest(".pdf-issue-row")) return true;
     var href = el.getAttribute("href") || "";
     if (el.closest(".sgn-notice-list") && /\.pdf($|\?|#)/i.test(href)) return true;
@@ -158,7 +163,7 @@
     if (nameOk(user) && birthOk(pass)) {
       setLoggedIn();
       document.getElementById("school-login-overlay").hidden = true;
-      if (pendingPdfHref) {
+      if (pendingPdfHref && pendingPdfHref !== "#" && !/^javascript:/i.test(pendingPdfHref)) {
         window.open(pendingPdfHref, "_blank", "noopener,noreferrer");
       }
       pendingPdfHref = null;

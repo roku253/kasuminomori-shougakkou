@@ -52,12 +52,18 @@
 
   function addPdfLink(row, href, label, graduateOnly) {
     var a = document.createElement("a");
-    a.href = href;
-    a.target = "_blank";
-    a.rel = "noopener";
+    var logged = isLoggedIn();
+    if (graduateOnly && !logged) {
+      a.href = "#";
+      a.setAttribute("data-login-gate", "");
+    } else {
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.setAttribute("data-require-pdf", "");
+      if (graduateOnly) a.setAttribute("data-requires-graduate", "");
+    }
     a.textContent = label;
-    a.setAttribute("data-require-pdf", "");
-    if (graduateOnly) a.setAttribute("data-requires-graduate", "");
     row.appendChild(a);
   }
 
@@ -89,11 +95,10 @@
         var href;
         if (year === 2016) {
           href = join("assets/pdf/newsletter-h28-" + nn + ".pdf");
-          addPdfLink(row, href, "第" + n + "号", true);
         } else {
           href = join("assets/pdf/newsletter-" + eraSlug(year) + "-" + nn + ".pdf");
-          addPdfLink(row, href, "第" + n + "号", logged);
         }
+        addPdfLink(row, href, "第" + n + "号", !logged);
       }
       block.appendChild(row);
       container.appendChild(block);

@@ -379,11 +379,8 @@ body {
   width: 88px;
 }
 
-.pdf-year-block.is-gated a,
 .pdf-issue-row a.is-gated {
-  color: #999;
-  pointer-events: none;
-  text-decoration: none;
+  cursor: pointer;
 }
 .pdf-year-block.is-hidden-year,
 .life-year-block.is-hidden-year {
