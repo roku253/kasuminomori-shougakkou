@@ -8,8 +8,8 @@
   var YEAR_MAX = 2026;
 
   var VALID_NAMES = [
-    "佐藤ユウ",
-    "佐藤 ユウ",
+    "佐藤優",
+    "佐藤 優",
     "さとうゆう",
     "サトウユウ",
     "satouyuu",
