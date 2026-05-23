@@ -1,16 +1,9 @@
-/**
- * 関係者認証（画面はログインID・パスワード／卒業生の正体はFAQ参照）
- * GitHub Pages: sessionStorage + 表／裏 HTML の切り分け
- *
- * 認証は SHA-256(正規化氏名 + "|" + 正規化生年月日) の照合（平文の正解リストは含めない）。
- * ハッシュ再生成: node -e "const c=require('crypto');const n=s=>s.replace(/\\s+/g,'').replace(/　/g,'').toLowerCase();const b=s=>s.replace(/[^\\d]/g,'');['佐藤優','佐藤 優','さとうゆう','サトウユウ','satouyuu','sato yuu'].forEach(x=>console.log(c.createHash('sha256').update(n(x)+'|'+b('20110412')).digest('hex')));"
- */
+
 (function () {
   var SESSION_KEY = "kn_graduate_auth_v1";
   var YEAR_MIN = 2017;
   var YEAR_MAX = 2026;
 
-  /** 佐藤優 + 20110412 系の表記ゆれ（正規化後ペイロードの SHA-256 hex） */
   var CREDENTIAL_HASHES = [
     "8e7c3101e9d2c5335f0b4649649744d40da8488c101b4ca43aaec6cb535071b5",
     "2742060bc4cafe8c2ba0c3286f59adce5a9b57d6aacd56f4ca306e6e34e2a8dc",
