@@ -5,7 +5,7 @@
 | 層 | パス例 | 内容 |
 |----|--------|------|
 | 表（公開） | `portal/newsletters/index.html` など | 2017〜2026年度の号一覧。未ログインで号を押すと認証モーダル（HTMLソースにPDFパスは直書きしない） |
-| 認証 | `portal/kn-gate.html` | ログインID・パスワード → `sessionStorage`（卒業生の入力方法はFAQ） |
+| 認証 | `portal/kn-gate.html` | ログインID・パスワード → `sessionStorage`（卒業生の入力方法はFAQ）。`school-login.js` は SHA-256 照合のみで平文の正解は含めない |
 | ハブ | `portal/kn-hub.html` | 認証後の資料入口（要ログイン） |
 | 裏 | `portal/newsletters/back.html` など | PDF 一覧（2017〜2026） |
 

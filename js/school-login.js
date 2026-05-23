@@ -1,21 +1,23 @@
 /**
  * 関係者認証（画面はログインID・パスワード／卒業生の正体はFAQ参照）
  * GitHub Pages: sessionStorage + 表／裏 HTML の切り分け
+ *
+ * 認証は SHA-256(正規化氏名 + "|" + 正規化生年月日) の照合（平文の正解リストは含めない）。
+ * ハッシュ再生成: node -e "const c=require('crypto');const n=s=>s.replace(/\\s+/g,'').replace(/　/g,'').toLowerCase();const b=s=>s.replace(/[^\\d]/g,'');['佐藤優','佐藤 優','さとうゆう','サトウユウ','satouyuu','sato yuu'].forEach(x=>console.log(c.createHash('sha256').update(n(x)+'|'+b('20110412')).digest('hex')));"
  */
 (function () {
   var SESSION_KEY = "kn_graduate_auth_v1";
   var YEAR_MIN = 2017;
   var YEAR_MAX = 2026;
 
-  var VALID_NAMES = [
-    "佐藤優",
-    "佐藤 優",
-    "さとうゆう",
-    "サトウユウ",
-    "satouyuu",
-    "sato yuu",
+  /** 佐藤優 + 20110412 系の表記ゆれ（正規化後ペイロードの SHA-256 hex） */
+  var CREDENTIAL_HASHES = [
+    "8e7c3101e9d2c5335f0b4649649744d40da8488c101b4ca43aaec6cb535071b5",
+    "2742060bc4cafe8c2ba0c3286f59adce5a9b57d6aacd56f4ca306e6e34e2a8dc",
+    "6b8f529a2e4fb57dd51af07f51567689fb1331ee2a045aab06021b882b538219",
+    "61040bdc7fb80b8c1a771e69a29270a568495230b6d7ddfb3e53838aa26d3a82",
+    "7d21881db9e4f20451882aca7f89b4d1facebd8779bc0ced1969e8ce613ee8b9",
   ];
-  var VALID_BIRTHS = ["20110412", "2011/04/12", "2011-04-12", "2011.4.12"];
 
   function normalizeName(s) {
     return (s || "")
@@ -69,17 +71,27 @@
     applyYearFilter();
   }
 
+  function sha256Hex(str) {
+    if (!window.crypto || !window.crypto.subtle || !window.TextEncoder) {
+      return Promise.resolve("");
+    }
+    var data = new TextEncoder().encode(str);
+    return window.crypto.subtle.digest("SHA-256", data).then(function (buf) {
+      var arr = new Uint8Array(buf);
+      var hex = "";
+      for (var i = 0; i < arr.length; i++) {
+        hex += arr[i].toString(16).padStart(2, "0");
+      }
+      return hex;
+    });
+  }
+
   function credentialsOk(user, pass) {
-    var n = normalizeName(user);
-    var b = normalizeBirth(pass);
-    return (
-      VALID_NAMES.some(function (v) {
-        return normalizeName(v) === n;
-      }) &&
-      VALID_BIRTHS.some(function (v) {
-        return normalizeBirth(v) === b;
-      })
-    );
+    var payload = normalizeName(user) + "|" + normalizeBirth(pass);
+    return sha256Hex(payload).then(function (hex) {
+      if (!hex) return false;
+      return CREDENTIAL_HASHES.indexOf(hex) !== -1;
+    });
   }
 
   function hubUrl() {
@@ -189,13 +201,15 @@
     var user = (document.getElementById("login-user").value || "").trim();
     var pass = document.getElementById("login-pass").value || "";
     var err = document.getElementById("login-error");
-    if (credentialsOk(user, pass)) {
-      setLoggedIn();
-      document.getElementById("school-login-overlay").hidden = true;
-      openPendingPdf();
-      return;
-    }
-    err.textContent = "認証に失敗しました。入力内容をご確認ください。";
+    credentialsOk(user, pass).then(function (ok) {
+      if (ok) {
+        setLoggedIn();
+        document.getElementById("school-login-overlay").hidden = true;
+        openPendingPdf();
+        return;
+      }
+      err.textContent = "認証に失敗しました。入力内容をご確認ください。";
+    });
   }
 
   function initGatePage() {
@@ -206,12 +220,14 @@
       e.preventDefault();
       var user = (document.getElementById("kn-gate-user").value || "").trim();
       var pass = document.getElementById("kn-gate-pass").value || "";
-      if (credentialsOk(user, pass)) {
-        setLoggedIn();
-        location.href = hubUrl();
-        return;
-      }
-      if (err) err.textContent = "認証に失敗しました。入力内容をご確認ください。";
+      credentialsOk(user, pass).then(function (ok) {
+        if (ok) {
+          setLoggedIn();
+          location.href = hubUrl();
+          return;
+        }
+        if (err) err.textContent = "認証に失敗しました。入力内容をご確認ください。";
+      });
     });
     if (isLoggedIn()) {
       location.replace(hubUrl());
