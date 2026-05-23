@@ -6,21 +6,23 @@
   <title>学校だより｜霞ノ杜小学校</title>
   <link rel="stylesheet" href="../../css/style.css" />
   <link rel="stylesheet" href="../../css/layout-municipal.css" />
+  <link rel="stylesheet" href="../../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
   <script src="../../token-gate.js" defer></script>
   <script src="../../js/school-portal-config.js" defer></script>
   <script src="../../js/school-login.js" defer></script>
   <script src="../../js/school-shell.js" defer></script>
+  <script src="../../js/school-catalog.js" defer></script>
 </head>
-<body data-school-home="../../" data-sgn-base="../../" data-portal-tier="public">
+<body data-school-home="../../" data-sgn-base="../../" data-portal-tier="public" data-catalog="newsletter">
   <div id="site-root">
     <div class="sgn-site">
       <div class="sgn-body">
         <div class="sgn-col-main">
           <h1 class="sgn-page-title">学校だより</h1>
           <p class="sgn-crumbs"><a href="../../">ホーム</a> ／ 学校だより</p>
-          <p>学校だよりは学級ごとに配布しています。本校サイトでは、個人情報保護のため過去号の一覧は掲載しておりません。</p>
-          <p>卒業生の方は、<a href="../kn-gate.html"><strong>関係者認証</strong></a>のうえ専用ページからご覧いただけます（在学時の氏名・生年月日が必要です）。</p>
+          <p style="font-size:12px;color:#666;">平成25〜31年度分は、各号をクリックのうえ関係者認証後に閲覧できます。卒業生の方は<a href="../kn-gate.html">認証ページ</a>からもどうぞ。</p>
+          <div id="catalog-root" class="pdf-catalog"></div>
         </div>
       </div>
     </div>

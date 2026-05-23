@@ -118,7 +118,7 @@
   }
 
   function isPdfGateTarget(el) {
-    if (portalTier() === "public" || portalTier() === "gate") return false;
+    if (portalTier() === "gate" || portalTier() === "hub") return false;
     if (!el || el.tagName !== "A") return false;
     if (
       el.hasAttribute("data-requires-graduate") ||
@@ -226,7 +226,7 @@
 
   document.addEventListener("click", function (e) {
     var tier = portalTier();
-    if (tier === "public" || tier === "gate" || tier === "hub") return;
+    if (tier === "gate" || tier === "hub") return;
     var link = e.target.closest("a");
     if (!link || !isPdfGateTarget(link)) return;
     if (isLoggedIn()) return;

@@ -4,7 +4,7 @@
 
 | 層 | パス例 | 内容 |
 |----|--------|------|
-| 表（公開） | `portal/newsletters/index.html` など | PDF・カタログなし。認証へ誘導のみ |
+| 表（公開） | `portal/newsletters/index.html` など | 令和2〜8年度の号一覧あり。未ログインで号を押すと認証モーダル（HTMLソースにPDFパスは直書きしない） |
 | 認証 | `portal/kn-gate.html` | 卒業生（在学時氏名＋生年月日）→ `sessionStorage` |
 | ハブ | `portal/kn-hub.html` | 認証後の資料入口（要ログイン） |
 | 裏 | `portal/newsletters/back.html` など | 従来の PDF 一覧・年度切替 |
