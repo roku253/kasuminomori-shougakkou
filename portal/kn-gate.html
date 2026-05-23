@@ -20,15 +20,15 @@
         <div class="sgn-col-main">
           <h1 class="sgn-page-title">関係者認証</h1>
           <p class="sgn-crumbs"><a href="../">ホーム</a> ／ 関係者認証</p>
-          <p>個人情報を含む資料の閲覧には認証が必要です。<strong>卒業生の方</strong>は、在学時の氏名と生年月日を入力してください。</p>
+          <p>個人情報を含む資料の閲覧には認証が必要です。ログインIDとパスワードを入力してください。</p>
           <form id="kn-gate-form" class="kn-gate-form" autocomplete="on">
             <div class="login-field">
-              <label for="kn-gate-user">氏名（在学時）</label>
+              <label for="kn-gate-user">ログインID</label>
               <input id="kn-gate-user" name="username" type="text" autocomplete="username" required />
             </div>
             <div class="login-field">
-              <label for="kn-gate-pass">生年月日</label>
-              <input id="kn-gate-pass" name="password" type="password" autocomplete="current-password" placeholder="例: 20060412" required />
+              <label for="kn-gate-pass">パスワード</label>
+              <input id="kn-gate-pass" name="password" type="password" autocomplete="current-password" required />
             </div>
             <p class="login-error" id="kn-gate-error" aria-live="polite"></p>
             <button type="submit" class="login-btn-primary">ログインして資料ページへ</button>

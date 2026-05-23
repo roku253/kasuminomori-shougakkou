@@ -4,15 +4,20 @@
 
 | 層 | パス例 | 内容 |
 |----|--------|------|
-| 表（公開） | `portal/newsletters/index.html` など | 令和2〜8年度の号一覧あり。未ログインで号を押すと認証モーダル（HTMLソースにPDFパスは直書きしない） |
-| 認証 | `portal/kn-gate.html` | 卒業生（在学時氏名＋生年月日）→ `sessionStorage` |
+| 表（公開） | `portal/newsletters/index.html` など | 2017〜2026年度の号一覧。未ログインで号を押すと認証モーダル（HTMLソースにPDFパスは直書きしない） |
+| 認証 | `portal/kn-gate.html` | ログインID・パスワード → `sessionStorage`（卒業生の入力方法はFAQ） |
 | ハブ | `portal/kn-hub.html` | 認証後の資料入口（要ログイン） |
-| 裏 | `portal/newsletters/back.html` など | 従来の PDF 一覧・年度切替 |
+| 裏 | `portal/newsletters/back.html` など | PDF 一覧（2017〜2026） |
 
-### 年度・メニュー（従来どおり `school-catalog.js` / `school-shell.js`）
+### 年度・メニュー（`school-catalog.js` / `school-shell.js`）
 
-- **未ログイン** … 令和2〜8年度（2020〜2026）、メニューは現役向け
-- **ログイン後（卒業生）** … 平成25〜31年度（2013〜2019）、メニューは卒業生向け（行事・タイムカプセル等）
+- **未ログイン** … 2017〜2026年度の一覧表示、クリックで認証。メニューは現役向け（タイムカプセルなし）
+- **ログイン後（卒業生）** … 同じ2017〜2026年度を閲覧、メニューは卒業生向け（タイムカプセルあり）
+
+### タイムカプセル
+
+- 一覧: `archives/time-capsule/` — 2017〜2026
+- 実体: **2021年度のみ**（`archives/time-capsule/2021/`、関連記録は `archives/2021/`）
 
 ## A — 完全公開
 

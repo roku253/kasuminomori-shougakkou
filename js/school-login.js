@@ -1,11 +1,11 @@
 /**
- * 卒業生・関係者認証（在学時氏名 + 生年月日）
- * GitHub Pages: sessionStorage + 表／裏 HTML の切り分け（裏のみ PDF・カタログ）
+ * 関係者認証（画面はログインID・パスワード／卒業生の正体はFAQ参照）
+ * GitHub Pages: sessionStorage + 表／裏 HTML の切り分け
  */
 (function () {
   var SESSION_KEY = "kn_graduate_auth_v1";
-  var YEAR_MIN = 2013;
-  var YEAR_MAX = 2019;
+  var YEAR_MIN = 2017;
+  var YEAR_MAX = 2026;
 
   var VALID_NAMES = [
     "佐藤ユウ",
@@ -15,7 +15,7 @@
     "satouyuu",
     "sato yuu",
   ];
-  var VALID_BIRTHS = ["20060412", "2006/04/12", "2006-04-12", "2006.4.12"];
+  var VALID_BIRTHS = ["20110412", "2011/04/12", "2011-04-12", "2011.4.12"];
 
   function normalizeName(s) {
     return (s || "")
@@ -97,18 +97,10 @@
     document.querySelectorAll("[data-year]").forEach(function (el) {
       var y = parseInt(el.getAttribute("data-year"), 10);
       if (isNaN(y)) return;
-      if (logged) {
-        if (y >= YEAR_MIN && y <= YEAR_MAX) {
-          el.classList.remove("is-hidden-year", "is-gated");
-        } else {
-          el.classList.add("is-hidden-year");
-        }
+      if (y < YEAR_MIN || y > YEAR_MAX) {
+        el.classList.add("is-hidden-year");
       } else {
-        if (y >= YEAR_MIN && y <= YEAR_MAX) {
-          el.classList.add("is-hidden-year");
-        } else {
-          el.classList.remove("is-hidden-year");
-        }
+        el.classList.remove("is-hidden-year");
       }
     });
     document.querySelectorAll("[data-requires-graduate], [data-require-pdf], [data-login-gate]").forEach(function (el) {
@@ -141,12 +133,14 @@
     el.innerHTML =
       '<div class="login-dialog" role="dialog" aria-labelledby="login-title" aria-modal="true">' +
       '<div class="login-dialog-header" id="login-title">閲覧には認証が必要です</div>' +
-      '<p class="login-dialog-note">個人情報を含む資料です。卒業生の方は在学時の氏名と生年月日を入力してください。</p>' +
+      '<p class="login-dialog-note">個人情報を含む資料です。認証の入力方法は<a href="' +
+      joinBase("contact/index.html") +
+      '">お問い合わせ</a>のよくあるご質問をご覧ください。</p>' +
       '<div class="login-dialog-body">' +
-      '<div class="login-field"><label for="login-user">氏名（在学時）</label>' +
+      '<div class="login-field"><label for="login-user">ログインID</label>' +
       '<input id="login-user" type="text" autocomplete="username" /></div>' +
-      '<div class="login-field"><label for="login-pass">生年月日</label>' +
-      '<input id="login-pass" type="password" autocomplete="current-password" placeholder="例: 20060412" /></div>' +
+      '<div class="login-field"><label for="login-pass">パスワード</label>' +
+      '<input id="login-pass" type="password" autocomplete="current-password" /></div>' +
       "</div>" +
       '<p class="login-error" id="login-error" aria-live="polite"></p>' +
       '<div class="login-dialog-actions">' +

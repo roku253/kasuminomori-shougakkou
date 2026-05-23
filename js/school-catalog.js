@@ -1,14 +1,11 @@
 /**
  * 年度別カタログ（学校だより・年間行事・学校生活）
- * 未ログイン: 2020-2026（現役6年生の入学年度〜）
- * ログイン後: 2013-2019（卒業生アーカイブ）
+ * 表示: 2017–2026（10年）。在校生・卒業生とも同じ。PDF閲覧は認証後。
  */
 (function () {
   var BASE = document.body.getAttribute("data-sgn-base") || "../../";
-  var YEAR_MIN = 2013;
-  var YEAR_MAX = 2019;
-  var PUBLIC_ENROLL = 2020;
-  var PUBLIC_END = 2026;
+  var YEAR_MIN = 2017;
+  var YEAR_MAX = 2026;
 
   function join(path) {
     var base = BASE;
@@ -38,10 +35,19 @@
     2019: "平成31年度",
     2018: "平成30年度",
     2017: "平成29年度",
-    2016: "平成28年度",
-    2015: "平成27年度",
-    2014: "平成26年度",
-    2013: "平成25年度",
+  };
+
+  var LIFE_BY_YEAR = {
+    2026: "運動会・科学週間",
+    2025: "合唱祭・社会科見学",
+    2024: "町民体育祭ボランティア",
+    2023: "プール開き・交通安全",
+    2022: "遠足・音楽会",
+    2021: "オンライン学習発表会",
+    2020: "リモート学習・クラブ活動",
+    2019: "卒業式・地域清掃",
+    2018: "写生大会・クラブ発表",
+    2017: "林間学校・読書週間",
   };
 
   function issueCount(year) {
@@ -51,6 +57,12 @@
   function eraSlug(year) {
     if (year >= 2019) return "r" + (year - 2018);
     return "h" + (year - 1988);
+  }
+
+  function rangeYears(from, to) {
+    var arr = [];
+    for (var y = from; y >= to; y--) arr.push(y);
+    return arr;
   }
 
   function addPdfLink(row, href, label, graduateOnly) {
@@ -73,12 +85,7 @@
   function buildNewsletterCatalog(container) {
     container.innerHTML = "";
     var logged = isLoggedIn();
-    var years = [];
-    if (logged) {
-      for (var y = YEAR_MAX; y >= YEAR_MIN; y--) years.push(y);
-    } else {
-      for (var y2 = PUBLIC_END; y2 >= PUBLIC_ENROLL; y2--) years.push(y2);
-    }
+    var years = rangeYears(YEAR_MAX, YEAR_MIN);
 
     years.forEach(function (year) {
       var block = document.createElement("section");
@@ -95,12 +102,7 @@
       var count = issueCount(year);
       for (var n = count; n >= 1; n--) {
         var nn = String(n).padStart(2, "0");
-        var href;
-        if (year === 2016) {
-          href = join("assets/pdf/newsletter-h28-" + nn + ".pdf");
-        } else {
-          href = join("assets/pdf/newsletter-" + eraSlug(year) + "-" + nn + ".pdf");
-        }
+        var href = join("assets/pdf/newsletter-" + eraSlug(year) + "-" + nn + ".pdf");
         addPdfLink(row, href, "第" + n + "号", !logged);
       }
       block.appendChild(row);
@@ -111,9 +113,7 @@
   function buildEventsCatalog(container) {
     container.innerHTML = "";
     var logged = isLoggedIn();
-    var years = logged
-      ? rangeYears(YEAR_MAX, YEAR_MIN)
-      : rangeYears(PUBLIC_END, PUBLIC_ENROLL);
+    var years = rangeYears(YEAR_MAX, YEAR_MIN);
 
     years.forEach(function (year) {
       var block = document.createElement("section");
@@ -131,7 +131,7 @@
         row,
         join("assets/pdf/events-" + eraSlug(year) + ".pdf"),
         "年間行事予定表",
-        logged || year > YEAR_MAX
+        !logged
       );
       var meta = document.createElement("span");
       meta.className = "pdf-meta";
@@ -142,42 +142,18 @@
     });
   }
 
-  function rangeYears(from, to) {
-    var arr = [];
-    for (var y = from; y >= to; y--) arr.push(y);
-    return arr;
-  }
-
   function buildLifeCatalog(container) {
     container.innerHTML = "";
-    var logged = isLoggedIn();
-    var publicItems = [
-      { year: 2026, title: "令和8年度", event: "運動会・科学週間" },
-      { year: 2025, title: "令和7年度", event: "合唱祭・社会科見学" },
-      { year: 2024, title: "令和6年度", event: "町民体育祭ボランティア" },
-      { year: 2023, title: "令和5年度", event: "プール開き・交通安全" },
-      { year: 2022, title: "令和4年度", event: "遠足・音楽会" },
-      { year: 2021, title: "令和3年度", event: "オンライン学習発表会" },
-    ];
-    var archiveItems = [
-      { year: 2019, title: "平成31年度", event: "卒業式・地域清掃" },
-      { year: 2018, title: "平成30年度", event: "写生大会・クラブ発表" },
-      { year: 2017, title: "平成29年度", event: "林間学校" },
-      { year: 2016, title: "平成28年度", event: "河川敷清掃・写生大会" },
-      { year: 2015, title: "平成27年度", event: "読書週間" },
-      { year: 2014, title: "平成26年度", event: "運動会" },
-      { year: 2013, title: "平成25年度", event: "入学式" },
-    ];
-    var items = logged ? archiveItems : publicItems;
+    var years = rangeYears(YEAR_MAX, YEAR_MIN);
 
-    items.forEach(function (item) {
+    years.forEach(function (year) {
       var block = document.createElement("section");
       block.className = "life-year-block pdf-year-block";
-      block.setAttribute("data-year", String(item.year));
+      block.setAttribute("data-year", String(year));
 
       var h = document.createElement("h3");
       h.className = "pdf-year-title";
-      h.textContent = item.title;
+      h.textContent = ERA_LABELS[year] || year + "年度";
       block.appendChild(h);
 
       var card = document.createElement("div");
@@ -185,7 +161,7 @@
       card.innerHTML =
         '<div class="life-photo" style="background:linear-gradient(145deg,#dfe8d4,#b8c9a8);min-height:100px;border:1px solid #ddd;margin-bottom:8px;"></div>' +
         "<p>" +
-        item.event +
+        (LIFE_BY_YEAR[year] || "当該年度の記録") +
         " … 当該年度の記録です。</p>";
       block.appendChild(card);
       container.appendChild(block);

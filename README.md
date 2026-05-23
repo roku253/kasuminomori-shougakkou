@@ -7,11 +7,13 @@
 ## 配信（GitHub Pages）
 
 - **表** … `portal/*/index.html` — ソースに PDF パス・カタログ JS なし（ネタバレ防止）
-- **認証** … `portal/kn-gate.html` — 卒業生ログイン後 `portal/kn-hub.html` へ
+- **認証** … `portal/kn-gate.html` — ログインID・パスワード（卒業生の入力方法はFAQ）→ `sessionStorage` → `portal/kn-hub.html`
 - **裏** … `portal/*/back.html` — 学校だより・行事など（`school-catalog.js`、PDF リンクあり）
 
-ログイン後は従来どおり **2013〜2019 年度のアーカイブ**、未ログインの裏ページでは **2020〜2026（現在の学校）** が表示されます。
+学校だより・行事・学校生活は **2017〜2026年度（10年）** を常に表示。未ログインでも号一覧は見え、クリック時に認証モーダルが開きます。卒業生ログイン後は同じ10年分を閲覧でき、メニューにタイムカプセルが追加されます。
+
+タイムカプセルは **2017〜2026 の一覧**、中身は **2021年度のみ** 公開です。
 
 詳細: [`docs/information-classification.md`](docs/information-classification.md)
 
-※ `api/`・`middleware.js` は Vercel 用のオプションです。GitHub Pages では使われません。
+※ 仮PDFは `assets/pdf/` に配置済み。PDF生成スクリプト（旧 `tools/`）は廃止しました。

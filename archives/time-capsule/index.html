@@ -19,7 +19,7 @@
         <div class="sgn-col-main">
           <h1 class="sgn-page-title">卒業クラス別 保管一覧</h1>
           <p class="sgn-crumbs"><a href="../../">ホーム</a> ／ <a href="../../contact/">お問い合わせ</a> ／ タイムカプセル</p>
-          <p class="pdf-gate-msg" style="display:block;font-size:12px;color:#888;">卒業生の方はログイン後に2013〜2019年度の保管を閲覧できます。</p>
+          <p class="pdf-gate-msg" style="display:block;font-size:12px;color:#888;">卒業生の方はログイン後に2017〜2026年度の一覧から保管を閲覧できます（2021年度のみ公開）。</p>
           <div class="pdf-catalog" id="tc-catalog"></div>
         </div>
       </div>
@@ -28,7 +28,7 @@
   <script>
     (function () {
       var years = [];
-      for (var y = 2026; y >= 2013; y--) years.push(y);
+      for (var y = 2026; y >= 2017; y--) years.push(y);
       var root = document.getElementById("tc-catalog");
       years.forEach(function (year) {
         var block = document.createElement("section");
@@ -40,14 +40,13 @@
         block.appendChild(h);
         var row = document.createElement("div");
         row.className = "pdf-issue-row";
-        if (year === 2026) {
-          row.innerHTML = '<span style="color:#666;">準備中（当年組は未保管）</span>';
-        } else {
+        if (year === 2021) {
           var a = document.createElement("a");
-          a.href = "./" + year + "/";
+          a.href = "./2021/";
           a.textContent = "閲覧";
-          
           row.appendChild(a);
+        } else {
+          row.innerHTML = '<span style="color:#666;">準備中</span>';
         }
         block.appendChild(row);
         root.appendChild(block);

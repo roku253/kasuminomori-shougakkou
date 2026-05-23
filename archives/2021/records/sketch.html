@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>写生大会記録（R3）｜霞ノ杜小学校</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="../../../css/layout-municipal.css" />
+  <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
+  <script src="../../../token-gate.js" defer></script>
+  <script src="../../../js/kn-footprint.js" defer></script>
+  <script src="../../../js/school-shell.js" defer></script>
+</head>
+<body data-sgn-base="../../../" data-sgn-active="guide">
+  <div id="site-root">
+    <div class="sgn-site">
+      <div class="sgn-body">
+        <div class="sgn-col-main" data-kn-story-clue="1">
+        <p class="crumbs"><a href="../">令和3年度保管資料</a> ／ 写生大会</p>
+        <h2>令和3年5月22日　写生大会（旧・水辺の丘）</h2>
+        <p>4年1組の受賞作品。公式一覧には作者名を掲載していません。サムネイルを拡大するとキャンバス端のサインが判読できます。</p>
+        <figure class="sketch-figure">
+          <button type="button" class="sketch-thumb" id="sketch-open" aria-label="作品写真を拡大">
+            <span class="sketch-frame" aria-hidden="true"></span>
+            <span class="sketch-caption">受賞作品（4年1組）— クリックで拡大</span>
+          </button>
+        </figure>
+        <p><a href="../../time-capsule/2021/">タイムカプセル（2021・4年1組）</a></p>
+        </div>
+      </div>
+    </div>
+    <div id="sketch-lightbox" class="sketch-lightbox" hidden>
+      <div class="sketch-lightbox-inner" role="dialog" aria-modal="true">
+        <button type="button" class="sketch-close" id="sketch-close">閉じる</button>
+        <div class="sketch-zoom-art"><p class="sketch-sign">金賞・アキト</p></div>
+        <p class="sketch-zoom-note">キャンバス右下の筆跡（復元）</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var lb = document.getElementById("sketch-lightbox");
+      document.getElementById("sketch-open").onclick = function () { lb.hidden = false; };
+      document.getElementById("sketch-close").onclick = function () { lb.hidden = true; };
+      lb.addEventListener("click", function (e) { if (e.target === lb) lb.hidden = true; });
+    })();
+  </script>
+</body>
+</html>

@@ -2,85 +2,11 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>タイムカプセル｜2016・4年1組</title>
-  <link rel="stylesheet" href="../../../css/style.css" />
-  <link rel="stylesheet" href="../../../css/layout-municipal.css" />
-  <link rel="stylesheet" href="../../../css/login-modal.css" />
-  <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
-<script src="../../../token-gate.js" defer></script>
-  <script src="../../../js/school-login.js" defer></script>
-  <script src="../../../js/school-shell.js" defer></script>
-  <script src="../../../js/kn-footprint.js" defer></script>
-  <style>
-    .lock { background: #f5f5f0; border: 1px dashed #999; padding: 14px; margin: 12px 0; }
-    .pdf-panel { display: none; background: #fff; border: 1px solid #ccc; padding: 16px; margin-top: 12px; }
-    .pdf-panel.open { display: block; }
-    .pdf-hint { display: none; margin-top: 10px; font-size: 13px; color: #444; }
-    .pdf-hint.open { display: block; }
-    input { padding: 6px 8px; margin-right: 8px; }
-    button { padding: 6px 12px; cursor: pointer; }
-    .seat-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; max-width: 320px; margin: 12px 0; }
-    .seat { border: 1px solid #bbb; padding: 6px; text-align: center; font-size: 11px; min-height: 28px; }
-    .seat.empty { background: #eee; color: #aaa; }
-    .pdf-link { display: inline-block; margin-top: 8px; color: #2d5a27; font-weight: 600; }
-  </style>
+  <meta http-equiv="refresh" content="0; url=../2021/" />
+  <title>タイムカプセル｜霞ノ杜小学校</title>
+  <script>location.replace("../2021/");</script>
 </head>
-<body data-graduate-page data-school-home="../../../" data-sgn-base="../../../" data-sgn-active="contact">
-  <div id="site-root">
-    <div class="sgn-site">
-      <div class="sgn-body">
-        <div class="sgn-col-main" data-kn-story-clue="1">
-          <h1 class="sgn-page-title">タイムカプセル（2016年度）</h1>
-          <p class="sgn-crumbs"><a href="../">歴代一覧</a> ／ 2016年</p>
-          <p>2016年・2分の1成人式に向けてクラスで残した記録です。</p>
-
-          <div class="lock" id="lock1">
-            <p><strong>第1ロック:</strong> 当時のクラス合唱曲名を入力</p>
-            <input id="song" placeholder="曲名" autocomplete="off" />
-            <button type="button" id="btn1">解除</button>
-          </div>
-
-          <div class="pdf-panel" id="pdf-panel">
-            <h3>帳票「10年後の私へ」</h3>
-            <p>PDFを開くと閲覧パスワードの入力が求められます。第2ロックで得た番号と合唱曲名をつなげてください。</p>
-            <a class="pdf-link" href="../../../assets/time-capsule-2016.pdf" target="_blank" rel="noopener noreferrer" data-require-pdf>time-capsule-2016.pdf を開く</a>
-          </div>
-
-          <div class="lock" id="lock2" style="display:none">
-            <p><strong>第2ロック:</strong> 佐藤ユウの<strong>本来の</strong>出席番号（4人目がいた前提）</p>
-            <p class="hint" style="font-size:12px;color:#555;">座席表（28枠）と公式記録の差分を考えてください。<a href="../../2016/records/sketch.html">写生記録</a>・<a href="../../2016/records/river-roster.html">名簿（印刷確認用）</a>も参照できます。</p>
-            <div class="seat-grid" id="seats"></div>
-            <input id="seat" placeholder="番号" maxlength="2" autocomplete="off" />
-            <button type="button" id="btn2">解除</button>
-            <p class="pdf-hint" id="pdf-hint">PDFパスワード: <strong>本来の出席番号</strong> + <strong>合唱曲名（ひらがな・区切りなし）</strong></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script>
-    (function () {
-      var seats = document.getElementById("seats");
-      for (var i = 1; i <= 28; i++) {
-        var d = document.createElement("div");
-        d.className = "seat" + (i === 8 ? " empty" : "");
-        d.textContent = String(i);
-        seats.appendChild(d);
-      }
-      document.getElementById("btn1").onclick = function () {
-        var v = (document.getElementById("song").value || "").trim();
-        if (v === "ふるさと" || v === "フルサト") {
-          document.getElementById("pdf-panel").classList.add("open");
-          document.getElementById("lock2").style.display = "block";
-        } else alert("合唱曲名が一致しません。");
-      };
-      document.getElementById("btn2").onclick = function () {
-        var v = (document.getElementById("seat").value || "").trim();
-        if (v === "9") document.getElementById("pdf-hint").classList.add("open");
-        else alert("出席番号が一致しません。");
-      };
-    })();
-  </script>
+<body>
+  <p><a href="../2021/">タイムカプセル（2021）へ</a></p>
 </body>
 </html>
