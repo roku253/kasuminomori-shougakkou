@@ -1,20 +1,41 @@
 /**
  * 卒業生・関係者認証（在学時氏名 + 生年月日）
- * サーバー側 Cookie セッションと連携（個人情報を含む PDF の直URL防止）
+ * GitHub Pages: sessionStorage + 表／裏 HTML の切り分け（裏のみ PDF・カタログ）
  */
 (function () {
   var SESSION_KEY = "kn_graduate_auth_v1";
   var YEAR_MIN = 2013;
   var YEAR_MAX = 2019;
-  var API_LOGIN = "/api/auth/login";
-  var API_LOGOUT = "/api/auth/logout";
-  var API_SESSION = "/api/auth/session";
+
+  var VALID_NAMES = [
+    "佐藤ユウ",
+    "佐藤 ユウ",
+    "さとうゆう",
+    "サトウユウ",
+    "satouyuu",
+    "sato yuu",
+  ];
+  var VALID_BIRTHS = ["20060412", "2006/04/12", "2006-04-12", "2006.4.12"];
 
   function normalizeName(s) {
     return (s || "")
       .replace(/\s+/g, "")
       .replace(/　/g, "")
       .toLowerCase();
+  }
+
+  function normalizeBirth(s) {
+    return (s || "").replace(/[^\d]/g, "");
+  }
+
+  function portalTier() {
+    return document.body.getAttribute("data-portal-tier") || "default";
+  }
+
+  function joinBase(path) {
+    var base = document.body.getAttribute("data-sgn-base") || "/";
+    if (base.charAt(base.length - 1) !== "/") base += "/";
+    return base + path;
   }
 
   function isLoggedIn() {
@@ -48,18 +69,27 @@
     applyYearFilter();
   }
 
-  function isProtectedPdfHref(href) {
-    if (!href || href === "#") return false;
-    try {
-      var u = new URL(href, window.location.origin);
-      var path = u.pathname;
-      if (/^\/assets\/time-capsule[^/]*\.pdf$/i.test(path)) return true;
-      var m = path.match(/\/assets\/pdf\/([^/]+\.pdf)$/i);
-      if (!m) return false;
-      return !m[1].toLowerCase().startsWith("notice-");
-    } catch (e) {
-      return /\.pdf($|\?)/i.test(href) && !/notice-/i.test(href);
-    }
+  function credentialsOk(user, pass) {
+    var n = normalizeName(user);
+    var b = normalizeBirth(pass);
+    return (
+      VALID_NAMES.some(function (v) {
+        return normalizeName(v) === n;
+      }) &&
+      VALID_BIRTHS.some(function (v) {
+        return normalizeBirth(v) === b;
+      })
+    );
+  }
+
+  function hubUrl() {
+    var cfg = window.KnPortalConfig;
+    return joinBase(cfg ? cfg.HUB : "portal/kn-hub.html");
+  }
+
+  function gateUrl() {
+    var cfg = window.KnPortalConfig;
+    return joinBase(cfg ? cfg.GATE : "portal/kn-gate.html");
   }
 
   function applyYearFilter() {
@@ -88,6 +118,7 @@
   }
 
   function isPdfGateTarget(el) {
+    if (portalTier() === "public" || portalTier() === "gate") return false;
     if (!el || el.tagName !== "A") return false;
     if (
       el.hasAttribute("data-requires-graduate") ||
@@ -96,9 +127,7 @@
     )
       return true;
     if (el.closest(".pdf-issue-row")) return true;
-    var href = el.getAttribute("href") || "";
-    if (el.closest(".sgn-notice-list") && isProtectedPdfHref(href)) return true;
-    return isProtectedPdfHref(href);
+    return false;
   }
 
   function ensureModal() {
@@ -112,7 +141,7 @@
     el.innerHTML =
       '<div class="login-dialog" role="dialog" aria-labelledby="login-title" aria-modal="true">' +
       '<div class="login-dialog-header" id="login-title">閲覧には認証が必要です</div>' +
-      '<p class="login-dialog-note">個人情報を含む資料です。関係者の方は在学時の氏名と生年月日を入力してください。認証後、一定時間はセッションで閲覧できます。</p>' +
+      '<p class="login-dialog-note">個人情報を含む資料です。卒業生の方は在学時の氏名と生年月日を入力してください。</p>' +
       '<div class="login-dialog-body">' +
       '<div class="login-field"><label for="login-user">氏名（在学時）</label>' +
       '<input id="login-user" type="text" autocomplete="username" /></div>' +
@@ -130,7 +159,7 @@
       el.hidden = true;
       pendingPdfHref = null;
     });
-    el.querySelector("#login-submit").addEventListener("click", tryLogin);
+    el.querySelector("#login-submit").addEventListener("click", tryModalLogin);
     el.addEventListener("click", function (e) {
       if (e.target === el) {
         el.hidden = true;
@@ -138,7 +167,7 @@
       }
     });
     document.getElementById("login-pass").addEventListener("keydown", function (e) {
-      if (e.key === "Enter") tryLogin();
+      if (e.key === "Enter") tryModalLogin();
     });
     return el;
   }
@@ -162,64 +191,42 @@
     pendingPdfHref = null;
   }
 
-  function tryLogin() {
+  function tryModalLogin() {
     var user = (document.getElementById("login-user").value || "").trim();
     var pass = document.getElementById("login-pass").value || "";
     var err = document.getElementById("login-error");
-    err.textContent = "認証しています…";
-
-    fetch(API_LOGIN, {
-      method: "POST",
-      credentials: "same-origin",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: user, birth: pass }),
-    })
-      .then(function (res) {
-        return res.json().then(function (data) {
-          return { ok: res.ok && data && data.ok, status: res.status };
-        });
-      })
-      .then(function (result) {
-        if (result.ok) {
-          setLoggedIn();
-          document.getElementById("school-login-overlay").hidden = true;
-          openPendingPdf();
-          return;
-        }
-        err.textContent = "認証に失敗しました。入力内容をご確認ください。";
-      })
-      .catch(function () {
-        err.textContent =
-          "認証サーバーに接続できません。Vercel 上で閲覧するか、vercel dev でローカル確認してください。";
-      });
+    if (credentialsOk(user, pass)) {
+      setLoggedIn();
+      document.getElementById("school-login-overlay").hidden = true;
+      openPendingPdf();
+      return;
+    }
+    err.textContent = "認証に失敗しました。入力内容をご確認ください。";
   }
 
-  function syncSessionFromServer() {
-    return fetch(API_SESSION, { credentials: "same-origin", cache: "no-store" })
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        if (data && data.ok) setLoggedIn();
-        else clearLoggedIn();
-      })
-      .catch(function () {
-        /* 静的ファイルのみの環境では Cookie API なし — UI は未ログインのまま */
-        clearLoggedIn();
-      });
-  }
-
-  function logout() {
-    return fetch(API_LOGOUT, { method: "POST", credentials: "same-origin" })
-      .then(function () {
-        clearLoggedIn();
-      })
-      .catch(function () {
-        clearLoggedIn();
-      });
+  function initGatePage() {
+    var form = document.getElementById("kn-gate-form");
+    if (!form) return;
+    var err = document.getElementById("kn-gate-error");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var user = (document.getElementById("kn-gate-user").value || "").trim();
+      var pass = document.getElementById("kn-gate-pass").value || "";
+      if (credentialsOk(user, pass)) {
+        setLoggedIn();
+        location.href = hubUrl();
+        return;
+      }
+      if (err) err.textContent = "認証に失敗しました。入力内容をご確認ください。";
+    });
+    if (isLoggedIn()) {
+      location.replace(hubUrl());
+    }
   }
 
   document.addEventListener("click", function (e) {
+    var tier = portalTier();
+    if (tier === "public" || tier === "gate" || tier === "hub") return;
     var link = e.target.closest("a");
     if (!link || !isPdfGateTarget(link)) return;
     if (isLoggedIn()) return;
@@ -236,16 +243,7 @@
       return;
     }
     document.documentElement.classList.add("graduate-prelock");
-    showModal(null);
-  }
-
-  function checkAuthQuery() {
-    try {
-      var params = new URLSearchParams(window.location.search);
-      if (params.get("auth") === "required" && !isLoggedIn()) {
-        showModal(null);
-      }
-    } catch (e) {}
+    location.replace(gateUrl());
   }
 
   window.KnSchoolLogin = {
@@ -253,19 +251,27 @@
     showModal: showModal,
     setLoggedIn: setLoggedIn,
     clearLoggedIn: clearLoggedIn,
-    logout: logout,
-    syncSessionFromServer: syncSessionFromServer,
     applyYearFilter: applyYearFilter,
-    isProtectedPdfHref: isProtectedPdfHref,
+    hubUrl: hubUrl,
+    gateUrl: gateUrl,
     YEAR_MIN: YEAR_MIN,
     YEAR_MAX: YEAR_MAX,
   };
 
   function onReady() {
-    syncSessionFromServer().finally(function () {
+    var tier = portalTier();
+    if (tier === "gate") {
+      initGatePage();
+      return;
+    }
+    if (isLoggedIn()) {
+      document.documentElement.classList.remove("graduate-prelock");
+      document.body.classList.add("graduate-logged-in");
+    }
+    applyYearFilter();
+    if (tier === "back") {
       guardGraduateOnlyPage();
-      checkAuthQuery();
-    });
+    }
   }
 
   if (document.readyState === "loading") {

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>関係者向け資料｜霞ノ杜小学校</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/layout-municipal.css" />
+  <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
+  <script src="../token-gate.js" defer></script>
+  <script src="../js/school-portal-config.js" defer></script>
+  <script src="../js/school-login.js" defer></script>
+  <script src="../js/school-shell.js" defer></script>
+</head>
+<body data-sgn-base="../" data-portal-tier="hub">
+  <div id="site-root">
+    <div class="sgn-site">
+      <div class="sgn-body">
+        <div class="sgn-col-main">
+          <h1 class="sgn-page-title">関係者向け資料</h1>
+          <p class="sgn-crumbs"><a href="../">ホーム</a> ／ 関係者向け資料</p>
+          <p id="kn-hub-status">認証済みの方は、以下から各資料をご覧いただけます。</p>
+          <ul class="kn-hub-links">
+            <li><a href="newsletters/back.html">学校だより</a></li>
+            <li><a href="events/back.html">年間行事予定</a></li>
+            <li><a href="life/back.html">学校生活の様子</a></li>
+            <li><a href="health/back.html">保健だより</a></li>
+            <li><a href="grade-news/back.html">学年だより</a></li>
+            <li><a href="lunch/back.html">給食だより・こんだて表</a></li>
+            <li><a href="../archives/time-capsule/">タイムカプセル</a></li>
+          </ul>
+          <p style="font-size:12px;color:#666;margin-top:1.5em;">
+            <a href="kn-gate.html">別の方として再ログイン</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      function goGate() {
+        var base = document.body.getAttribute("data-sgn-base") || "../";
+        if (base.charAt(base.length - 1) !== "/") base += "/";
+        location.replace(base + "portal/kn-gate.html");
+      }
+      try {
+        if (sessionStorage.getItem("kn_graduate_auth_v1") !== "1") goGate();
+      } catch (e) {
+        goGate();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>関係者認証｜霞ノ杜小学校</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/layout-municipal.css" />
+  <link rel="stylesheet" href="../css/login-modal.css" />
+  <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
+  <script src="../token-gate.js" defer></script>
+  <script src="../js/school-portal-config.js" defer></script>
+  <script src="../js/school-login.js" defer></script>
+  <script src="../js/school-shell.js" defer></script>
+</head>
+<body data-sgn-base="../" data-portal-tier="gate">
+  <div id="site-root">
+    <div class="sgn-site">
+      <div class="sgn-body sgn-body--full">
+        <div class="sgn-col-main">
+          <h1 class="sgn-page-title">関係者認証</h1>
+          <p class="sgn-crumbs"><a href="../">ホーム</a> ／ 関係者認証</p>
+          <p>個人情報を含む資料の閲覧には認証が必要です。<strong>卒業生の方</strong>は、在学時の氏名と生年月日を入力してください。</p>
+          <form id="kn-gate-form" class="kn-gate-form" autocomplete="on">
+            <div class="login-field">
+              <label for="kn-gate-user">氏名（在学時）</label>
+              <input id="kn-gate-user" name="username" type="text" autocomplete="username" required />
+            </div>
+            <div class="login-field">
+              <label for="kn-gate-pass">生年月日</label>
+              <input id="kn-gate-pass" name="password" type="password" autocomplete="current-password" placeholder="例: 20060412" required />
+            </div>
+            <p class="login-error" id="kn-gate-error" aria-live="polite"></p>
+            <button type="submit" class="login-btn-primary">ログインして資料ページへ</button>
+          </form>
+          <p style="font-size:12px;color:#666;margin-top:1.5em;">
+            認証の詳細は<a href="../contact/index.html">お問い合わせ</a>の「よくあるご質問」をご覧ください。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -53,12 +53,24 @@
     return base + path;
   }
 
+  function resolveMenuHref(item) {
+    var tier = document.body.getAttribute("data-portal-tier");
+    var back = window.KnPortalConfig && window.KnPortalConfig.BACK;
+    var useBack = tier === "back" || tier === "hub" || isGraduateLoggedIn();
+    if (useBack && back && back[item.id]) {
+      return join(back[item.id]);
+    }
+    return join(item.href);
+  }
+
   function currentMenuId() {
     var p = (location.pathname || "").toLowerCase();
     if (/\/portal\/events/.test(p)) return "events";
     if (/\/portal\/life/.test(p)) return "life";
     if (/\/portal\/evaluation/.test(p)) return "evaluation";
     if (/\/portal\/newsletters/.test(p)) return "newsletter";
+    if (/\/portal\/kn-hub/.test(p)) return "hub";
+    if (/\/portal\/kn-gate/.test(p)) return "gate";
     if (/\/portal\/grade-news/.test(p)) return "grade-news";
     if (/\/portal\/health/.test(p)) return "health";
     if (/\/portal\/nurse/.test(p)) return "nurse";
@@ -125,7 +137,7 @@
     items.forEach(function (item) {
       if (item.id === current) return;
       var a = document.createElement("a");
-      a.href = join(item.href);
+      a.href = resolveMenuHref(item);
       a.textContent = item.label;
       aside.appendChild(a);
     });

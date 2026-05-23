@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>保健だより｜霞ノ杜小学校</title>
+  <title>学校だより（関係者向け）｜霞ノ杜小学校</title>
   <link rel="stylesheet" href="../../css/style.css" />
   <link rel="stylesheet" href="../../css/layout-municipal.css" />
+  <link rel="stylesheet" href="../../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
   <script src="../../token-gate.js" defer></script>
   <script src="../../js/school-portal-config.js" defer></script>
   <script src="../../js/school-login.js" defer></script>
   <script src="../../js/school-shell.js" defer></script>
+  <script src="../../js/school-catalog.js" defer></script>
 </head>
-<body data-sgn-base="../../" data-portal-tier="public">
+<body data-school-home="../../" data-sgn-base="../../" data-portal-tier="back" data-catalog="newsletter">
   <div id="site-root">
     <div class="sgn-site">
       <div class="sgn-body">
         <div class="sgn-col-main">
-          <h1 class="sgn-page-title">保健だより</h1>
-          <p class="sgn-crumbs"><a href="../../">ホーム</a> ／ 保健だより</p>
-          <p>保健だよりのバックナンバーは個人情報保護のため、Web上の一覧は公開しておりません。卒業生の方は<a href="../kn-gate.html"><strong>関係者認証</strong></a>後に専用ページからご覧いただけます。</p>
+          <h1 class="sgn-page-title">学校だより</h1>
+          <p class="sgn-crumbs"><a href="../../">ホーム</a> ／ <a href="../kn-hub.html">関係者向け資料</a> ／ 学校だより</p>
+          <div id="catalog-root" class="pdf-catalog"></div>
         </div>
       </div>
     </div>
