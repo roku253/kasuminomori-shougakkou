@@ -17,6 +17,9 @@
   }
 
   function isLoggedIn() {
+    if (window.KnSchoolLogin && typeof window.KnSchoolLogin.isLoggedIn === "function") {
+      return window.KnSchoolLogin.isLoggedIn();
+    }
     try {
       return sessionStorage.getItem("kn_graduate_auth_v1") === "1";
     } catch (e) {

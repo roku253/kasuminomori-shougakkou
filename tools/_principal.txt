@@ -1,0 +1,10 @@
+﻿python :   File "<string>", line 13
+発生場所 C:\Users\roku5\AppData\Local\Temp\ps-script-78ed31a7-ff65-4dd9-a3be-e0862352f5c6.ps1:84 文字:32
++ $env:PYTHONIOENCODING='utf-8'; python -c "
++                                ~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (  File "<string>", line 13:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    print(f'{x0:.1f} {y0:.1f} | {sp[" text\][:20]}')
+                                                   ^
+SyntaxError: f-string expression part cannot include a backslash

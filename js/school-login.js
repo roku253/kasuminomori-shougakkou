@@ -1,30 +1,20 @@
 /**
- * 卒業生認証（在学時氏名 + 生年月日）— PDF閲覧時のみ必須
+ * 卒業生・関係者認証（在学時氏名 + 生年月日）
+ * サーバー側 Cookie セッションと連携（個人情報を含む PDF の直URL防止）
  */
 (function () {
   var SESSION_KEY = "kn_graduate_auth_v1";
   var YEAR_MIN = 2013;
   var YEAR_MAX = 2019;
-
-  var VALID_NAMES = [
-    "佐藤ユウ",
-    "佐藤 ユウ",
-    "さとうゆう",
-    "サトウユウ",
-    "satouyuu",
-    "sato yuu",
-  ];
-  var VALID_BIRTHS = ["20060412", "2006/04/12", "2006-04-12", "2006.4.12"];
+  var API_LOGIN = "/api/auth/login";
+  var API_LOGOUT = "/api/auth/logout";
+  var API_SESSION = "/api/auth/session";
 
   function normalizeName(s) {
     return (s || "")
       .replace(/\s+/g, "")
       .replace(/　/g, "")
       .toLowerCase();
-  }
-
-  function normalizeBirth(s) {
-    return (s || "").replace(/[^\d]/g, "");
   }
 
   function isLoggedIn() {
@@ -49,18 +39,27 @@
     applyYearFilter();
   }
 
-  function nameOk(user) {
-    var n = normalizeName(user);
-    return VALID_NAMES.some(function (v) {
-      return normalizeName(v) === n;
-    });
+  function clearLoggedIn() {
+    try {
+      sessionStorage.removeItem(SESSION_KEY);
+    } catch (e) {}
+    document.body.classList.remove("graduate-logged-in");
+    notifyAuthChange();
+    applyYearFilter();
   }
 
-  function birthOk(pass) {
-    var b = normalizeBirth(pass);
-    return VALID_BIRTHS.some(function (v) {
-      return normalizeBirth(v) === b;
-    });
+  function isProtectedPdfHref(href) {
+    if (!href || href === "#") return false;
+    try {
+      var u = new URL(href, window.location.origin);
+      var path = u.pathname;
+      if (/^\/assets\/time-capsule[^/]*\.pdf$/i.test(path)) return true;
+      var m = path.match(/\/assets\/pdf\/([^/]+\.pdf)$/i);
+      if (!m) return false;
+      return !m[1].toLowerCase().startsWith("notice-");
+    } catch (e) {
+      return /\.pdf($|\?)/i.test(href) && !/notice-/i.test(href);
+    }
   }
 
   function applyYearFilter() {
@@ -98,8 +97,8 @@
       return true;
     if (el.closest(".pdf-issue-row")) return true;
     var href = el.getAttribute("href") || "";
-    if (el.closest(".sgn-notice-list") && /\.(pdf|html)($|\?|#)/i.test(href)) return true;
-    return false;
+    if (el.closest(".sgn-notice-list") && isProtectedPdfHref(href)) return true;
+    return isProtectedPdfHref(href);
   }
 
   function ensureModal() {
@@ -113,12 +112,12 @@
     el.innerHTML =
       '<div class="login-dialog" role="dialog" aria-labelledby="login-title" aria-modal="true">' +
       '<div class="login-dialog-header" id="login-title">閲覧には認証が必要です</div>' +
-      '<p class="login-dialog-note">個人情報を含む資料です。認証情報を入力してください。</p>' +
+      '<p class="login-dialog-note">個人情報を含む資料です。関係者の方は在学時の氏名と生年月日を入力してください。認証後、一定時間はセッションで閲覧できます。</p>' +
       '<div class="login-dialog-body">' +
-      '<div class="login-field"><label for="login-user">ユーザー名</label>' +
+      '<div class="login-field"><label for="login-user">氏名（在学時）</label>' +
       '<input id="login-user" type="text" autocomplete="username" /></div>' +
-      '<div class="login-field"><label for="login-pass">パスワード</label>' +
-      '<input id="login-pass" type="password" autocomplete="current-password" /></div>' +
+      '<div class="login-field"><label for="login-pass">生年月日</label>' +
+      '<input id="login-pass" type="password" autocomplete="current-password" placeholder="例: 20060412" /></div>' +
       "</div>" +
       '<p class="login-error" id="login-error" aria-live="polite"></p>' +
       '<div class="login-dialog-actions">' +
@@ -156,20 +155,68 @@
     document.getElementById("login-user").focus();
   }
 
+  function openPendingPdf() {
+    if (pendingPdfHref && pendingPdfHref !== "#" && !/^javascript:/i.test(pendingPdfHref)) {
+      window.open(pendingPdfHref, "_blank", "noopener,noreferrer");
+    }
+    pendingPdfHref = null;
+  }
+
   function tryLogin() {
     var user = (document.getElementById("login-user").value || "").trim();
     var pass = document.getElementById("login-pass").value || "";
     var err = document.getElementById("login-error");
-    if (nameOk(user) && birthOk(pass)) {
-      setLoggedIn();
-      document.getElementById("school-login-overlay").hidden = true;
-      if (pendingPdfHref && pendingPdfHref !== "#" && !/^javascript:/i.test(pendingPdfHref)) {
-        window.open(pendingPdfHref, "_blank", "noopener,noreferrer");
-      }
-      pendingPdfHref = null;
-      return;
-    }
-    err.textContent = "認証に失敗しました。入力内容をご確認ください。";
+    err.textContent = "認証しています…";
+
+    fetch(API_LOGIN, {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: user, birth: pass }),
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          return { ok: res.ok && data && data.ok, status: res.status };
+        });
+      })
+      .then(function (result) {
+        if (result.ok) {
+          setLoggedIn();
+          document.getElementById("school-login-overlay").hidden = true;
+          openPendingPdf();
+          return;
+        }
+        err.textContent = "認証に失敗しました。入力内容をご確認ください。";
+      })
+      .catch(function () {
+        err.textContent =
+          "認証サーバーに接続できません。Vercel 上で閲覧するか、vercel dev でローカル確認してください。";
+      });
+  }
+
+  function syncSessionFromServer() {
+    return fetch(API_SESSION, { credentials: "same-origin", cache: "no-store" })
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (data) {
+        if (data && data.ok) setLoggedIn();
+        else clearLoggedIn();
+      })
+      .catch(function () {
+        /* 静的ファイルのみの環境では Cookie API なし — UI は未ログインのまま */
+        clearLoggedIn();
+      });
+  }
+
+  function logout() {
+    return fetch(API_LOGOUT, { method: "POST", credentials: "same-origin" })
+      .then(function () {
+        clearLoggedIn();
+      })
+      .catch(function () {
+        clearLoggedIn();
+      });
   }
 
   document.addEventListener("click", function (e) {
@@ -178,7 +225,7 @@
     if (isLoggedIn()) return;
     e.preventDefault();
     e.stopPropagation();
-    var href = link.href;
+    var href = link.getAttribute("href") || link.href;
     showModal(href || null);
   });
 
@@ -192,24 +239,33 @@
     showModal(null);
   }
 
+  function checkAuthQuery() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get("auth") === "required" && !isLoggedIn()) {
+        showModal(null);
+      }
+    } catch (e) {}
+  }
+
   window.KnSchoolLogin = {
     isLoggedIn: isLoggedIn,
     showModal: showModal,
     setLoggedIn: setLoggedIn,
+    clearLoggedIn: clearLoggedIn,
+    logout: logout,
+    syncSessionFromServer: syncSessionFromServer,
     applyYearFilter: applyYearFilter,
+    isProtectedPdfHref: isProtectedPdfHref,
     YEAR_MIN: YEAR_MIN,
     YEAR_MAX: YEAR_MAX,
   };
 
-  if (isLoggedIn()) {
-    document.documentElement.classList.remove("graduate-prelock");
-    document.body.classList.add("graduate-logged-in");
-  }
-
   function onReady() {
-    guardGraduateOnlyPage();
-    applyYearFilter();
-    notifyAuthChange();
+    syncSessionFromServer().finally(function () {
+      guardGraduateOnlyPage();
+      checkAuthQuery();
+    });
   }
 
   if (document.readyState === "loading") {
