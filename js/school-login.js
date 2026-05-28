@@ -4,12 +4,9 @@
   var YEAR_MIN = 2017;
   var YEAR_MAX = 2026;
 
+  /** v2: 佐藤優（20110412）のみ */
   var CREDENTIAL_HASHES = [
     "8e7c3101e9d2c5335f0b4649649744d40da8488c101b4ca43aaec6cb535071b5",
-    "2742060bc4cafe8c2ba0c3286f59adce5a9b57d6aacd56f4ca306e6e34e2a8dc",
-    "6b8f529a2e4fb57dd51af07f51567689fb1331ee2a045aab06021b882b538219",
-    "61040bdc7fb80b8c1a771e69a29270a568495230b6d7ddfb3e53838aa26d3a82",
-    "7d21881db9e4f20451882aca7f89b4d1facebd8779bc0ced1969e8ce613ee8b9",
   ];
 
   function normalizeName(s) {

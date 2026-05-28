@@ -40,11 +40,16 @@
         block.appendChild(h);
         var row = document.createElement("div");
         row.className = "pdf-issue-row";
-        if (year === 2021) {
+        if (year === 2016) {
           var a = document.createElement("a");
-          a.href = "./2021/";
-          a.textContent = "閲覧";
+          a.href = "./2016/";
+          a.textContent = "閲覧（10年後の自分へ）";
           row.appendChild(a);
+        } else if (year === 2021) {
+          var a2 = document.createElement("a");
+          a2.href = "./2021/";
+          a2.textContent = "アーカイブ（旧版）";
+          row.appendChild(a2);
         } else {
           row.innerHTML = '<span style="color:#666;">準備中</span>';
         }
