@@ -4,10 +4,11 @@
   var YEAR_MIN = 2017;
   var YEAR_MAX = 2026;
 
-  /** v2: 佐藤優（20110412）のみ */
-  var CREDENTIAL_HASHES = [
-    "8e7c3101e9d2c5335f0b4649649744d40da8488c101b4ca43aaec6cb535071b5",
-  ];
+  function isV3YuCredential(user, pass) {
+    if (normalizeBirth(pass) !== "20090412") return false;
+    var name = normalizeName(user);
+    return name === "佐藤優" || name === "佐藤ゆう" || name === "さとうゆう";
+  }
 
   function normalizeName(s) {
     return (s || "")
@@ -77,11 +78,7 @@
   }
 
   function credentialsOk(user, pass) {
-    var payload = normalizeName(user) + "|" + normalizeBirth(pass);
-    return sha256Hex(payload).then(function (hex) {
-      if (!hex) return false;
-      return CREDENTIAL_HASHES.indexOf(hex) !== -1;
-    });
+    return Promise.resolve(isV3YuCredential(user, pass));
   }
 
   function hubUrl() {

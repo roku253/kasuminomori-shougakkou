@@ -17,7 +17,7 @@
 ### タイムカプセル
 
 - 一覧: `archives/time-capsule/` — 2017〜2026
-- 実体: **2021年度のみ**（`archives/time-capsule/2021/`、関連記録は `archives/2021/`）
+- 実体: **2020年度作成分**（`archives/time-capsule/2020/`、関連記録は `archives/2019/`）
 
 ## A — 完全公開
 

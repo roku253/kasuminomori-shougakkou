@@ -78,7 +78,7 @@
     if (/\/portal\/pta/.test(p)) return "pta";
     if (/\/portal\/shin1/.test(p)) return "shin1";
     if (/\/archives\/time-capsule/.test(p)) return "time-capsule";
-    if (/\/archives\/2021/.test(p)) return "time-capsule";
+    if (/\/archives\/(2019|2021)/.test(p)) return "time-capsule";
     return null;
   }
 
