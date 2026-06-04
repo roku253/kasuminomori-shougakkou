@@ -3,35 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>タイムカプセル｜霞ノ杜小学校</title>
-  <link rel="stylesheet" href="../../css/style.css" />
-  <link rel="stylesheet" href="../../css/layout-municipal.css" />
-  <link rel="stylesheet" href="../../css/login-modal.css" />
+  <title>タイムカプセル｜2020・6年1組</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="../../../css/layout-municipal.css" />
+  <link rel="stylesheet" href="../../../css/login-modal.css" />
   <script>window.__TOKEN_RESOURCE_KEY__ = "ext:kasuminomori-shougakkou"</script>
-<script src="../../token-gate.js" defer></script>
-  <script src="../../js/school-login.js" defer></script>
-  <script src="../../js/school-shell.js" defer></script>
+  <script src="../../../token-gate.js" defer></script>
+  <script src="../../../js/school-login.js" defer></script>
+  <script src="../../../js/school-shell.js" defer></script>
+  <script src="../../../js/kn-footprint.js" defer></script>
+  <style>
+    .tc-sheet { border: 1px solid #bbb; background: #fff; padding: 16px; margin: 12px 0; max-width: 520px; }
+    .tc-row { display: grid; grid-template-columns: 100px 1fr; gap: 8px; margin: 8px 0; font-size: 13px; }
+    .tc-label { color: #555; }
+    .tc-blank { border-bottom: 1px dashed #999; min-height: 1.2em; color: #222; }
+    .tc-note { font-size: 12px; color: #666; margin-top: 12px; }
+    .tc-access { font-size: 12px; color: #888; margin-top: 8px; }
+  </style>
 </head>
-<body data-school-home="../../" data-sgn-base="../../" data-sgn-active="contact">
+<body data-school-home="../../../" data-sgn-base="../../../" data-sgn-active="contact">
   <div id="site-root">
     <div class="sgn-site">
       <div class="sgn-body">
-        <div class="sgn-col-main">
-          <h1 class="sgn-page-title" id="year-title">タイムカプセル</h1>
-          <p class="sgn-crumbs"><a href="../">歴代一覧</a></p>
-          <p>当該年度の保管記録です。認証後にご覧いただけます。</p>
-          <p style="font-size:12px;color:#666;">お問い合わせページのFAQをご参照のうえ、在学時の氏名と生年月日でログインしてください。</p>
-          <p><a href="../">← 年一覧へ</a></p>
+        <div class="sgn-col-main" data-kn-story-clue="1">
+          <h1 class="sgn-page-title">タイムカプセル（2020年度）</h1>
+          <p class="sgn-crumbs"><a href="../">歴代一覧</a> ／ 2020年</p>
+          <p>令和2年度・6年1組「10年後の自分へ」記入票（2030年開封予定・Webアーカイブ）。</p>
+
+          <div class="tc-sheet" data-requires-graduate>
+            <p><strong>記入者：</strong>佐藤 優（6年1組）</p>
+            <div class="tc-row">
+              <span class="tc-label">10年後の自分へ</span>
+              <span class="tc-blank">（本文なし）</span>
+            </div>
+            <div class="tc-row">
+              <span class="tc-label">一緒にいた友達</span>
+              <span class="tc-blank">青空 ソラ</span>
+            </div>
+            <div class="tc-row">
+              <span class="tc-label">住所・連絡先</span>
+              <span class="tc-blank">　</span>
+            </div>
+            <div class="tc-row">
+              <span class="tc-label">サイン</span>
+              <span class="tc-blank">ゆう</span>
+            </div>
+            <p class="tc-note">※「友達」欄は名前のみ。他欄は空白のまま保管されています。</p>
+          </div>
+          <p class="tc-access" id="kn-tc-access">アクセス回数：読み込み中…</p>
+          <p class="tc-note">閲覧には卒業生認証が必要です。<a href="../../../contact/index.html">FAQ</a>を参照してください。</p>
+          <p><a href="../../2019/records/river-roster.html">令和元年度 名簿（印刷確認用）</a></p>
         </div>
       </div>
     </div>
   </div>
   <script>
     (function () {
-      var y = (location.pathname.match(/\/(\d{4})\//) || [])[1] || "";
-      if (y) document.getElementById("year-title").textContent = y + "年度 タイムカプセル";
+      var el = document.getElementById("kn-tc-access");
+      if (!el) return;
+      var key = "kn_tc_access_count_v1";
+      var n = 47;
+      try {
+        var v = parseInt(localStorage.getItem(key) || "47", 10);
+        if (!isFinite(v) || v < 47) v = 47;
+        v += 1;
+        localStorage.setItem(key, String(v));
+        n = v;
+      } catch (e) { /* ignore */ }
+      el.textContent = "アクセス回数：" + n + "回";
     })();
   </script>
 </body>
 </html>
-
