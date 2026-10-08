@@ -7,18 +7,24 @@
   function isV3YuCredential(user, pass) {
     if (normalizeBirth(pass) !== "20090412") return false;
     var name = normalizeName(user);
-    return name === "佐藤優" || name === "佐藤ゆう" || name === "さとうゆう";
+    return (
+      name === "佐藤優" ||
+      name === "佐藤ゆう" ||
+      name === "さとうゆう" ||
+      name === "サトウユウ"
+    );
   }
 
   function normalizeName(s) {
     return (s || "")
+      .normalize("NFKC")
       .replace(/\s+/g, "")
       .replace(/　/g, "")
       .toLowerCase();
   }
 
   function normalizeBirth(s) {
-    return (s || "").replace(/[^\d]/g, "");
+    return (s || "").normalize("NFKC").replace(/\D/g, "");
   }
 
   function portalTier() {
@@ -205,7 +211,10 @@
         openPendingPdf();
         return;
       }
-      err.textContent = "認証に失敗しました。入力内容をご確認ください。";
+      err.textContent =
+        normalizeBirth(pass).length === 8
+          ? "認証に失敗しました。入力内容をご確認ください。"
+          : "生年月日は数字8桁で入力してください。";
     });
   }
 
@@ -226,7 +235,12 @@
           location.href = hubUrl();
           return;
         }
-        if (err) err.textContent = "認証に失敗しました。入力内容をご確認ください。";
+        if (err) {
+          err.textContent =
+            normalizeBirth(pass).length === 8
+              ? "認証に失敗しました。入力内容をご確認ください。"
+              : "生年月日は数字8桁で入力してください。";
+        }
       });
     });
     if (isLoggedIn()) {

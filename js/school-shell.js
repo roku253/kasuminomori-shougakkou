@@ -192,9 +192,11 @@
       '<p class="sgn-footer-line">' +
       FOOTER_TEXT +
       "</p>" +
-      '<p class="sgn-footer-fiction" role="note">' +
+      '<details class="sgn-footer-fiction" style="font-size:11px;color:#888;">' +
+      "<summary>架空の学校です</summary>" +
+      "<p>" +
       FICTION_HTML +
-      "</p>";
+      "</p></details>";
     site.appendChild(footer);
   }
 
