@@ -108,6 +108,16 @@
     });
   }
 
+  function isImeConfirmEnter(e) {
+    var native = e && e.nativeEvent;
+    return !!(
+      (e && e.isComposing) ||
+      (native && native.isComposing) ||
+      (e && e.keyCode === 229) ||
+      (native && native.keyCode === 229)
+    );
+  }
+
   function isPdfGateTarget(el) {
     if (portalTier() === "gate" || portalTier() === "hub") return false;
     if (!el || el.tagName !== "A") return false;
@@ -160,7 +170,7 @@
       }
     });
     document.getElementById("login-pass").addEventListener("keydown", function (e) {
-      if (e.key === "Enter") tryModalLogin();
+      if (e.key === "Enter" && !isImeConfirmEnter(e)) tryModalLogin();
     });
     return el;
   }
@@ -203,6 +213,9 @@
     var form = document.getElementById("kn-gate-form");
     if (!form) return;
     var err = document.getElementById("kn-gate-error");
+    form.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && isImeConfirmEnter(e)) e.preventDefault();
+    });
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var user = (document.getElementById("kn-gate-user").value || "").trim();
