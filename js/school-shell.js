@@ -6,9 +6,7 @@
   var BASE = document.body.getAttribute("data-sgn-base") || "./";
 
   var FOOTER_TEXT =
-    "霞ノ杜町立霞ノ杜小学校 ／ 〒393-0000 霞ノ杜町大字杜ケ丘 1234";
-  var FICTION_HTML =
-    "※本サイトは謎解き作品のための<strong>架空サイト</strong>です。記載・表示されるサービス名・地名・人物名・団体名などはフィクションであり、<strong>実在のものとは一切関係ありません</strong>。";
+    "霞ノ杜町立第一小学校（通称 霞ノ杜小学校）／〒392-0391 長野県霞郡霞ノ杜町大字杜ケ丘";
 
   var TABS = [
     { id: "home", label: "ホーム", href: "" },
@@ -91,10 +89,10 @@
       '<div class="sgn-header-brand-inner">' +
       '<div class="sgn-logo" aria-hidden="true">霞</div>' +
       '<div class="sgn-header-titles">' +
-      '<p class="sgn-header-ruby">かすみのもりちょうりつ</p>' +
+      '<p class="sgn-header-ruby">かすみのもりちょうりつ だいいちしょうがっこう</p>' +
       '<h1 class="sgn-header-name"><a href="' +
       join("") +
-      '">霞ノ杜町立 霞ノ杜小学校</a></h1>' +
+      '">霞ノ杜町立第一小学校</a></h1>' +
       '<p class="sgn-header-slogan">よく見て、よく考えて、ことばにする</p>' +
       "</div></div></div>" +
       '<div class="sgn-header-photo" role="img" aria-label="学校の様子（仮画像）"></div>' +
@@ -188,16 +186,15 @@
     var footer = document.createElement("footer");
     footer.className = "sgn-site-footer";
     footer.setAttribute("role", "contentinfo");
-    footer.innerHTML =
-      '<p class="sgn-footer-line">' +
-      FOOTER_TEXT +
-      "</p>" +
-      '<details class="sgn-footer-fiction" style="font-size:11px;color:#888;">' +
-      "<summary>架空の学校です</summary>" +
-      "<p>" +
-      FICTION_HTML +
-      "</p></details>";
+    footer.innerHTML = '<p class="sgn-footer-line">' + FOOTER_TEXT + "</p>";
     site.appendChild(footer);
+
+    if (!document.querySelector('meta[name="description"]')) {
+      var meta = document.createElement("meta");
+      meta.name = "description";
+      meta.content = "霞ノ杜町立第一小学校の公式ホームページです。（架空の町のサイトです）";
+      document.head.appendChild(meta);
+    }
   }
 
   function normalizeBodyLayout(site) {
